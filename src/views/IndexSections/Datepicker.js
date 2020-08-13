@@ -17,7 +17,7 @@
 */
 import React from "react";
 // react plugin used to create datetimepicker
-import ReactDatetime from "react-datetime";
+// import ReactDatetime from "react-datetime";
 
 // reactstrap components
 import {
@@ -102,12 +102,12 @@ class Datepicker extends React.Component {
                     <i className="ni ni-calendar-grid-58" />
                   </InputGroupText>
                 </InputGroupAddon>
-                <ReactDatetime
+                {/* <ReactDatetime
                   inputProps={{
                     placeholder: "Date Picker Here"
                   }}
                   timeFormat={false}
-                />
+                /> */}
               </InputGroup>
             </FormGroup>
           </Col>
@@ -124,7 +124,7 @@ class Datepicker extends React.Component {
                         <i className="ni ni-calendar-grid-58" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <ReactDatetime
+                    {/* <ReactDatetime
                       inputProps={{
                         placeholder: "Start Date"
                       }}
@@ -144,7 +144,7 @@ class Datepicker extends React.Component {
                           </td>
                         );
                       }}
-                    />
+                    /> */}
                   </InputGroup>
                 </FormGroup>
               </Col>
@@ -156,7 +156,7 @@ class Datepicker extends React.Component {
                         <i className="ni ni-calendar-grid-58" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <ReactDatetime
+                    {/* <ReactDatetime
                       inputProps={{
                         placeholder: "End Date"
                       }}
@@ -177,7 +177,7 @@ class Datepicker extends React.Component {
                           </td>
                         );
                       }}
-                    />
+                    /> */}
                   </InputGroup>
                 </FormGroup>
               </Col>

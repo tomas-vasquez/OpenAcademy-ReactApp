@@ -513,14 +513,14 @@ h1, h2, h3, h4, h5,
               .site-mobile-menu .site-nav-wrap > li > ul > li > ul > li > a {
                 font-size: 16px;
                 padding-left: 60px; }
-    .site-mobile-menu .site-nav-wrap[data-class="social"] {
+    .site-mobile-menu .site-nav-wrap[data-className="social"] {
       float: left;
       width: 100%;
       margin-top: 30px;
       padding-bottom: 5em; }
-      .site-mobile-menu .site-nav-wrap[data-class="social"] > li {
+      .site-mobile-menu .site-nav-wrap[data-className="social"] > li {
         width: auto; }
-        .site-mobile-menu .site-nav-wrap[data-class="social"] > li:first-child a {
+        .site-mobile-menu .site-nav-wrap[data-className="social"] > li:first-child a {
           padding-left: 15px !important; }
 
 .sticky-wrapper {

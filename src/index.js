@@ -1,56 +1,69 @@
-/*!
+import "assets/css/owl.carousel.min.css";
+import "assets/css/owl.theme.default.min.css";
 
-=========================================================
-* Argon Design System React - v1.1.0
-=========================================================
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
-* Product Page: https://www.creative-tim.com/product/argon-design-system-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-design-system-react/blob/master/LICENSE.md)
 
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-
-import "assets/vendor/nucleo/css/nucleo.css";
-import "assets/vendor/font-awesome/css/font-awesome.min.css";
+import "assets/css/bootstrap.min.css";
 import "assets/css/style.css";
 
-import Index from "views/Index.js";
-import Landing from "views/examples/Landing.js";
-import Login from "views/examples/Login.js";
-import Profile from "views/examples/Profile.js";
-import Register from "views/examples/Register.js";
+import React from "react";
+import ReactDOM from "react-dom";
+import { Route, Switch } from "react-router-dom";
+
+import MainLayouth from "layouts/Main";
+import CourseLayouth from "layouts/Course";
+
+
+import { myRoutes } from "config";
+
+import { Provider } from "react-redux";
+import store, { history } from "store";
+import { ConnectedRouter } from "connected-react-router";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Switch>
-      <Route path="/" exact render={props => <Index {...props} />} />
-      <Route
-        path="/landing-page"
-        exact
-        render={props => <Landing {...props} />}
-      />
-      <Route path="/login-page" exact render={props => <Login {...props} />} />
-      <Route
-        path="/profile-page"
-        exact
-        render={props => <Profile {...props} />}
-      />
-      <Route
-        path="/register-page"
-        exact
-        render={props => <Register {...props} />}
-      />
-      <Redirect to="/" />
-    </Switch>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      {/* <Suspense fallback={<SSuspense />}> */}
+      <Switch>
+        {/* <Route
+          exact
+          path={myRoutes.login}
+          render={(props) => <AuthLayout {...props} />}
+        />
+        <Route
+          exact
+          path={myRoutes.register}
+          render={(props) => <AuthLayout {...props} />}
+        /> */}
+        <Route
+          exact
+          path={"/"}
+          render={(props) => <MainLayouth {...props} />}
+        />
+        <Route
+          exact
+          path={myRoutes.profile}
+          render={(props) => <MainLayouth {...props} />}
+        />
+        <Route
+          exact
+          path={myRoutes.courses}
+          render={(props) => <MainLayouth {...props} />}
+        />
+        <Route
+          exact
+          path={myRoutes.addContent}
+          render={(props) => <MainLayouth {...props} />}
+        />
+        {/* <Route
+          path={myRoutes.editCourse}
+          render={(props) => <CourseEditorLayouth {...props} />}
+        /> */}
+        <Route render={(props) => <CourseLayouth {...props} />} />
+      </Switch>
+      {/* </Suspense> */}
+    </ConnectedRouter>
+  </Provider>,
   document.getElementById("root")
 );
