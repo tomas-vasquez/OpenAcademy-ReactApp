@@ -42,9 +42,7 @@ class Main extends React.Component {
         <div className="site-wrap">
           <DemoNavbar />
 
-          {!this.props.isBeenLoadedMainData ? 
-          <Landing /> : 
-          <Switch>{this.getRoutes(routes)}</Switch>}
+          <Switch>{this.getRoutes(routes)}</Switch>
 
           <CardsFooter />
         </div>

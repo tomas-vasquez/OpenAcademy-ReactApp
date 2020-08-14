@@ -299,13 +299,13 @@ class Comments extends React.Component {
                     {this.state.commentReply.name.split(" ")[0]}:
                   </small>
 
-                  <div class="comments-container mt-0">
-                    <ul id="comments-list" class="comments-list mt-2">
+                  <div className="comments-container mt-0">
+                    <ul id="comments-list" className="comments-list mt-2">
                       <li>
                         <Row>
                           <Col xs="auto">
                             {/* <!-- Avatar --> */}
-                            <div class="comment-avatar mr-3">
+                            <div className="comment-avatar mr-3">
                               {this.state.commentReply.pic_url !== null ? (
                                 <img
                                   src={
@@ -323,9 +323,9 @@ class Comments extends React.Component {
                           </Col>
                           <Col>
                             {/* <!-- Contenedor del Comentario --> */}
-                            <div class="comment-box">
-                              <div class="comment-head">
-                                <h6 class="comment-name">{userData.name}</h6>
+                            <div className="comment-box">
+                              <div className="comment-head">
+                                <h6 className="comment-name">{userData.name}</h6>
                                 <span style={{ lineHeight: "13px" }}>
                                   {moment(
                                     this.state.commentReply.comment_created_at,
@@ -333,7 +333,7 @@ class Comments extends React.Component {
                                   ).fromNow()}
                                 </span>
                               </div>
-                              <div class="comment-content">
+                              <div className="comment-content">
                                 {this.state.commentReply.comment_content
                                   .length < 100 ? (
                                   <p>
@@ -389,8 +389,8 @@ class Comments extends React.Component {
           </form>
         </div>
         <div>
-          <div class="comments-container">
-            <ul id="comments-list" class="comments-list">
+          <div className="comments-container">
+            <ul id="comments-list" className="comments-list">
               {
                 //que si no se ha seleccionado ahún
                 targetId !== null ? (

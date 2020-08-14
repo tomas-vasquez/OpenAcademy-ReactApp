@@ -26,16 +26,16 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       {/* <Suspense fallback={<SSuspense />}> */}
       <Switch>
-        {/* <Route
+        <Route
           exact
           path={myRoutes.login}
-          render={(props) => <AuthLayout {...props} />}
+          render={(props) => <MainLayouth {...props} />}
         />
         <Route
           exact
           path={myRoutes.register}
-          render={(props) => <AuthLayout {...props} />}
-        /> */}
+          render={(props) => <MainLayouth {...props} />}
+        />
         <Route
           exact
           path={"/"}
@@ -51,11 +51,7 @@ ReactDOM.render(
           path={myRoutes.courses}
           render={(props) => <MainLayouth {...props} />}
         />
-        <Route
-          exact
-          path={myRoutes.addContent}
-          render={(props) => <MainLayouth {...props} />}
-        />
+        
         {/* <Route
           path={myRoutes.editCourse}
           render={(props) => <CourseEditorLayouth {...props} />}

@@ -43,12 +43,12 @@ class Comment extends React.Component {
 
         <li className="mt-4">
            <Collapse isOpen={this.state.collapse1}>
-          <div class="comment-main-level">
+          <div className="comment-main-level">
             {/* <!-- Avatar --> */}
 
             <Row >
               <Col xs="auto">
-                <div class="comment-avatar mr-3">
+                <div className="comment-avatar mr-3">
                   {comment.pic_url !== null ? (
                     <img
                       src={storageUrl + comment.pic_url}
@@ -64,14 +64,14 @@ class Comment extends React.Component {
               </Col>
               <Col>
                 {/* <!-- Contenedor del Comentario --> */}
-                <div class="comment-box border-1 ">
-                  <div class="comment-head">
-                    <h6 class="comment-name">{userData.name}</h6>
+                <div className="comment-box border-1 ">
+                  <div className="comment-head">
+                    <h6 className="comment-name">{userData.name}</h6>
                     <span style={{ lineHeight: "13px" }}>
                       {moment(comment.comment_created_at, "UNIX").fromNow()}
                     </span>
                   </div>
-                  <div class="comment-content">{comment.comment_content}</div>
+                  <div className="comment-content">{comment.comment_content}</div>
                   <p>
                     <Button
                       className="p-1 m-2"
@@ -92,7 +92,7 @@ class Comment extends React.Component {
                         this.props.handleClickReplyComments(e, comment);
                       }}
                     >
-                      <i class="fa fa-heart mr-2" />
+                      <i className="fa fa-heart mr-2" />
                       Me gustó
                     </Button>
                   </p>
@@ -103,12 +103,12 @@ class Comment extends React.Component {
 
           {/* <!-- Respuestas de los comentarios --> */}
           {replyComment !== null && replyComment !== undefined ? (
-            <ul class="comments-list reply-list">
+            <ul className="comments-list reply-list">
               <li>
                 <Row>
                   <Col xs="auto">
                     {/* <!-- Avatar --> */}
-                    <div class="comment-avatar mr-3">
+                    <div className="comment-avatar mr-3">
                       {replyComment.pic_url !== null ? (
                         <img
                           src={storageUrl + replyComment.pic_url}
@@ -124,9 +124,9 @@ class Comment extends React.Component {
                   </Col>
                   <Col>
                     {/* <!-- Contenedor del Comentario --> */}
-                    <div class="comment-box">
-                      <div class="comment-head">
-                        <h6 class="comment-name">{userData.name}</h6>
+                    <div className="comment-box">
+                      <div className="comment-head">
+                        <h6 className="comment-name">{userData.name}</h6>
                         <span style={{ lineHeight: "13px" }}>
                           {moment(
                             replyComment.comment_created_at,
@@ -135,7 +135,7 @@ class Comment extends React.Component {
                         </span>
                         
                       </div>
-                      <div class="comment-content">
+                      <div className="comment-content">
                         {replyComment.comment_content.length < 150 ? (
                           <>{replyComment.comment_content}</>
                         ) : (
@@ -153,7 +153,7 @@ class Comment extends React.Component {
                             this.props.handleClickReplyComments(e, comment);
                           }}
                         >
-                          <i class="fa fa-heart mr-2" />
+                          <i className="fa fa-heart mr-2" />
                           Me gustó
                         </Button>
                       </p>

@@ -5,17 +5,25 @@ import { myRoutes } from "config";
 // import UserProfile from "views/UserProfile";
 // import FormRegister from "views/forms/register";
 import Courses from "views/AllCourses"
+import Auth from "views/Auth";
 
 // import AddContent from "views/AddContent";
 // import ItemCustomizer from "views/ItemCustomizer";
 var routes = [
-  // {
-  //   path: myRoutes.register,
-  //   name: "Registro de usuarios",
-  //   icon: "tim-icons icon-chart-pie-36",
-  //   component: FormRegister,
-  //   layout: "auth",
-  // },
+  {
+    path: myRoutes.login,
+    name: "Registro de usuarios",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Auth,
+    layout: "admin",
+  },
+  {
+    path: myRoutes.register,
+    name: "Registro de usuarios",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Auth,
+    layout: "admin",
+  },
   // {
   //   path: myRoutes.login,
   //   name: "iniciar Sesion",

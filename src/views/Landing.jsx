@@ -10,17 +10,7 @@ class Landing extends React.Component {
   render() {
     return (
       <>
-        <Header />
-
-        <CourseSlider />
-
-        <Programs />
-
-        <BestAuthors />
-
-        <WhyChooseUs />
-
-        <ContactUs />
+        Loading.....
       </>
     );
   }

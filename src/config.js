@@ -35,7 +35,7 @@ export const myRoutes = {
   //academia
 
   admin: "/academia",
-  auth: "/auth",
+  auth: "/ingresar",
 
   login: "/acceso",
   register: "/registro",

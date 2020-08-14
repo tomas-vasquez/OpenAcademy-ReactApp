@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "reactstrap";
 
 class Header extends React.Component {
   constructor() {
@@ -13,7 +14,7 @@ class Header extends React.Component {
       this.setState({ height: window.innerHeight });
     });
   }
-setState
+  setState;
   render() {
     return (
       <div
@@ -57,7 +58,7 @@ setState
                 data-aos-delay="500"
               >
                 <form action="" method="post" className="form-box">
-                  <h3 className="h4 text-black mb-4">Sign Up</h3>
+                  <h3 className="h4 text-black mb-4">Iniciar Sesión</h3>
                   <div className="form-group">
                     <input
                       type="text"
@@ -79,12 +80,19 @@ setState
                       placeholder="Re-type Password"
                     />
                   </div>
-                  <div className="form-group">
-                    <input
+                  <div className="form-group text-center">
+                    <Button
                       type="submit"
+                      color="primary"
                       className="btn btn-primary btn-pill"
-                      value="Sign up"
-                    />
+                     >
+                       Iniciar sesión<i className="fa fa-sign-in-alt ml-2"/>
+                     </Button>
+                  </div>
+                  <div className="text-center">
+                    <p className="m-0 text-muted">
+                      ¿No tienes una cuenta? <a href="/">click aqui</a>
+                    </p>
                   </div>
                 </form>
               </div>

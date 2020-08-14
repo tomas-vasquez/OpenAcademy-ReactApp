@@ -7,7 +7,7 @@ class SocialButtons extends React.Component {
   render() {
     let styles = {
       borderRadius: "50%",
-      padding: 10,
+      padding: 7,
       width: 40,
       height: 40,
       margin: 3,
