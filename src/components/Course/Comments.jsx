@@ -8,8 +8,9 @@ import "moment/min/locales";
 
 import Controller_Comments from "_controllers/Comments";
 import { storageUrl } from "config";
-import { Button, Collapse } from "reactstrap";
+import { Button, Collapse, Row, Col } from "reactstrap";
 import { flagsUrl } from "config";
+import Comment from "./Comment";
 
 class Comments extends React.Component {
   constructor(props) {
@@ -275,7 +276,7 @@ class Comments extends React.Component {
     return (
       <>
         <div className="comment-form-wrap pt-5">
-          <h3 className="mb-5">
+          <h3 className="mb-4">
             Preguntas y respuestas{" "}
             {
               //que si no se han seleccionado ahún
@@ -290,91 +291,69 @@ class Comments extends React.Component {
             }
           </h3>
           <Collapse isOpen={this.state.commentReply !== null}>
-            <div className="py-0 px-2">
+            <div>
               {this.state.commentReply !== null ? (
                 <>
-                  <small className="h6 font-weight-400 text-muted mt-0">
+                  <small className="h6 font-weight-400 text-muted mb-2">
                     <i className="fa fa-reply ml-2 mr-1"></i> respondiendo a{" "}
                     {this.state.commentReply.name.split(" ")[0]}:
                   </small>
-                  <div
-                    className="shadow media align-items-center rounded"
-                    style={{ borderLeft: "solid 4px " }}
-                  >
-                    <div className="media-body">
-                      <div className="media align-items-center mb-0 bg-muted rounded py-1 m-0">
-                        <div className="ml-2">
-                          {this.state.commentReply.pic_url !== null ? (
-                            <img
-                              className="avatar avatar-md rounded-circle mr-3"
-                              src={storageUrl + this.state.commentReply.pic_url}
-                              alt={userData.name}
-                            />
-                          ) : (
-                            <img
-                              alt={userData.name}
-                              className="avatar avatar-md rounded-circle mr-3"
-                              src={require("assets/img/noPic.jpg")}
-                            />
-                          )}
-                        </div>
 
-                        <img
-                          className="avatar-flag"
-                          src={flagsUrl + this.state.commentReply.flag + ".png"}
-                          alt={this.state.commentReply.flag}
-                        />
-                        <div className="media-body">
-                          {this.state.commentReply.user_id === userData.id ? (
-                            <>
-                              <small className="h6 font-weight-400 text-muted mt-0">
-                                Tú -{" "}
-                                {this.formatDate(
-                                  this.state.commentReply
-                                    .comment_comment_created_at
-                                )}
-                              </small>
-                              <br />
-                            </>
-                          ) : (
-                            <>
-                              <small className="h6 font-weight-400 text-muted mt-0">
-                                {this.state.commentReply.name} -{" "}
-                                {this.formatDate(
-                                  this.state.commentReply
-                                    .comment_comment_created_at
-                                )}
-                              </small>
-                              <br />
-                            </>
-                          )}
-                          {this.state.commentReply.comment_content.lenght <
-                          100 ? (
-                            <p className="h4 font-weight-500 mt-0">
-                              {this.state.commentReply.comment_content}
-                            </p>
-                          ) : (
-                            <p className="h4 font-weight-500 mt-0">
-                              {this.state.commentReply.comment_content.substring(
-                                0,
-                                100
+                  <div class="comments-container mt-0">
+                    <ul id="comments-list" class="comments-list mt-2">
+                      <li>
+                        <Row>
+                          <Col xs="auto">
+                            {/* <!-- Avatar --> */}
+                            <div class="comment-avatar mr-3">
+                              {this.state.commentReply.pic_url !== null ? (
+                                <img
+                                  src={
+                                    storageUrl + this.state.commentReply.pic_url
+                                  }
+                                  alt={userData.name}
+                                />
+                              ) : (
+                                <img
+                                  alt={userData.name}
+                                  src={require("assets/img/noPic.jpg")}
+                                />
                               )}
-                              ...
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <Button
-                        className="btn-icon rounded-circle btn-neutral mr-2"
-                        onClick={(e) => {
-                          this.setState({ commentReply: null });
-                        }}
-                      >
-                        <i className="fa fa-times" />
-                      </Button>
-                    </div>
+                            </div>
+                          </Col>
+                          <Col>
+                            {/* <!-- Contenedor del Comentario --> */}
+                            <div class="comment-box">
+                              <div class="comment-head">
+                                <h6 class="comment-name">{userData.name}</h6>
+                                <span style={{ lineHeight: "13px" }}>
+                                  {moment(
+                                    this.state.commentReply.comment_created_at,
+                                    "UNIX"
+                                  ).fromNow()}
+                                </span>
+                              </div>
+                              <div class="comment-content">
+                                {this.state.commentReply.comment_content
+                                  .length < 100 ? (
+                                  <p>
+                                    {this.state.commentReply.comment_content}
+                                  </p>
+                                ) : (
+                                  <p>
+                                    {this.state.commentReply.comment_content.substring(
+                                      0,
+                                      100
+                                    )}
+                                    ...
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
+                      </li>
+                    </ul>
                   </div>
                 </>
               ) : (
@@ -382,51 +361,80 @@ class Comments extends React.Component {
               )}
             </div>
           </Collapse>
+          <form id="form-comments p-0" onSubmit={this.handleSubmitComment}>
+            <textarea
+              name="content"
+              minLength={4}
+              onChange={this.commentBoxChangedHandler}
+              id="comment-box"
+              defaultValue=""
+              disabled={this.state.isSendingComment}
+              className="form-control my-3"
+              placeholder={
+                this.state.commentReply === null
+                  ? "Escribe aquí tu comentario o pregunta"
+                  : "Escribe aquí tu respuesta al comentario de arriba"
+              }
+              rows="3"
+            />
 
-          <textarea
-            name=""
-            id="message"
-            cols="30"
-            rows="3"
-            className="form-control"
-          ></textarea>
+            <div className="form-group">
+              <input
+                id="buttom-submit"
+                type="submit"
+                value="Postear pregunta"
+                className="btn btn-primary"
+              />
+            </div>
+          </form>
         </div>
-        <div className="form-group">
-          <input
-            type="submit"
-            value="Postear pregunta"
-            className="btn btn-primary"
-          />
-        </div>
-
-        <div className="pt-5">
-          <ul className="comment-list">
-            <li className="comment">
-              <div className="vcard bio">
-                <img
-                  src={require("assets/images/person_2.jpg")}
-                  alt="Image placeholder"
-                />
-              </div>
-              <div className="comment-body">
-                <h3>Jean Doe</h3>
-                <div className="meta">January 9, 2018 at 2:21pm</div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Pariatur quidem laborum necessitatibus, ipsam impedit vitae
-                  autem, eum officia, fugiat saepe enim sapiente iste iure! Quam
-                  voluptas earum impedit necessitatibus, nihil?
-                </p>
-                <p>
-                  <a href="/" className="reply">
-                    <i className="fa fa-reply mr-2" />
-                    Responder
-                  </a>
-                </p>
-              </div>
-            </li>
-          </ul>
-          {/* <!-- END comment-list --> */}
+        <div>
+          <div class="comments-container">
+            <ul id="comments-list" class="comments-list">
+              {
+                //que si no se ha seleccionado ahún
+                targetId !== null ? (
+                  //que si no se han cargado ahún
+                  comments[targetId] !== undefined ? (
+                    //que si no se tiene comentarios
+                    comments[targetId].data.length !== 0 ? (
+                      this.sortComments(comments[targetId].data)
+                        .slice(0, this.state.maxCommentsShowing)
+                        .map((comment) => (
+                          <Comment
+                            key={comment.id}
+                            comment={comment}
+                            replyComment={
+                              comment.comment_reply_id !== null
+                                ? comments[targetId].data.find((elem) => {
+                                    return elem.id === comment.comment_reply_id;
+                                  })
+                                : null
+                            }
+                            handleClickReplyComments={
+                              this.handleClickReplyComments
+                            }
+                          />
+                        ))
+                    ) : (
+                      <div className="text-center">
+                        <p>Sin comentarios</p>
+                      </div>
+                    )
+                  ) : (
+                    <div className="text-center">
+                      <p>Cargando...</p>
+                    </div>
+                  )
+                ) : (
+                  <div className="text-center">
+                    <p>No se ha seleccionado ningún video</p>
+                  </div>
+                )
+              }
+            </ul>
+            {/* <!-- END comment-list --> */}
+          </div>
         </div>
       </>
     );

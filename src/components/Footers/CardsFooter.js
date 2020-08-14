@@ -31,15 +31,16 @@ import {
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
+import { myRoutes } from "config";
 
 class CardsFooter extends React.Component {
   render() {
     return (
-      <footer className="footer-section bg-white pb-3">
+      <footer className="footer-section bg-white pt-5 pb-0">
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              <h3>About OneSchool</h3>
+              <h3>Acerca de Vikings Academy</h3>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro
                 consectetur ut hic ipsum et veritatis corrupti. Itaque eius
@@ -49,28 +50,30 @@ class CardsFooter extends React.Component {
             </div>
 
             <div className="col-md-3 ml-auto">
-              <h3>Links</h3>
+              <h3>Enlaces</h3>
               <ul className="list-unstyled footer-links">
                 <li>
-                  <a href="#">Home</a>
+                  <Link to="/">inicio</Link>
                 </li>
                 <li>
-                  <a href="#">Courses</a>
+                  <Link to={myRoutes.courses}>Cursos</Link>
                 </li>
                 <li>
-                  <a href="#">Programs</a>
+                  <Link to={myRoutes.courses}>Conferencias</Link>
                 </li>
                 <li>
-                  <a href="#">Teachers</a>
+                  <Link to={myRoutes.courses}>Docentes</Link>
+                </li>
+                <li>
+                  <Link to={myRoutes.courses}>Dicta un curso</Link>
                 </li>
               </ul>
             </div>
 
             <div className="col-md-4">
-              <h3>Subscribe</h3>
+              <h3>Subscribete a nuestro newsletter</h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Nesciunt incidunt iure iusto architecto? Numquam, natus?
+               Recive correos avisandote de nuevos cursos, conferencias y promociones dentro de nuestra academia.
               </p>
               <form action="#" className="footer-subscribe">
                 <div className="d-flex mb-5">
@@ -89,17 +92,17 @@ class CardsFooter extends React.Component {
             </div>
           </div>
 
-          <div className="row py-0 mt-5 mb-0 text-center">
+          <div className="row py-0 mb-0 text-center">
             <div className="col-md-12">
-              <div className="border-top pt-5">
-                <p>
+              <div className="border-top py-3">
+                <p className="m-0 p-0">
                   {/* <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> */}
                   Copyright &copy;
-                  {new Date().getFullYear()} All
-                  rights reserved | This template is made with{" "}
-                  <i className="icon-heart" aria-hidden="true"></i> by{" "}
+                  {new Date().getFullYear()} todos los derechos reservados | This proyect
+                  is made with <i className="fa fa-heart" aria-hidden="true"></i>{" "}
+                  by{" "}
                   <a href="https://colorlib.com" target="_blank">
-                    Colorlib
+                    Tomy
                   </a>
                   {/* <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> */}
                 </p>

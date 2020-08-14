@@ -38,6 +38,7 @@ import {
   Col,
   UncontrolledTooltip
 } from "reactstrap";
+import { myRoutes } from "config";
 
 class DemoNavbar extends React.Component {
   componentDidMount() {
@@ -84,8 +85,7 @@ class DemoNavbar extends React.Component {
           <div className="mx-auto text-center">
             <nav className="site-navigation position-relative text-right" role="navigation">
               <ul className="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
-                <li><Link to="/" className="nav-link">inicio</Link></li>
-                <li><Link to="/" className="nav-link">Cursos</Link></li>
+                <li><Link to={myRoutes.courses}className="nav-link">Cursos</Link></li>
                 <li><Link to="/"  className="nav-link">Conferencias</Link></li>
                 <li><Link to="/"  className="nav-link">Docentes</Link></li>
                 <li><Link to="/"  className="nav-link">Dicta un curso</Link></li>
