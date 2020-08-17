@@ -121,7 +121,7 @@ class Landing extends React.Component {
           <div className="site-section pb-4">
             <div className="container">
               <div className="row">
-                <div className="col-lg-8 mb-5">
+                <div className="col-lg-9 mb-5">
                   {this.currentItem !== null ? (
                     <>
                       <CourseDescription
@@ -142,7 +142,7 @@ class Landing extends React.Component {
                     </>
                   ) : null}
                 </div>
-                <div className="col-lg-4 pl-lg-3">
+                <div className="col-lg-3 p-0">
                   <CardAuthor author={author} />
 
                   <CourseMap

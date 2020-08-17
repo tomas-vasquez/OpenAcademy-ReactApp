@@ -6,6 +6,7 @@ import { myRoutes } from "config";
 // import FormRegister from "views/forms/register";
 import Courses from "views/AllCourses"
 import Auth from "views/Auth";
+import UserProfile from "views/UserProfile";
 
 // import AddContent from "views/AddContent";
 // import ItemCustomizer from "views/ItemCustomizer";
@@ -39,13 +40,13 @@ var routes = [
     component: Home,
     layout: "admin",
   },
-  // {
-  //   path: myRoutes.profile,
-  //   name: "Tu perfil",
-  //   icon: "fa fa-user-graduate",
-  //   component: UserProfile,
-  //   layout: "admin",
-  // },
+  {
+    path: "/@:user_name",
+    name: "Tu perfil",
+    icon: "fa fa-user-graduate",
+    component: UserProfile,
+    layout: "admin",
+  },
   {
     path: myRoutes.courses,
     name: "Cursos",

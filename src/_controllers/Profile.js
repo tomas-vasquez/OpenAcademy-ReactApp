@@ -23,6 +23,16 @@ class Controller_Profile extends Controller_admin {
     this.db = new Db();
   }
 
+  getProfile = (userName, _callback) => {
+    this.profile.getProfile(
+      userName,
+      (response) => {
+        _callback(response.data)
+      },
+      (error) => this.errorsHandler(error, () => this.getProfile(userName, _callback), true)
+    );
+  };
+
   /*!
   =========================================================
   * 

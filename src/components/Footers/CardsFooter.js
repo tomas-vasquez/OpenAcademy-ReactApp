@@ -1,36 +1,7 @@
-/*!
 
-=========================================================
-* Argon Design System React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-design-system-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-design-system-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/*eslint-disable*/
 import React from "react";
 import { Link } from "react-router-dom";
-// reactstrap components
-import {
-  Button,
-  Card,
-  CardImg,
-  NavItem,
-  NavLink,
-  Nav,
-  Container,
-  Row,
-  Col,
-  UncontrolledTooltip,
-} from "reactstrap";
+
 import { myRoutes } from "config";
 
 class CardsFooter extends React.Component {
@@ -101,7 +72,7 @@ class CardsFooter extends React.Component {
                   {new Date().getFullYear()} todos los derechos reservados | This proyect
                   is made with <i className="fa fa-heart" aria-hidden="true"></i>{" "}
                   by{" "}
-                  <a href="https://colorlib.com" target="_blank">
+                  <a href="/@tomasdetloging" target="_blank">
                     Tomy
                   </a>
                   {/* <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> */}

@@ -17,10 +17,9 @@ class Model_Blog {
   */
 
   loadMainData(_success, _error) {
-
     axios({
       method: "get",
-      url: apiUrl + "/user_data/pack/init_pack",
+      url: apiUrl + "/user_data",
       headers: {
         "Accept": "aplication/json",
         "api-token": this.db.get("api-token")

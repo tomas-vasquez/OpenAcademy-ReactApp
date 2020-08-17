@@ -34,8 +34,7 @@ class Controller_admin {
   =========================================================
   */
 
-  initApp(ref) {
-    // alert("hola");
+  initApp() {
     if (!store.getState().app.isBeenLoadedMainData) {
       this.alerts.showLoading(true, "Cargando...");
       this.log.msg("cargando datos del usuario......");
@@ -143,13 +142,13 @@ class Controller_admin {
             }
           );
         } else {
-          return this.alerts.showErrorUnknow(retryHandler);
+          return this.alerts.showErrorUnknow(retryHandler, isStrict);
         }
       } else {
         return this.alerts.showErrorConexion(retryHandler, isStrict);
       }
     } else {
-      return this.alerts.showErrorUnknow(retryHandler);
+      return this.alerts.showErrorUnknow(retryHandler, isStrict);
     }
   };
 }

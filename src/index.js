@@ -51,11 +51,12 @@ ReactDOM.render(
           path={myRoutes.courses}
           render={(props) => <MainLayouth {...props} />}
         />
+        <Route
+          exact
+          path="/@:user_name"
+          render={(props) => <MainLayouth {...props} />}
+        />
         
-        {/* <Route
-          path={myRoutes.editCourse}
-          render={(props) => <CourseEditorLayouth {...props} />}
-        /> */}
         <Route render={(props) => <CourseLayouth {...props} />} />
       </Switch>
       {/* </Suspense> */}

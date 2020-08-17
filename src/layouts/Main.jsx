@@ -6,20 +6,22 @@ import { connect } from "react-redux";
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import CardsFooter from "components/Footers/CardsFooter.js";
 
-import Landing from "views/Landing";
 
 import Controller_admin from "_controllers";
 import { Switch, Route } from "react-router";
 import routes from "routes";
+import DB from "helpers/db";
 
 class Main extends React.Component {
   constructor() {
     super();
     this.controlleradmin = new Controller_admin();
+    this.db = new DB();
   }
 
   componentDidMount() {
     if (!this.props.isBeenLoadedMainData) {
+      if(this.db.get("api-token"))
       this.controlleradmin.initApp(this);
     }
   }

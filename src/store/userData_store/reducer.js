@@ -5,7 +5,7 @@ const init = {
     
     name: "",
     flag:"BO",
-    code_area: "591",
+    area_code: "591",
     description: "",
     parent_id: "",
 

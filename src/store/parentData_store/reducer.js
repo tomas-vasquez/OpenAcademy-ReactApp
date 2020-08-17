@@ -2,7 +2,7 @@ const initialValues = {
   user_name: "",
   email: "",
   name: "",
-  code_area: "",
+  area_code: "",
   wasap: "",
   feisbuk: "",
   pic_url: "",

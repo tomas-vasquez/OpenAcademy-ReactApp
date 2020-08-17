@@ -28,7 +28,7 @@ class AllCourse extends React.Component {
     if (courses[0] !== undefined) {
       return (
         <>
-          <Header />
+          <Header title="Todos los cursos"/>
 
           <Container className="mt-5">
             <h2 className="mb-4">
