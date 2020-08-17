@@ -1,8 +1,8 @@
 import React from "react";
 
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-import { Card, CardBody, Nav } from "reactstrap";
+import { Card, CardBody } from "reactstrap";
 
 class CourseMap extends React.Component {
 

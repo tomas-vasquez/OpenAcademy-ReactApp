@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { myRoutes } from "config";
 
 class DemoNavbar extends React.Component {
-
-  state = {
-    collapseClasses: "",
-    collapseOpen: false,
-  };
+  constructor() {
+    super();
+    this.state = {
+      collapseClasses: "",
+      collapseOpen: false,
+    };
+  }
 
   onExiting = () => {
     this.setState({

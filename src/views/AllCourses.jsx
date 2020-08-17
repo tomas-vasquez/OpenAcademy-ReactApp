@@ -2,7 +2,6 @@ import React from "react";
 
 import { connect } from "react-redux";
 
-import CourseSlider from "components/CourseSlider";
 import Controller_Academy from "_controllers/Academy";
 import { Container, Row, Col } from "reactstrap";
 import CardCourse from "components/CardCourse";
@@ -12,7 +11,7 @@ class AllCourse extends React.Component {
   constructor() {
     super();
     this.academy = new Controller_Academy();
-  }
+  } 
 
   componentDidMount() {
     if (this.props.academy.courses[0] === undefined) {
@@ -23,6 +22,7 @@ class AllCourse extends React.Component {
   }
 
   render() {
+    // eslint-disable-next-line react/prop-types
     var courses = this.props.academy.courses;
 
     if (courses[0] !== undefined) {
@@ -80,6 +80,7 @@ class AllCourse extends React.Component {
     }
   }
 }
+
 
 const mapStateToProps = (state) => ({
   academy: state.academy,

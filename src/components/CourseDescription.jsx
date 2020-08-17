@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, CardBody, Button, Col, div, Row } from "reactstrap";
-import { storageUrl } from "config";
+import { Card, CardBody, Button } from "reactstrap";
+
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import parser from "html-react-parser";

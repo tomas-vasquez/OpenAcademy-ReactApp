@@ -1,11 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 import moment from "moment";
 import "moment/min/locales";
 
-import { storageUrl, flagsUrl } from "config";
+import { storageUrl } from "config";
 
 // reactstrap components
 import { Collapse, Row, Col, Button } from "reactstrap";

@@ -2,15 +2,11 @@ import React from "react";
 
 import {
   Carousel,
-  CarouselIndicators,
   CarouselItem,
-  CarouselControl,
-  Card,
-  CardBody,
 } from "reactstrap";
 
 class CourseSlider extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
       activeIndex: 0,
@@ -44,7 +40,7 @@ class CourseSlider extends React.Component {
   };
 
   slides = () => {
-    return this.props.courses.map((course) => (
+    return this.props.courses.map(() => (
       <CarouselItem>
         
         

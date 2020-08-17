@@ -21,10 +21,7 @@ class HeaderCourse extends React.Component {
                       {course? course.course_title:null}
                     </h1>
                     <p data-aos="fade-up" data-aos-delay="100">
-                      4 Lessons / 12 Week &bullet; 2,193 students &bullet;{" "}
-                      <a href="#" className="text-white">
-                        6 comments
-                      </a>
+                      
                     </p>
                   </div>
                 </div>

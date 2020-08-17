@@ -8,8 +8,7 @@ import "moment/min/locales";
 
 import Controller_Comments from "_controllers/Comments";
 import { storageUrl } from "config";
-import { Button, Collapse, Row, Col } from "reactstrap";
-import { flagsUrl } from "config";
+import { Collapse, Row, Col } from "reactstrap";
 import Comment from "./Comment";
 
 class Comments extends React.Component {
@@ -204,7 +203,7 @@ class Comments extends React.Component {
   =========================================================
   */
 
-  handleClickOpenComments = (e) => {
+  handleClickOpenComments = () => {
     let targetId = this.props.targetId;
     let comments = this.props.comments;
 
@@ -261,15 +260,11 @@ class Comments extends React.Component {
     let targetId = this.props.targetId;
     let comments = this.props.comments;
 
-    let pic_url;
 
     if (userData.blob_pic_url !== undefined && userData.blob_pic_url !== null) {
-      pic_url = userData.blob_pic_url;
     } else {
       if (userData.pic_url !== null) {
-        pic_url = storageUrl + userData.pic_url;
       } else {
-        pic_url = require("assets/img/noPic.jpg");
       }
     }
 
