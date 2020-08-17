@@ -37,9 +37,12 @@ class Controller_Academy extends Controller_admin {
         store.log();
 
         this.log.msg("descargando courses\n");
-        if (_callback !== undefined) _callback(response.data);
+        _callback(response.data, null);
       },
-      (error) => this.errorsHandler(error, () => this.loadCourses(_callback))
+      // (error) => this.errorsHandler(error, () => this.loadCourses(_callback))
+      (error) => {
+        _callback(null, error);
+      }
     );
   }
   /*!
@@ -91,7 +94,7 @@ class Controller_Academy extends Controller_admin {
     );
   }
 
-/*
+  /*
 =========================================================
 * 
 =========================================================
@@ -107,9 +110,7 @@ class Controller_Academy extends Controller_admin {
         // console.log(response.data);
       },
       (error) =>
-        this.errorsHandler(error, () =>
-          this.editCourse(newData, _callback)
-        )
+        this.errorsHandler(error, () => this.editCourse(newData, _callback))
     );
   }
 }

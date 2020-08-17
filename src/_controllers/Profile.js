@@ -27,9 +27,12 @@ class Controller_Profile extends Controller_admin {
     this.profile.getProfile(
       userName,
       (response) => {
-        _callback(response.data)
+        _callback(response, null);
       },
-      (error) => this.errorsHandler(error, () => this.getProfile(userName, _callback), true)
+      // (error) => this.errorsHandler(error, () => this.getProfile(userName, _callback), true)
+      (error) => {
+        _callback(null, error);
+      }
     );
   };
 

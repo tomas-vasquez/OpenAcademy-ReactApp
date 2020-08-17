@@ -16,7 +16,7 @@ import { replacePayReports } from "store/pay_reports_store/actions";
 import Model_admin from "_models";
 
 //config
-import {myRoutes} from "config";
+import { myRoutes } from "config";
 import { reset } from "store/app_store/actions";
 import { replacePlatformData } from "store/platform_store/actions";
 
@@ -36,7 +36,7 @@ class Controller_admin {
 
   initApp() {
     if (!store.getState().app.isBeenLoadedMainData) {
-      this.alerts.showLoading(true, "Cargando...");
+      // this.alerts.showLoading(true, "Cargando...");
       this.log.msg("cargando datos del usuario......");
 
       //cargamos los datos iniciales
@@ -55,7 +55,7 @@ class Controller_admin {
           store.dispatch(isBeenLoadedMainData(true));
           store.log();
 
-          this.alerts.showLoading(false);
+          // this.alerts.showLoading(false);
           this.log.msg("cargando datos del usuario...... Perfecto !!!");
         },
         (error) => this.errorsHandler(error, () => this.initApp(), true)

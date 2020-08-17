@@ -23,12 +23,10 @@ class Model_Profile {
       headers: {
         "Content-Type": "aplication/json",
         "api-token": this.db.get("api-token"),
-      }
+      },
     })
       .then((response) => {
-        setTimeout(() => {
-          _success(response);
-        }, 1000);
+        _success(response.data);
       })
       .catch((error) => {
         _error(error);
