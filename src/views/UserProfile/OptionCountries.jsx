@@ -59,7 +59,9 @@ class OptionCountries extends React.Component {
       <>
         <div className="form-group row showcase_row_area">
           <div className="col-md-4 text-right">
-            <label htmlFor="input90">País:</label>
+            <label className="h6" htmlFor="input90">
+              País:
+            </label>
           </div>
           <div className="col-md-8 showcase_content_area">
             {this.props.editing ? (
@@ -112,7 +114,9 @@ class OptionCountries extends React.Component {
 
         <div className="form-group row showcase_row_area">
           <div className="col-md-4 text-right">
-            <label htmlFor="input90">WathsApp:</label>
+            <label className="h6" htmlFor="input90">
+              WathsApp:
+            </label>
           </div>
           <div className="col-md-8 showcase_content_area">
             {this.props.editing ? (
@@ -183,13 +187,13 @@ class OptionCountries extends React.Component {
         <Row>
           <Col md="6">
             <FormGroup>
-              <label className="form-control-label">País:</label>
+              <label className="h6" className="form-control-label">País:</label>
             </FormGroup>
           </Col>
 
           <Col md="6">
             <FormGroup>
-              <label className="form-control-label">Número de WathsApp:</label>
+              <label className="h6" className="form-control-label">Número de WathsApp:</label>
               
             </FormGroup>
           </Col>

@@ -1070,14 +1070,16 @@ h5,
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  padding: 30px 15px 15px 15px;
+  padding: 30px 15px;
   overflow: hidden;
   margin-bottom: 30px;
   background-color: #fff;
   border: 1px solid #e6e6e6;
   border-radius: 2px; }
-  .ph-item, .ph-item *,
-  .ph-item ::after, .ph-item ::before {
+  .ph-item,
+  .ph-item *,
+  .ph-item ::after,
+  .ph-item ::before {
     box-sizing: border-box; }
   .ph-item::before {
     content: " ";
@@ -1123,7 +1125,7 @@ h5,
   flex: 0 0 50%; }
 
 .ph-col-8 {
-  flex: 0 0 66.66667%; }
+  flex: 0 0 62.797%; }
 
 .ph-col-10 {
   flex: 0 0 83.33333%; }
@@ -1134,9 +1136,8 @@ h5,
 .ph-avatar {
   position: relative;
   width: 100%;
-  min-width: 60px;
+  min-width: 45px;
   background-color: #ced4da;
-  margin-bottom: 15px;
   border-radius: 50%;
   overflow: hidden; }
   .ph-avatar::before {

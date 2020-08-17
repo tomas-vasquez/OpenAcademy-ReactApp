@@ -1,6 +1,8 @@
 .ph-item {
-  &, *,
-  ::after, ::before {
+  &,
+  *,
+  ::after,
+  ::before {
     box-sizing: border-box;
   }
 
@@ -8,7 +10,7 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  padding: $ph-gutter ($ph-gutter / 2) ($ph-gutter - $ph-spacer) ($ph-gutter / 2);
+  padding: $ph-gutter ($ph-gutter / 2);
   overflow: hidden;
   margin-bottom: $ph-gutter;
   background-color: $ph-bg;
@@ -26,7 +28,13 @@
     width: 500%;
     margin-left: -250%;
     animation: phAnimation $ph-animation-duration linear infinite;
-    background: linear-gradient(to right, rgba($ph-bg, 0) 46%, rgba($ph-bg, .35) 50%, rgba($ph-bg, 0) 54%) 50% 50%;
+    background: linear-gradient(
+        to right,
+        rgba($ph-bg, 0) 46%,
+        rgba($ph-bg, 0.35) 50%,
+        rgba($ph-bg, 0) 54%
+      )
+      50% 50%;
   }
 
   > * {
@@ -68,7 +76,7 @@
   flex: 0 0 percentage(6 / 12);
 }
 .ph-col-8 {
-  flex: 0 0 percentage(8 / 12);
+  flex: 0 0 62.797%;
 }
 .ph-col-10 {
   flex: 0 0 percentage(10 / 12);
@@ -80,9 +88,9 @@
 .ph-avatar {
   position: relative;
   width: 100%;
-  min-width: 60px;
+  min-width: 45px;
   background-color: $ph-color;
-  margin-bottom: $ph-spacer;
+  // margin-bottom: $ph-spacer;
   border-radius: $ph-avatar-border-radius;
   overflow: hidden;
 

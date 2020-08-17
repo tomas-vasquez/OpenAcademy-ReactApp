@@ -67,8 +67,22 @@ class AuthorData extends React.Component {
         <Card>
           <CardBody>
             <Container>
-              <Row className="align-items-center">
-                <Col xs="8">
+              <Row>
+                <Col xs="12" lg="4" className="order-lg-2 mx-auto d-flex">
+                  <img
+                    src={pic_url}
+                    style={{
+                      borderRadius: "50%",
+                      cursor: "pointer",
+                      width: 180,
+                      height: 180,
+                    }}
+                    className="m-auto"
+                    onClick={this.profile.handleClickPic}
+                    alt={userData.name}
+                  />
+                </Col>
+                <Col xs="12" lg="8" className="order-lg-1">
                   <h1 data-aos="fade-up" data-aos-delay="100">
                     Hola !!!
                   </h1>
@@ -78,17 +92,6 @@ class AuthorData extends React.Component {
                   <p data-aos="fade-up" data-aos-delay="300">
                     <SocialButtons data={userData} />
                   </p>
-                </Col>
-                <Col xs="auto" className="mx-auto">
-                  <img
-                    src={pic_url}
-                    style={{
-                      borderRadius: "50%",
-                      cursor: "pointer",
-                    }}
-                    onClick={this.profile.handleClickPic}
-                    alt={userData.name}
-                  />
                 </Col>
               </Row>
             </Container>
@@ -105,7 +108,9 @@ class AuthorData extends React.Component {
         <Card className="mt-3 mb-5">
           <CardHeader>
             <CardTitle tag="h5" className="d-flex m-0">
-              <span className="mr-auto"><i className="fa fa-user"/> Datos del perfíl</span>
+              <span className="mr-auto">
+                <i className="fa fa-user" /> Datos del perfíl
+              </span>
               {this.props.userData2.user_name === userData.user_name ? (
                 <Button className="m-0  py-2 px-3" onClick={this.toggleEditing}>
                   <i className="fa fa-pencil-alt" /> editar
@@ -115,13 +120,15 @@ class AuthorData extends React.Component {
           </CardHeader>
           <CardBody>
             <form onSubmit={this.handleDataUpdate} id="form-user-data">
-              <h6 className="heading-small text-muted mb-4">
-                Información principal
-              </h6>
+              <h5 className="heading-small text-muted mb-4">
+                Información principal:
+              </h5>
 
               <div className="form-group row showcase_row_area">
                 <div className="col-md-4 text-right">
-                  <label htmlFor="input10">Nombre de cuenta:</label>
+                  <label className="h6" htmlFor="input10">
+                    Nombre de cuenta:
+                  </label>
                 </div>
                 <div className="col-md-8 showcase_content_area">
                   {this.state.editing ? (
@@ -139,7 +146,9 @@ class AuthorData extends React.Component {
 
               <div className="form-group row showcase_row_area">
                 <div className="col-md-4 text-right">
-                  <label htmlFor="input20">Correo electrónico:</label>
+                  <label className="h6" htmlFor="input20">
+                    Correo electrónico:
+                  </label>
                 </div>
                 <div className="col-md-8 showcase_content_area">
                   {this.state.editing ? (
@@ -156,7 +165,9 @@ class AuthorData extends React.Component {
 
               <div className="form-group row showcase_row_area">
                 <div className="col-md-4 text-right">
-                  <label htmlFor="input30">Nombre completo:</label>
+                  <label className="h6" htmlFor="input30">
+                    Nombre completo:
+                  </label>
                 </div>
                 <div className="col-md-8 showcase_content_area">
                   {this.state.editing ? (
@@ -177,7 +188,7 @@ class AuthorData extends React.Component {
               </div>
 
               <hr className="my-4" />
-              <h6 className="heading-small text-muted mb-4">Redes Sociales</h6>
+              <h5 className="heading-small text-muted mb-4">Redes Sociales:</h5>
 
               <OptionCountries
                 editing={this.state.editing}
@@ -186,7 +197,9 @@ class AuthorData extends React.Component {
 
               <div className="form-group row showcase_row_area">
                 <div className="col-md-4 text-right">
-                  <label htmlFor="input40">Enlace de Facebook:</label>
+                  <label className="h6" htmlFor="input40">
+                    Enlace de Facebook:
+                  </label>
                 </div>
                 <div className="col-md-8 showcase_content_area">
                   {this.state.editing ? (
@@ -235,7 +248,9 @@ class AuthorData extends React.Component {
 
               <div className="form-group row showcase_row_area">
                 <div className="col-md-4 text-right">
-                  <label htmlFor="input50">Enlace de Twitter:</label>
+                  <label className="h6" htmlFor="input50">
+                    Enlace de Twitter:
+                  </label>
                 </div>
                 <div className="col-md-8 showcase_content_area">
                   {this.state.editing ? (
@@ -282,7 +297,9 @@ class AuthorData extends React.Component {
 
               <div className="form-group row showcase_row_area">
                 <div className="col-md-4 text-right">
-                  <label htmlFor="input60">Enlace de Instagram:</label>
+                  <label className="h6" htmlFor="input60">
+                    Enlace de Instagram:
+                  </label>
                 </div>
                 <div className="col-md-8 showcase_content_area">
                   {this.state.editing ? (
@@ -332,11 +349,13 @@ class AuthorData extends React.Component {
               <Collapse isOpen={this.state.editing}>
                 <hr className="my-4" />
 
-                <h6 className="heading-small text-muted">Acerca de tí</h6>
+                <h5 className="heading-small text-muted">Acerca de tí:</h5>
 
                 <div className="form-group row showcase_row_area">
                   <div className="col-md-4 text-right">
-                    <label htmlFor="input20">Tu descripción:</label>
+                    <label className="h6" htmlFor="input20">
+                      Tu descripción:
+                    </label>
                   </div>
                   <div className="col-md-8 showcase_content_area">
                     {this.state.editing ? (
