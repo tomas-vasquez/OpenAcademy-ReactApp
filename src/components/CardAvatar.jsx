@@ -3,13 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 // reactstrap components
-import {
-  Card,
-  CardBody,
-  Input,
-  CardText,
-  CardFooter,
-} from "reactstrap";
+import { Card, CardBody, Input, CardText, CardFooter } from "reactstrap";
 
 import Profile from "_controllers/Profile";
 import { flagsUrl, storageUrl } from "config";
@@ -35,7 +29,7 @@ class CardAvatar extends React.Component {
     ) {
       pic_url = this.props.blob_pic_url;
     } else {
-      if (this.props.pic_url !== null ) {
+      if (this.props.pic_url !== null) {
         pic_url = storageUrl + this.props.pic_url;
       } else {
         pic_url = require("assets/img/noPic.jpg");
@@ -69,7 +63,9 @@ class CardAvatar extends React.Component {
               </a>
               <p className="description">{"@" + this.props.user_name}</p>
             </div>
-            <div className="card-description text-center">{this.props.description}</div>
+            <div className="card-description text-center">
+              {this.props.description}
+            </div>
           </CardBody>
           <CardFooter>
             <div className="button-container">
@@ -78,12 +74,12 @@ class CardAvatar extends React.Component {
           </CardFooter>
         </Card>
         <Input
-            className="form-control d-none"
-            id="input-pic"
-            type="file"
-            accept="image/*"
-            onChange={this.handlePicPicker}
-          />
+          className="form-control d-none"
+          id="input-pic"
+          type="file"
+          accept="image/*"
+          onChange={this.handlePicPicker}
+        />
       </>
     );
   }

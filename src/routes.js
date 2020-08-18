@@ -1,15 +1,10 @@
-// import Login from "views/forms/Login";
 import Home from "views/Home";
 import { myRoutes } from "config";
 
-// import UserProfile from "views/UserProfile";
-// import FormRegister from "views/forms/register";
-import Courses from "views/AllCourses"
+import Courses from "views/AllCourses";
 import Auth from "views/Auth";
 import UserProfile from "views/UserProfile";
 
-// import AddContent from "views/AddContent";
-// import ItemCustomizer from "views/ItemCustomizer";
 var routes = [
   {
     path: myRoutes.login,

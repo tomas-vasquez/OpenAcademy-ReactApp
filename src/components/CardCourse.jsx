@@ -4,13 +4,7 @@ import moment from "moment";
 import "moment/min/locales";
 
 // reactstrap components
-import {
-  Card,
-  CardBody,
-  CardImg,
-  Media,
-
-} from "reactstrap";
+import { Card, CardBody, CardImg, Media } from "reactstrap";
 
 import { storageUrl } from "config";
 import { Link } from "react-router-dom";
@@ -46,7 +40,7 @@ class CardCourse extends React.Component {
               <div className="course-inner-text py-4 px-4">
                 <span className="course-price">$99</span>
                 <div className="meta text-muted mr-2">
-                  <fa className="fa fa-clock mr-2" />
+                  <i className="fa fa-clock mr-2" />
                   {this.formatDate(course.created_at)}
                 </div>
                 <h3 className="text-primary">{course.course_title}</h3>
