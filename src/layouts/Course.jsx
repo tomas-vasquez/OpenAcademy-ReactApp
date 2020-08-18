@@ -5,73 +5,66 @@ import { connect } from "react-redux";
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import CardsFooter from "components/Footers/CardsFooter.js";
 
-import HeaderCourse from "components/Headers/HeaderCourse.jsx";
 import CardAuthor from "components/CardAuthor";
-import CourseDescription from "components/CourseDescription";
-import Comments from "components/Course/Comments";
-
 import Controller_Academy from "_controllers/Academy";
 import DB from "helpers/db";
 import Controller_admin from "_controllers";
-import Controller_AutoRefresh from "_controllers/AutoRefresh";
 import CourseMap from "components/Course/CourseMap";
+import CourseVideo from "views/CourseVideo";
+import Header from "components/Headers/Header";
+import Comments from "components/comments";
 
 class Landing extends React.Component {
-  nextItem = null;
-  currentItem = null;
-  proviusItem = null;
-  itemIndex = 0;
-
   ////
   constructor(props) {
     super(props);
+    let courseInUrl = document.baseURI.split("/")[3];
+
     this.academy = new Controller_Academy();
     this.db = new DB();
     this.controlleradmin = new Controller_admin();
-    this.autoRefresher = new Controller_AutoRefresh();
+    this.state = {
+      courses: props.academy.courses,
+      authors: props.academy.authors,
+      items: props.academy.items[courseInUrl],
+      error: null,
+    };
   }
 
   componentDidMount() {
-    let course_title = document.baseURI.split("/")[3];
-    // //cargamos los datos principales
-    if (!this.props.isBeenLoadedMainData) {
-      // console.log("hola");
-      this.controlleradmin.initApp(this);
+    let courseInUrl = document.baseURI.split("/")[3];
+
+    if (this.state.courses === null) {
+      this.academy.loadCourses((response, error) => {
+        this.setState({
+          courses: response.courses,
+          authors: response.authors,
+          error: error,
+        });
+      });
     }
 
-    if (this.props.academy.courses[0] === undefined) {
-      this.academy.loadCourses(() => {
-        if (this.props.academy.items[course_title] === undefined) {
-          this.academy.loadItems(course_title, () => {
-            this.forceUpdate();
-            this.autoRefresher.updateSubscribers();
-          });
-        }
+    if (this.state.items === undefined) {
+      this.academy.loadItems(courseInUrl, (response, error) => {
+        this.setState({ items: response.items, error: error });
       });
-    } else {
-      if (this.props.academy.items[course_title] === undefined) {
-        this.academy.loadItems(course_title, () => {
-          this.forceUpdate();
-          this.autoRefresher.updateSubscribers();
-        });
-      }
     }
   }
 
-  getCurrent = (items) => {
-    let course_title = document.baseURI.split("/")[3];
+  getCurrentTitle = () => {
+    let courseInUrl = document.baseURI.split("/")[3];
     let item_title = document.baseURI.split("/")[4];
 
     let targetItem = null;
 
     if (item_title !== undefined) {
       targetItem = item_title;
-      this.db.set("lasvideo>" + course_title, item_title);
+      this.db.set("lastItem>" + courseInUrl, item_title);
     } else {
-      let indb = this.db.get("lasvideo>" + course_title);
+      let indb = this.db.get("lastItem>" + courseInUrl);
       if (indb === undefined) {
-        targetItem = items[0].item_title;
-        this.db.set("lasvideo>" + course_title, targetItem);
+        targetItem = this.state.items[0].item_title;
+        this.db.set("lastItem>" + courseInUrl, targetItem);
       } else {
         targetItem = indb;
       }
@@ -80,81 +73,70 @@ class Landing extends React.Component {
   };
 
   render() {
-    this.currentItem = null;
+    let courseInUrl = document.baseURI.split("/")[3];
+
     let course = null;
-    let course_title = document.baseURI.split("/")[3];
-    let items = this.props.academy.items[course_title];
-    let author = null;
-    let description = "";
-    //calculamos el currentItem
-    if (items !== undefined && items !== null) {
-      items.forEach((item, key) => {
-        if (item.item_title === this.getCurrent(items)) {
-          this.proviusItem = items[key - 1];
-          this.currentItem = item;
-          this.itemIndex = key + 1;
-          this.nextItem = items[key + 1];
-          author = this.props.academy.authors.find((author) => {
-            return author.user_id === item.item_author_id;
-          });
-        }
+    if (this.state.courses !== null) {
+      course = this.state.courses.find((course) => {
+        return course.course_short_link === courseInUrl;
       });
-
-      course = this.props.academy.courses.find((course) => {
-        return course.course_short_link === course_title;
-      });
-
-      description = this.props.academy.descriptions[
-        this.currentItem.item_content_url
-      ];
-      if (description === undefined) {
-        this.academy.loadDescription(this.currentItem.item_content_url, () => {
-          this.forceUpdate();
-        });
-      }
     }
+
+    let nextItem = null;
+    let currentItem = null;
+    let proviusItem = null;
+    let itemIndex = 0;
+    let author = null;
+
+    if (this.state.items !== undefined && this.state.courses !== null) {
+      //calculamos el currentItem
+      this.state.items.forEach((item, key) => {
+        if (item.item_title === this.getCurrentTitle()) {
+          proviusItem = this.state.items[key - 1];
+          currentItem = item;
+          nextItem = this.state.items[key + 1];
+          itemIndex = key + 1;
+        }
+        author = this.state.authors.find((author) => {
+          return author.user_id === item.item_author_id;
+        });
+      });
+    }
+
     return (
       <>
         <div className="site-wrap">
-          <DemoNavbar course={course} />
-          <HeaderCourse course={course} />
-          <div className="site-section pb-4">
-            <div className="container">
-              <div className="row">
-                <div className="col-lg-9 mb-5">
-                  {this.currentItem !== null ? (
-                    <>
-                      <CourseDescription
-                        course={course}
-                        description={description}
-                        itemIndex={this.itemIndex}
-                        proviusItem={this.proviusItem}
-                        currentItem={this.currentItem}
-                        nextItem={this.nextItem}
+          <DemoNavbar />
+          {this.state.items === null || currentItem === null ? (
+            <Header title="cargando..." />
+          ) : (
+            <>
+              <Header title={currentItem.item_title} />
+              <div className="site-section pb-4">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-lg-9 mb-5">
+                      <CourseVideo
+                        currentItem={currentItem}
+                        itemIndex={itemIndex}
                       />
-                      {this.currentItem !== null ? (
-                        <Comments
-                          targetId={
-                            "item-" + course.id + "-" + this.currentItem.id
-                          }
-                        />
-                      ) : null}
-                    </>
-                  ) : null}
-                </div>
-                <div className="col-lg-3 p-0">
-                  <CardAuthor author={author} />
-
-                  <CourseMap
-                    items={items}
-                    course_title={course ? course.course_short_link : ""}
-                    currentItem={this.currentItem}
-                  />
+                      <Comments
+                        targetId={"item-" + course.id + "-" + currentItem.id}
+                      />
+                    </div>
+                    <div className="col-lg-3 p-0">
+                      <CardAuthor author={author} />
+                      <CourseMap
+                        items={this.state.items}
+                        course_title={course ? course.course_short_link : ""}
+                        currentItem={currentItem}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-
+            </>
+          )}
           <CardsFooter />
         </div>
       </>

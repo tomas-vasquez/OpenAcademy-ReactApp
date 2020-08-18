@@ -61,12 +61,11 @@ class Controller_Academy extends Controller_admin {
         store.log();
 
         this.log.msg("descargando items\n");
-        if (_callback !== undefined) _callback(response.data);
+        _callback(response.data, null);
       },
-      (error) =>
-        this.errorsHandler(error, () =>
-          this.loadItems(currentCourse, _callback)
-        )
+      (error) => {
+        _callback(null, error);
+      }
     );
   }
   /*!
@@ -85,12 +84,17 @@ class Controller_Academy extends Controller_admin {
         store.log();
 
         this.log.msg("descargando descripcion\n");
-        if (_callback !== undefined) _callback(response.data);
+        _callback(response.data, null);
       },
-      (error) =>
-        this.errorsHandler(error, () =>
-          this.loadDescription(currentDescription, _callback)
-        )
+      (error) => {
+        _callback(null, error);
+      }
+
+      // this.errorsHandler(error, () =>
+      //  _callback(response.data, null);
+
+      //   this.loadDescription(currentDescription, _callback)
+      // )
     );
   }
 

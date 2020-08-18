@@ -27,7 +27,7 @@ class AllCourse extends React.Component {
   }
 
   init = () => {
-    if (this.props.academy.courses[0] === undefined) {
+    if (this.props.academy.courses === null) {
       this.academy.loadCourses((response, error) => {
         console.log(response, error);
         this.setState({
@@ -35,6 +35,11 @@ class AllCourse extends React.Component {
           authors: response ? response.authors : null,
           error: error,
         });
+      });
+    } else {
+      this.setState({
+        courses: this.props.academy.courses,
+        authors: this.props.academy.authors,
       });
     }
   };
@@ -78,6 +83,7 @@ class AllCourse extends React.Component {
                 { breakPoint: 760, cardsToShow: 3 },
                 { breakPoint: 0, cardsToShow: 1 },
               ]}
+              // DotsWrapper={<></>}
             >
               {courses !== null
                 ? courses.map((_course, key) => (
