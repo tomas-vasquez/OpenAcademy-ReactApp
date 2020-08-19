@@ -1,4 +1,3 @@
-import Logger from "helpers/Logger";
 import store from "store";
 import { setComments, addComment } from "store/comments_store/actions";
 
@@ -13,7 +12,6 @@ class Controller_Comments extends Controller_admin {
   constructor() {
     super();
     this.comments = new Model_Comments();
-    this.log = new Logger("Controller_Comments", "background:blue;color:white");
     this.db = new Dexie("comments");
     this.db.version(1).stores({
       comments: "item_id,data,lastMarkTime",
@@ -27,8 +25,6 @@ class Controller_Comments extends Controller_admin {
   */
 
   loadComments(item_id, _callback) {
-    this.log.msg("cargando comentarios...");
-
     this.db.open().then(() => {
       //sacamos lo que tenemos en la base de datos
       this.db.comments.get(item_id).then((commentsInDb) => {
@@ -66,13 +62,12 @@ class Controller_Comments extends Controller_admin {
               }
 
               store.dispatch(setComments(item_id, data));
-              store.log();
 
               _callback(data, null);
 
-              this.log.msg("cargandos api:", response.data.comments);
-              this.log.msg("cargandos idb:", commentsInDb);
-              this.log.msg("cargando comentarios... Listo :D");
+              // this.log.msg("cargandos api:", response.data.comments);
+              // this.log.msg("cargandos idb:", commentsInDb);
+              // this.log.msg("cargando comentarios... Listo :D");
             },
             (error) => {
               _callback(null, error);
@@ -93,8 +88,6 @@ class Controller_Comments extends Controller_admin {
   */
 
   postComment(item_id, content, reply_id, _callBack) {
-    this.log.msg("publicando comentario...");
-
     this.comments.postComment(
       item_id,
       content,
@@ -108,12 +101,10 @@ class Controller_Comments extends Controller_admin {
         };
 
         store.dispatch(addComment(item_id, comment));
-        store.log();
 
         //boramos el text-area
         document.getElementById("comment-box").value = "";
 
-        this.log.msg("publicando comentario... LISTO :D");
         _callBack(response.data, null);
       },
       (error) => {

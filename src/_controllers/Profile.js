@@ -2,7 +2,6 @@ import swal from "sweetalert2";
 
 import Model_Profile from "_models/Profile";
 
-import Logger from "helpers/Logger";
 import Alerts from "helpers/Alerts";
 import Db from "helpers/db";
 
@@ -18,7 +17,6 @@ class Controller_Profile extends Controller_admin {
   constructor() {
     super();
     this.profile = new Model_Profile();
-    this.log = new Logger("Profile Controller", "background:blue;color:white");
     this.alerts = new Alerts();
     this.db = new Db();
   }
@@ -98,7 +96,6 @@ class Controller_Profile extends Controller_admin {
 
   unsafeUploadPic = (blob) => {
     this.alerts.showUploding(true, "subiendo...");
-    this.log.msg("actualizando foto de perfíl...");
 
     this.profile.uploadPic(
       blob,
@@ -116,9 +113,6 @@ class Controller_Profile extends Controller_admin {
             pic_url: response.data,
           })
         );
-        store.log();
-
-        this.log.msg("actualizando foto de perfil\n");
       },
       (error) => this.errorsHandler(error, () => this.unsafeUploadPic(blob))
     );
@@ -131,8 +125,6 @@ class Controller_Profile extends Controller_admin {
   */
 
   deletePic = () => {
-    this.log.msg("eliminando foto de perfil... ");
-
     swal
       .fire({
         showCloseButton: true,
@@ -151,14 +143,11 @@ class Controller_Profile extends Controller_admin {
           this.unsafeDeletePic();
         } else if (result.dismiss === "cancel") {
           this.handleClickPic();
-          this.log.msg("eliminando foto de perfil... cancelado! :D\n");
         }
       });
   };
 
   unsafeDeletePic = () => {
-    this.alerts.showLoading(true, "eliminando...");
-
     this.profile.deletePic(
       () => {
         this.alerts.showSuccess("Foto de perfil eliminada");
@@ -169,9 +158,6 @@ class Controller_Profile extends Controller_admin {
             pic_url: null,
           })
         );
-        store.log();
-
-        this.log.msg("eliminando foto de perfil\n");
       },
       (error) => this.errorsHandler(error, () => this.unsafeDeletePic())
     );
@@ -189,7 +175,6 @@ class Controller_Profile extends Controller_admin {
       "Actualizando datos de su perfíl",
       true,
       () => {
-        this.log.msg("actualizando perfil...");
         this.unsafeUpdateUserData(form);
       }
     );
@@ -212,9 +197,6 @@ class Controller_Profile extends Controller_admin {
         this.alerts.showSuccess("Perfil actualizado");
 
         store.dispatch(setUserData(response.data));
-        store.log();
-
-        this.log.msg("actualizando perfil\n");
       },
       (error) =>
         this.errorsHandler(error, () => this.unsafeUpdateUserData(form))

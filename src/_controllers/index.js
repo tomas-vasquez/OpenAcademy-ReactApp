@@ -1,5 +1,4 @@
 //helpers
-import Logger from "helpers/Logger";
 import Alerts from "helpers/Alerts";
 import DB from "helpers/db";
 
@@ -18,7 +17,6 @@ import { reset } from "store/app_store/actions";
 
 class Controller_admin {
   constructor() {
-    this.log = new Logger("Controller_admin", "background:blue;color:white");
     this.alerts = new Alerts();
     this.db = new DB();
     this.modeladmin = new Model_admin();
@@ -32,22 +30,12 @@ class Controller_admin {
 
   initApp() {
     if (!store.getState().app.isBeenLoadedMainData) {
-      // this.alerts.showLoading(true, "Cargando...");
-      this.log.msg("cargando datos del usuario......");
-
-      //cargamos los datos iniciales
       this.modeladmin.loadMainData(
         (data) => {
-          //guardamos todos los datos en el store
-
           //store.dispatch(setNotifications(data.notifications));
           // store.dispatch(setUsers(data.users));
           store.dispatch(replacePayReports(data.pay_reports));
           store.dispatch(setUserData(data.user_data));
-          store.log();
-
-          // this.alerts.showLoading(false);
-          this.log.msg("cargando datos del usuario...... Perfecto !!!");
         },
         (error) => this.errorsHandler(error, () => this.initApp(), true)
       );
@@ -63,16 +51,14 @@ class Controller_admin {
   clearData = () => {
     store.dispatch(replace(myRoutes.login));
     store.dispatch(reset());
-    store.log();
+
     new DB().clear();
   };
 
-  /*
-  |--------------------------------------------------------------------------
-  | Error handler
-  |--------------------------------------------------------------------------
-  |
-  |
+  /*!
+  =========================================================
+  * 
+  =========================================================
   */
 
   errorsHandler = (error, retryHandler, isStrict) => {

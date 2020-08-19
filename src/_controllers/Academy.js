@@ -1,4 +1,3 @@
-import Logger from "helpers/Logger";
 import Alerts from "helpers/Alerts";
 import DB from "helpers/db";
 
@@ -15,7 +14,6 @@ import { setItems } from "store/academy_store/actions";
 class Controller_Academy extends Controller_admin {
   constructor() {
     super();
-    this.log = new Logger("Controller_Academy", "background:blue;color:white");
     this.alerts = new Alerts();
     this.db = new DB();
     this.modelAcademy = new Model_Academy();
@@ -28,18 +26,13 @@ class Controller_Academy extends Controller_admin {
 */
 
   loadCourses(_callback) {
-    this.log.msg("descargando courses ......");
-
     this.modelAcademy.loadCourses(
       (response) => {
         store.dispatch(setCourses(response.data.courses));
         store.dispatch(setAuthors(response.data.authors));
-        store.log();
 
-        this.log.msg("descargando courses\n");
         _callback(response.data, null);
       },
-      // (error) => this.errorsHandler(error, () => this.loadCourses(_callback))
       (error) => {
         _callback(null, error);
       }
@@ -52,15 +45,11 @@ class Controller_Academy extends Controller_admin {
 */
 
   loadItems(currentCourse, _callback) {
-    this.log.msg("descargando items ......");
-
     this.modelAcademy.loadItems(
       currentCourse,
       (response) => {
         store.dispatch(setItems(currentCourse, response.data.items));
-        store.log();
 
-        this.log.msg("descargando items\n");
         _callback(response.data, null);
       },
       (error) => {
@@ -75,46 +64,16 @@ class Controller_Academy extends Controller_admin {
 */
 
   loadDescription(currentDescription, _callback) {
-    this.log.msg("descargando descripcion ......");
-
     this.modelAcademy.loadDescription(
       currentDescription,
       (response) => {
         store.dispatch(setDescription(currentDescription, response.data));
-        store.log();
 
-        this.log.msg("descargando descripcion\n");
         _callback(response.data, null);
       },
       (error) => {
         _callback(null, error);
       }
-
-      // this.errorsHandler(error, () =>
-      //  _callback(response.data, null);
-
-      //   this.loadDescription(currentDescription, _callback)
-      // )
-    );
-  }
-
-  /*
-=========================================================
-* 
-=========================================================
-*/
-
-  editCourse(newData, _callback) {
-    this.log.msg("editando curso ......");
-
-    this.modelAcademy.editCourse(
-      newData,
-      (response) => {
-        // console.clear();
-        // console.log(response.data);
-      },
-      (error) =>
-        this.errorsHandler(error, () => this.editCourse(newData, _callback))
     );
   }
 }
