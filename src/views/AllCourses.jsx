@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import { connect } from "react-redux";
 
@@ -81,9 +82,9 @@ class AllCourse extends React.Component {
                 { breakPoint: 760, cardsToShow: 3 },
                 { breakPoint: 0, cardsToShow: 1 },
               ]}
-              // DotsWrapper={styled.div`
-              //   text-align: center;
-              // `}
+              DotsWrapper={styled.div`
+                text-align: center;
+              `}
             >
               {courses !== null
                 ? courses.map((_course, key) => (

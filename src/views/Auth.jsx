@@ -43,7 +43,7 @@ class Auth extends React.Component {
         <div
           className="slide-1 p-0"
           style={{
-            backgroundImage: "url(" + require("assets/images/hero_1.jpg") + ")",
+            backgroundImage: "url(" + require("assets/images/banner.jpg") + ")",
           }}
         >
           <div className="container py-5 py-lg-0">

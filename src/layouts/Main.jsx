@@ -3,8 +3,8 @@ import React from "react";
 import { connect } from "react-redux";
 
 // core components
-import DemoNavbar from "components/Navbars/DemoNavbar.js";
-import CardsFooter from "components/Footers/CardsFooter.js";
+import Navbar from "components/Navbars/Navbar";
+import CardsFooter from "components/Footers/CardsFooter";
 
 import Controller_admin from "_controllers";
 import { Switch, Route } from "react-router";
@@ -41,7 +41,7 @@ class Main extends React.Component {
     return (
       <>
         <div className="site-wrap">
-          <DemoNavbar />
+          <Navbar />
 
           <Switch>{this.getRoutes(routes)}</Switch>
 
