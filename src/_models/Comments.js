@@ -32,7 +32,7 @@ class Model_Academy {
       )
 
       .then((response) => {
-        if (_success !== undefined) _success(response);
+        _success(response);
       })
       .catch((error) => {
         _error(error);
@@ -50,10 +50,10 @@ class Model_Academy {
       method: "post",
       url: apiUrl + "/comments",
       headers: {
-        "Content-Type": "aplication/json","api-token": this.db.get("api-token"),
+        "Content-Type": "aplication/json",
+        "api-token": this.db.get("api-token"),
       },
       data: {
-        
         comment_item_id: item_id,
         comment_content: content.trim(),
         comment_reply_id: reply_id,

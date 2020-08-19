@@ -3,7 +3,7 @@ import store from "store";
 import { replaceComments, addComment } from "store/comments_store/actions";
 
 import Model_Comments from "_models/Comments";
-import Controller_admin from ".././_controllers";
+import Controller_admin from "_controllers";
 
 import { getLastTimeMark, mergeComments } from "helpers/utils";
 
@@ -26,81 +26,64 @@ class Controller_Comments extends Controller_admin {
   =========================================================
   */
 
-  loadComments(item_id, _myCallBack) {
-    setTimeout(() => {
-      this.log.msg("cargando comentarios...");
+  loadComments(item_id, _callback) {
+    this.log.msg("cargando comentarios...");
 
-      this.db.open().then(() => {
-        //sacamos lo que tenemos en la base de datos
-        this.db.comments.get(item_id).then((commentsInDb) => {
-          let lastUpdate =
-            commentsInDb !== undefined ? commentsInDb.lastUpdate : 0; //ultima vez que actualizamos los datos locales
+    this.db.open().then(() => {
+      //sacamos lo que tenemos en la base de datos
+      this.db.comments.get(item_id).then((commentsInDb) => {
+        let lastUpdate =
+          commentsInDb !== undefined ? commentsInDb.lastUpdate : 0; //ultima vez que actualizamos los datos locales
+        try {
+          this.comments.loadComments(
+            item_id,
+            lastUpdate,
+            (response) => {
+              var data;
+              if (commentsInDb === undefined) {
+                data = {
+                  item_id, //primary key
+                  comments: response.data.comments,
+                  lastUpdate: getLastTimeMark(
+                    response.data.comments,
+                    "comment_updated_at"
+                  ),
+                };
+                this.db.comments.add(data);
+              } else {
+                data = {
+                  item_id, //primary key
+                  comments: mergeComments(
+                    commentsInDb.comments,
+                    response.data.comments
+                  ),
+                  lastUpdate: getLastTimeMark(
+                    response.data.comments,
+                    "comment_updated_at"
+                  ),
+                };
+                this.db.comments.update(item_id, data);
+              }
 
-          try {
-            this.comments.loadComments(
-              item_id,
-              lastUpdate,
-              (response) => {
-                // console.log(response);
+              store.dispatch(replaceComments(item_id, data));
+              store.log();
 
-                if (commentsInDb === undefined) {
-                  //guardamos en la base de datos
-                  //alert(item_id);
-                  let dat = {
-                    item_id, //primary key
-                    data: response.data.comments,
-                    lastUpdate: getLastTimeMark(
-                      response.data.comments,
-                      "comment_updated_at"
-                    ),
-                  };
-                  this.db.comments.add(dat);
-                  //guardamos en el store
-                  store.dispatch(replaceComments(item_id, dat));
-                  store.log();
-                } else {
-                  if (response.data.comments.length !== 0) {
-                    //guardamos en la base de datos
-                    let dat = {
-                      item_id,
-                      data: mergeComments(
-                        commentsInDb.data,
-                        response.data.comments
-                      ),
-                      lastUpdate: getLastTimeMark(
-                        response.data.comments,
-                        "comment_updated_at"
-                      ),
-                    };
+              _callback(data, null);
 
-                    this.db.comments.update(item_id, dat);
-                    store.dispatch(replaceComments(item_id, dat));
-                    store.log();
-                  } else {
-                    store.dispatch(replaceComments(item_id, commentsInDb));
-                    store.log();
-                  }
-                }
-
-                this.log.msg("cargandos api:", response.data.comments);
-                this.log.msg("cargandos idb:", commentsInDb);
-                this.log.msg("cargando comentarios... Listo :D");
-
-                _myCallBack();
-              },
-              (error) =>
-                this.errorsHandler(error, () =>
-                  this.loadComments(item_id, _myCallBack)
-                )
-            );
-          } catch (error) {
-            this.errorsHandler(error, () =>
-              this.loadComments(item_id, _myCallBack)
-            );
-          }
-        });
+              this.log.msg("cargandos api:", response.data.comments);
+              this.log.msg("cargandos idb:", commentsInDb);
+              this.log.msg("cargando comentarios... Listo :D");
+            },
+            (error) => {
+              _callback(null, error);
+            }
+          );
+        } catch (error) {
+          console.error(error);
+          _callback(null, error);
+        }
       });
-    }, 1000);
+    });
   }
 
   /*!
@@ -131,12 +114,15 @@ class Controller_Comments extends Controller_admin {
         document.getElementById("comment-box").value = "";
 
         this.log.msg("publicando comentario... LISTO :D");
-        _callBack();
+        _callBack(response.data, null);
       },
-      (error) =>
-        this.errorsHandler(error, () =>
-          this.postComment(item_id, content, reply_id, _callBack)
-        )
+      (error) => {
+        _callBack(null, error);
+        this.errorsHandler(error, () => {
+          console.error(error);
+          this.postComment(item_id, content, reply_id, _callBack);
+        });
+      }
     );
   }
 

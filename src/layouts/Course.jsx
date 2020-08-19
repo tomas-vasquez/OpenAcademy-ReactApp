@@ -8,11 +8,12 @@ import CardsFooter from "components/Footers/CardsFooter.js";
 import CardAuthor from "components/CardAuthor";
 import Controller_Academy from "_controllers/Academy";
 import DB from "helpers/db";
-import Controller_admin from "_controllers";
+import Controller_Admin from "_controllers";
 import CourseMap from "components/Course/CourseMap";
 import CourseVideo from "views/CourseVideo";
 import Header from "components/Headers/Header";
-import Comments from "components/comments";
+import Comments from "components/Course/comments";
+import ErrorAllCourses from "components/errors/ErrorAllCourse";
 
 class Landing extends React.Component {
   ////
@@ -22,7 +23,7 @@ class Landing extends React.Component {
 
     this.academy = new Controller_Academy();
     this.db = new DB();
-    this.controlleradmin = new Controller_admin();
+    this.controlleradmin = new Controller_Admin();
     this.state = {
       courses: props.academy.courses,
       authors: props.academy.authors,
@@ -36,17 +37,22 @@ class Landing extends React.Component {
 
     if (this.state.courses === null) {
       this.academy.loadCourses((response, error) => {
-        this.setState({
-          courses: response.courses,
-          authors: response.authors,
-          error: error,
-        });
-      });
-    }
-
-    if (this.state.items === undefined) {
-      this.academy.loadItems(courseInUrl, (response, error) => {
-        this.setState({ items: response.items, error: error });
+        if (error === null) {
+          this.setState({
+            courses: response.courses,
+            authors: response.authors,
+            error: error,
+          });
+          if (this.state.items === undefined) {
+            this.academy.loadItems(courseInUrl, (response, error) => {
+              this.setState({ items: response.items, error: error });
+            });
+          }
+        } else {
+          this.setState({
+            error: error,
+          });
+        }
       });
     }
   }
@@ -103,44 +109,48 @@ class Landing extends React.Component {
       });
     }
 
-    return (
-      <>
-        <div className="site-wrap">
-          <DemoNavbar />
-          {this.state.items === null || currentItem === null ? (
-            <Header title="cargando..." />
-          ) : (
-            <>
-              <Header title={currentItem.item_title} />
-              <div className="site-section pb-4">
-                <div className="container">
-                  <div className="row">
-                    <div className="col-lg-9 mb-5">
-                      <CourseVideo
-                        currentItem={currentItem}
-                        itemIndex={itemIndex}
-                      />
-                      <Comments
-                        targetId={"item-" + course.id + "-" + currentItem.id}
-                      />
-                    </div>
-                    <div className="col-lg-3 p-0">
-                      <CardAuthor author={author} />
-                      <CourseMap
-                        items={this.state.items}
-                        course_title={course ? course.course_short_link : ""}
-                        currentItem={currentItem}
-                      />
+    if (this.state.error === null) {
+      return (
+        <>
+          <div className="site-wrap">
+            <DemoNavbar />
+            {this.state.items === null || currentItem === null ? (
+              <Header title="cargando..." />
+            ) : (
+              <>
+                <Header title={currentItem.item_title} />
+                <div className="site-section pb-4">
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-lg-9 mb-5">
+                        <CourseVideo
+                          currentItem={currentItem}
+                          itemIndex={itemIndex}
+                        />
+                        <Comments
+                          target_id={"item-" + course.id + "-" + currentItem.id}
+                        />
+                      </div>
+                      <div className="col-lg-3 p-0">
+                        <CardAuthor author={author} />
+                        <CourseMap
+                          items={this.state.items}
+                          course_title={course ? course.course_short_link : ""}
+                          currentItem={currentItem}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </>
-          )}
-          <CardsFooter />
-        </div>
-      </>
-    );
+              </>
+            )}
+            <CardsFooter />
+          </div>
+        </>
+      );
+    } else {
+      return <ErrorAllCourses error={this.state.error} />;
+    }
   }
 }
 

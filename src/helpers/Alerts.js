@@ -135,7 +135,7 @@ class Alerts {
         showCancelButton: !isStrict,
         allowOutsideClick: !isStrict,
         buttonsStyling: false,
-        confirmBut: "btn btn-primary",
+        confirmButtonClass: "btn btn-primary",
         cancelButtonClass: "btn btn-secondary",
         confirmButtonText: 'reintentar <i class="fa fa-redo"></i>',
         cancelButtonText: 'cancelar  <i class="fa fa-times"></i>',
