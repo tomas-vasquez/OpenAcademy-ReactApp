@@ -4,10 +4,6 @@ import { connect } from "react-redux";
 import moment from "moment";
 import "moment/min/locales";
 
-import { storageUrl } from "config";
-
-// reactstrap components
-import { Collapse, Row, Col, Button } from "reactstrap";
 import SingleComment from "./SingleComment";
 // import { reply } from "store/comments_store/actions";
 

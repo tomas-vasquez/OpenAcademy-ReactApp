@@ -51,7 +51,7 @@ class Error500 extends React.Component {
                     <Button
                       color="primary"
                       className="mx-auto mt-3"
-                      onClick={this.props.reinit}
+                      onClick={this.props.reload}
                     >
                       <i className="fa fa-redo mr-2" />
                       Reintentar

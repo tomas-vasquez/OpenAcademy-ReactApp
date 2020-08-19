@@ -15,7 +15,7 @@ class CourseVideo extends React.Component {
   render() {
     return this.props.video !== null ? (
       <>
-        <Card style={{ marginTop: -150 }} className="mb-4 border-0 bg-black">
+        <Card className="mb-4 border-0 bg-black">
           <CardBody className="p-0 p-md-2">
             <div className="video-container shadow">
               <video

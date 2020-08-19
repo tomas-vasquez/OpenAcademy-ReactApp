@@ -3,7 +3,6 @@ import React from "react";
 // reactstrap components
 import { Row, Col, Container } from "reactstrap";
 
-// import CardAvatar from "components/CardAvatar";
 import Header from "components/Headers/Header";
 
 import AuthorData from "./AuthorData";
@@ -23,10 +22,10 @@ class UserProfile extends React.Component {
   }
 
   componentDidMount() {
-    this.init();
+    this.loadData();
   }
 
-  init = () => {
+  loadData = () => {
     let userName = this.props.match.params.user_name;
 
     this.profile.getProfile(userName, (response, error) => {
@@ -37,11 +36,9 @@ class UserProfile extends React.Component {
     });
   };
 
-  reinit = () => {
+  reloadData = () => {
     this.setState({ userData: null, error: null });
-    setTimeout(() => {
-      this.init();
-    }, 2000);
+    this.loadData();
   };
 
   render() {
@@ -66,7 +63,7 @@ class UserProfile extends React.Component {
         </Container>
       </>
     ) : this.state.error !== null ? (
-      <ErrorUserProfile error={this.state.error} reinit={this.reinit} />
+      <ErrorUserProfile error={this.state.error} reload={this.reload} />
     ) : (
       <>
         <Header title={"cargando..."} subTitle="por favor espere..." />

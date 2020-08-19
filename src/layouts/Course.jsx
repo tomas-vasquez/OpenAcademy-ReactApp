@@ -10,10 +10,14 @@ import Controller_Academy from "_controllers/Academy";
 import DB from "helpers/db";
 import Controller_Admin from "_controllers";
 import CourseMap from "components/Course/CourseMap";
-import CourseVideo from "views/CourseVideo";
 import Header from "components/Headers/Header";
 import Comments from "components/Course/comments";
 import ErrorAllCourses from "components/errors/ErrorAllCourse";
+import { Container, Col, Row } from "reactstrap";
+
+import PHCourse from "components/Loaders/PHCourse";
+import CourseVideo from "views/CourseVideo";
+import ItemsJumperButtons from "components/Course/ItemsJumperButtons";
 
 class Landing extends React.Component {
   ////
@@ -33,7 +37,21 @@ class Landing extends React.Component {
   }
 
   componentDidMount() {
+    this.loadData();
+  }
+
+  loadData = () => {
     let courseInUrl = document.baseURI.split("/")[3];
+
+    let loadItems = () => {
+      if (this.props.academy.items[courseInUrl] === undefined) {
+        this.academy.loadItems(courseInUrl, (response, error) => {
+          this.setState({ items: response.items, error: error });
+        });
+      } else {
+        this.setState({ items: this.props.academy.items[courseInUrl] });
+      }
+    };
 
     if (this.state.courses === null) {
       this.academy.loadCourses((response, error) => {
@@ -43,19 +61,28 @@ class Landing extends React.Component {
             authors: response.authors,
             error: error,
           });
-          if (this.state.items === undefined) {
-            this.academy.loadItems(courseInUrl, (response, error) => {
-              this.setState({ items: response.items, error: error });
-            });
-          }
+          loadItems();
         } else {
           this.setState({
             error: error,
           });
         }
       });
+    } else {
+      loadItems();
     }
-  }
+  };
+
+  reloadData = () => {
+    this.setState({
+      courses: this.props.academy.courses,
+      authors: this.props.academy.authors,
+      items: undefined,
+      error: null,
+    });
+
+    this.loadData();
+  };
 
   getCurrentTitle = () => {
     let courseInUrl = document.baseURI.split("/")[3];
@@ -109,48 +136,60 @@ class Landing extends React.Component {
       });
     }
 
-    if (this.state.error === null) {
-      return (
-        <>
-          <div className="site-wrap">
-            <DemoNavbar />
-            {this.state.items === null || currentItem === null ? (
-              <Header title="cargando..." />
+    return (
+      <>
+        <div className="site-wrap">
+          <DemoNavbar />
+          {this.state.error === null ? (
+            this.state.items !== undefined && currentItem !== null ? (
+              <>
+                {}
+                <Header title={currentItem.item_title} />
+
+                <Container style={{ marginTop: -100 }}>
+                  <Row>
+                    <Col lg="9" className="mb-5 pl-lg-4">
+                      <CourseVideo
+                        currentItem={currentItem}
+                        itemIndex={itemIndex}
+                      />
+                      <ItemsJumperButtons
+                        course={course}
+                        proviusItem={proviusItem}
+                        nextItem={nextItem}
+                      />
+                      <Comments
+                        target_id={"item-" + course.id + "-" + currentItem.id}
+                      />
+                    </Col>
+                    <Col lg="3" className="p-0">
+                      <CardAuthor author={author} />
+                      <CourseMap
+                        items={this.state.items}
+                        course_title={course ? course.course_short_link : ""}
+                        currentItem={currentItem}
+                      />
+                    </Col>
+                  </Row>
+                </Container>
+              </>
             ) : (
               <>
-                <Header title={currentItem.item_title} />
-                <div className="site-section pb-4">
-                  <div className="container">
-                    <div className="row">
-                      <div className="col-lg-9 mb-5">
-                        <CourseVideo
-                          currentItem={currentItem}
-                          itemIndex={itemIndex}
-                        />
-                        <Comments
-                          target_id={"item-" + course.id + "-" + currentItem.id}
-                        />
-                      </div>
-                      <div className="col-lg-3 p-0">
-                        <CardAuthor author={author} />
-                        <CourseMap
-                          items={this.state.items}
-                          course_title={course ? course.course_short_link : ""}
-                          currentItem={currentItem}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <Header
+                  title={"Cargando curso..."}
+                  subTitle="espere por favor..."
+                />
+                <PHCourse />
               </>
-            )}
-            <CardsFooter />
-          </div>
-        </>
-      );
-    } else {
-      return <ErrorAllCourses error={this.state.error} />;
-    }
+            )
+          ) : (
+            <ErrorAllCourses error={this.state.error} reload={this.reload} />
+          )}
+
+          <CardsFooter />
+        </div>
+      </>
+    );
   }
 }
 

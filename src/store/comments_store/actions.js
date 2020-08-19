@@ -1,5 +1,5 @@
-export const replaceComments = (item_id, comments) => ({
-  type: "REPLACE_COMMENTS",
+export const setComments = (item_id, comments) => ({
+  type: "SET_COMMENTS",
   item_id,
   comments,
 });

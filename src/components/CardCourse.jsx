@@ -29,7 +29,7 @@ class CardCourse extends React.Component {
         to={"/" + course.course_short_link}
         className="text-default"
       >
-        <Card className="border-1  course mb-3">
+        <Card className="border-1 course">
           <CardBody className="p-0">
             <div className="h-50 align-self-stretch">
               <figure className=" m-0">

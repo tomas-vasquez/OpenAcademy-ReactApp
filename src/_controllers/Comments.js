@@ -1,6 +1,6 @@
 import Logger from "helpers/Logger";
 import store from "store";
-import { replaceComments, addComment } from "store/comments_store/actions";
+import { setComments, addComment } from "store/comments_store/actions";
 
 import Model_Comments from "_models/Comments";
 import Controller_admin from "_controllers";
@@ -65,7 +65,7 @@ class Controller_Comments extends Controller_admin {
                 this.db.comments.update(item_id, data);
               }
 
-              store.dispatch(replaceComments(item_id, data));
+              store.dispatch(setComments(item_id, data));
               store.log();
 
               _callback(data, null);

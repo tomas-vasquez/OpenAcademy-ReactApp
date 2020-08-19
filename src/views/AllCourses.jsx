@@ -12,24 +12,23 @@ import Slider from "react-styled-carousel";
 import ErrorAllCourses from "components/errors/ErrorAllCourse";
 
 class AllCourse extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.academy = new Controller_Academy();
     this.state = {
-      courses: null,
-      authors: null,
+      courses: props.academy.courses,
+      authors: props.academy.authors,
       error: null,
     };
   }
 
   componentDidMount() {
-    this.init();
+    this.loadData();
   }
 
-  init = () => {
+  loadData = () => {
     if (this.props.academy.courses === null) {
       this.academy.loadCourses((response, error) => {
-        console.log(response, error);
         this.setState({
           courses: response ? response.courses : null,
           authors: response ? response.authors : null,
@@ -44,9 +43,9 @@ class AllCourse extends React.Component {
     }
   };
 
-  reinit = () => {
+  reload = () => {
     this.setState({ courses: null, authors: null, error: null });
-    this.init();
+    this.loadData();
   };
 
   render() {
@@ -65,7 +64,7 @@ class AllCourse extends React.Component {
           />
         )}
         <Container className="mt-0">
-          <Card className="py-1px-0 mx-0 mb-3" style={{ marginTop: -100 }}>
+          <Card className="py-1px-0 mx-0 pb-3" style={{ marginTop: -100 }}>
             <CardHeader>
               <CardTitle tag="h2">
                 Cursos más vistos...
@@ -74,7 +73,6 @@ class AllCourse extends React.Component {
                 <i className="fa fa-fire text-danger mr-1" />
               </CardTitle>
             </CardHeader>
-
             <Slider
               autoSlide={3000}
               pauseOnMouseHover
@@ -83,11 +81,13 @@ class AllCourse extends React.Component {
                 { breakPoint: 760, cardsToShow: 3 },
                 { breakPoint: 0, cardsToShow: 1 },
               ]}
-              // DotsWrapper={<></>}
+              // DotsWrapper={styled.div`
+              //   text-align: center;
+              // `}
             >
               {courses !== null
                 ? courses.map((_course, key) => (
-                    <div className="p-2 mt-3" key={key}>
+                    <div className="p-2 mt-3" key={"a-" + key}>
                       <CardCourse
                         course={_course}
                         author={authors.find((author) => {
@@ -97,7 +97,7 @@ class AllCourse extends React.Component {
                     </div>
                   ))
                 : ["", "", "", ""].map((value, key) => (
-                    <div key={key} className="p-2 mt-3">
+                    <div key={"b-" + key} className="p-2 mt-3">
                       <PHCardCourse />
                     </div>
                   ))}
@@ -133,7 +133,7 @@ class AllCourse extends React.Component {
         </Container>
       </>
     ) : (
-      <ErrorAllCourses error={this.state.error} reinit={this.reinit} />
+      <ErrorAllCourses error={this.state.error} reload={this.reload} />
     );
   }
 }

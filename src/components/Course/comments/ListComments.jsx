@@ -25,13 +25,19 @@ class ListComments extends React.Component {
   }
 
   render() {
-    let comments = this.props.comments.filter((comment) => {
-      return comment.comment_reply_id === null;
-    });
+    let comments = this.props.comments;
 
-    let replys = this.props.comments.filter((comment) => {
-      return comment.comment_reply_id !== null;
-    });
+    let replys = comments
+      ? comments.filter((comment) => {
+          return comment.comment_reply_id !== null;
+        })
+      : [];
+
+    comments = comments
+      ? comments.filter((comment) => {
+          return comment.comment_reply_id === null;
+        })
+      : [];
 
     return (
       <div className="comments-container">

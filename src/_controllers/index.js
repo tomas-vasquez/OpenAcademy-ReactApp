@@ -5,11 +5,8 @@ import DB from "helpers/db";
 
 //store
 import store from "store";
-import { isBeenLoadedMainData } from "store/app_store/actions";
 import { replace } from "connected-react-router/lib/actions";
 import { setUserData } from "store/userData_store/actions";
-import { setParentData } from "store/parentData_store/actions";
-import { setUsers } from "store/users_store/actions";
 import { replacePayReports } from "store/pay_reports_store/actions";
 
 //models
@@ -18,7 +15,6 @@ import Model_admin from "_models";
 //config
 import { myRoutes } from "config";
 import { reset } from "store/app_store/actions";
-import { replacePlatformData } from "store/platform_store/actions";
 
 class Controller_admin {
   constructor() {
@@ -43,16 +39,11 @@ class Controller_admin {
       this.modeladmin.loadMainData(
         (data) => {
           //guardamos todos los datos en el store
-          store.dispatch(setParentData(data.parent_data));
+
           //store.dispatch(setNotifications(data.notifications));
-          // store.dispatch(setProspects(data.prospects));
-          store.dispatch(setUsers(data.users));
+          // store.dispatch(setUsers(data.users));
           store.dispatch(replacePayReports(data.pay_reports));
-          // store.dispatch(setItems(data.academy));
           store.dispatch(setUserData(data.user_data));
-          store.dispatch(replacePlatformData(data.platform));
-          // store.dispatch(isLoadedData(true));//cuando esta en false bloquea el renderizado
-          store.dispatch(isBeenLoadedMainData(true));
           store.log();
 
           // this.alerts.showLoading(false);

@@ -11,7 +11,9 @@ class Comments extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      comments: props.comments[props.target_id],
+      comments: props.comments[props.target_id]
+        ? props.comments[props.target_id]["comments"]
+        : null,
       replyComment: null,
       target_id: props.target_id,
       animating: false,
@@ -19,20 +21,38 @@ class Comments extends React.Component {
     this.comments = new Controller_Comments();
   }
 
-  componentDidMount() {
-    this.init();
-  }
-
-  init = () => {
-    if (this.state.comments === undefined) {
-      // alert(this.state.target_id);
-      this.comments.loadComments(this.state.target_id, (response, error) => {
-        console.log(response);
-        this.setState({ comments: response.comments });
+  loadData = () => {
+    if (this.props.comments[this.props.target_id] === undefined) {
+      this.comments.loadComments(this.props.target_id, (response, error) => {
+        this.setState({ comments: response.comments, error: error });
         this.setState({ animating: true });
       });
+    } else {
+      this.setState({
+        comments: this.props.comments[this.props.target_id]["comments"],
+      });
+      this.setState({ animating: true });
     }
   };
+
+  reloadData = () => {
+    this.setState({
+      comments: null,
+      target_id: this.props.target_id,
+      animating: false,
+    });
+    this.loadData();
+  };
+
+  componentDidMount() {
+    this.loadData();
+  }
+
+  componentDidUpdate(e) {
+    if (this.state.target_id !== this.props.target_id) {
+      this.reloadData();
+    }
+  }
 
   updateGui = () => {
     this.forceUpdate();
@@ -40,7 +60,6 @@ class Comments extends React.Component {
 
   handlerSetReplyComment = (comment) => {
     this.setState({ replyComment: comment });
-    console.log(comment);
     document.getElementById("comment-box").focus();
   };
 
@@ -62,7 +81,7 @@ class Comments extends React.Component {
           target_id={this.state.target_id}
           updateGui={this.updateGui}
         />
-        {this.state.comments !== undefined ? (
+        {this.state.comments !== null ? (
           <ListComments
             handlerSetReplyComment={this.handlerSetReplyComment}
             animating={this.state.animating}

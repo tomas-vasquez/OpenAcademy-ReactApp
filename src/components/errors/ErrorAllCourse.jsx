@@ -20,10 +20,10 @@ class ErrorAllCourses extends React.Component {
 
     if (error.response) {
       return error.response.status === 500 ? (
-        <Error500 reinit={this.props.reinit} />
+        <Error500 reload={this.props.reload} />
       ) : null;
     } else {
-      return <ErrorConection reinit={this.props.reinit} />;
+      return <ErrorConection reload={this.props.reload} />;
     }
   }
 }

@@ -24,7 +24,15 @@ class CourseDescription extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.descripcion === undefined) {
+    this.loadData();
+  }
+
+  loadData = () => {
+    if (
+      this.props.academy.descriptions[
+        this.props.currentItem.item_content_url
+      ] === undefined
+    ) {
       this.academy.loadDescription(
         this.props.currentItem.item_content_url,
         (response, error) => {
@@ -34,12 +42,34 @@ class CourseDescription extends React.Component {
           });
         }
       );
+    } else {
+      this.setState({
+        description: this.props.academy.descriptions[
+          this.props.currentItem.item_content_url
+        ],
+      });
+    }
+  };
+
+  reloadData = () => {
+    this.setState({
+      description: undefined,
+      itemIndex: this.props.itemIndex,
+      currentItem: this.props.currentItem,
+      error: null,
+    });
+    this.loadData();
+  };
+
+  componentDidUpdate(e) {
+    if (this.state.currentItem !== this.props.currentItem) {
+      this.reloadData();
     }
   }
 
   render() {
     return (
-      <div className="mb-5">
+      <>
         <h3 className="text-black">
           {this.state.itemIndex +
             ".- " +
@@ -63,7 +93,7 @@ class CourseDescription extends React.Component {
             <PHCourseDescription />
           )}
         </div>
-      </div>
+      </>
     );
   }
 }

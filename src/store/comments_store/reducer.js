@@ -19,9 +19,10 @@ export default (state = {}, action) => {
     aux = state;
     aux[action.item_id].lastUpdate = action.lastUpdate;
     return aux;
-  } else if (action.type === "REPLACE_COMMENTS") {
-    //console.log("REPLACE_COMMENTS:", action);
-    return { [action.item_id]: action.comments };
+  } else if (action.type === "SET_COMMENTS") {
+    aux = state;
+    aux[action.item_id] = action.comments;
+    return aux;
   } else if (action.type === "RESET") {
     return {};
   }

@@ -105,7 +105,6 @@ class SingleComment extends React.Component {
               </Col>
             </Row>
           </div>
-          {/* replys */}
         </Collapse>
       </li>
     );

@@ -15,7 +15,7 @@ class CardAuthor extends React.Component {
         pic_url = require("assets/img/noPic.jpg");
       }
       return (
-        <div className="mb-5 text-center border rounded course-instructor bg-white mt-neg p-3 pb-4">
+        <div className="mb-5 text-center border rounded course-instructor bg-white p-3 pb-4">
           <h3 className="mb-4 text-black text-uppercase h6 border-bottom pb-3">
             Docente
           </h3>{" "}

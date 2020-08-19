@@ -3,7 +3,7 @@ import React from "react";
 class PHCardCourse extends React.Component {
   render() {
     return (
-      <div className="ph-item p-0 mb-3">
+      <div className="ph-item p-0">
         <div className="ph-col-12 p-0">
           <div className="ph-picture" />
           <div className="ph-row px-3">

@@ -48,7 +48,7 @@ class BoxComments extends React.Component {
 
   render() {
     return (
-      <div className="comment-form-wrap pt-5">
+      <div className="comment-form-wrap pt-2">
         <h3 className="mb-4">Preguntas y respuestas</h3>
 
         <Collapse isOpen={this.props.replyComment !== null}>
