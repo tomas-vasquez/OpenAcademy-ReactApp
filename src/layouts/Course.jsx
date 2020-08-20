@@ -116,7 +116,15 @@ class Landing extends React.Component {
         targetItem = indb;
       }
     }
-    return targetItem.replace(/_/g, " ");
+    let aux = this.state.items.find((item) => {
+      return item.item_title === targetItem.replace(/_/g, " ");
+    });
+    if (aux === undefined) {
+      this.db.set("lastItem>" + courseInUrl, this.state.items[0].item_title);
+      return this.state.items[0].item_title;
+    } else {
+      return targetItem.replace(/_/g, " ");
+    }
   };
 
   render() {
@@ -217,6 +225,7 @@ class Landing extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  userData: state.userData,
   academy: state.academy,
 });
 

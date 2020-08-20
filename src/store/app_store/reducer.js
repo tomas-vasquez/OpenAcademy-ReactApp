@@ -1,4 +1,5 @@
 const initialState = {
+  targetUrl: null,
   autoRefresherSubscribers: [],
 };
 
@@ -6,7 +7,7 @@ export default (state = initialState, action) => {
   var aux;
 
   if (action.type === "SET_TARGET_URL") {
-    //pagina a cargar despues de login o register//usado por ofice
+    //pagina a cargar despues de login o register
     aux = state;
     aux.targetUrl = action.data;
     return aux;

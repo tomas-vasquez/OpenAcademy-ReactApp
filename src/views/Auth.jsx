@@ -1,34 +1,55 @@
 import React from "react";
-import { Button } from "reactstrap";
-import Controller_Users from "_controllers/Users";
-import { myRoutes } from "config";
+
+import { connect } from "react-redux";
+import { replace } from "connected-react-router/lib/actions";
+import { setTargetUrl } from "store/app_store/actions";
 import { Link } from "react-router-dom";
+import { myRoutes } from "config";
+
+import { Button, Row, Col, Container } from "reactstrap";
+
+import Controller_Users from "_controllers/Users";
 import { user_nameChangedHandler } from "helpers/input";
 
 class Auth extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       height: window.innerHeight,
     };
     this.users = new Controller_Users();
   }
 
-  componentDidMount() {
-    window.addEventListener("resize", () => {
-      this.setState({ height: window.innerHeight });
-    });
-  }
+  openTargetPage = () => {
+    if (this.props.targetUrl !== null) {
+      this.props.replace(this.props.targetUrl);
+    } else {
+      this.props.replace(myRoutes.home);
+    }
+  };
 
   submitHandlerLogin = (e) => {
     e.preventDefault();
-    this.users.login(e.target, this.props.successCallback);
+    this.users.login(e.target, this.openTargetPage);
   };
 
   submitHandlerRegister = (e) => {
     e.preventDefault();
-    this.users.register(e.target, this.props.successCallback);
+    this.users.register(e.target, this.openTargetPage);
   };
+
+  handlerResizeWindow = () => {
+    this.setState({ height: window.innerHeight });
+  };
+
+  componentDidMount() {
+    window.addEventListener("resize", this.handlerResizeWindow);
+  }
+
+  componentWillUnmount() {
+    this.props.setTargetUrl(null);
+    window.removeEventListener("resize", this.handlerResizeWindow);
+  }
 
   render() {
     return (
@@ -42,9 +63,9 @@ class Auth extends React.Component {
           backgroundImage: "url(" + require("assets/images/banner.jpg") + ")",
         }}
       >
-        <div className="container  my-lg-auto " style={{ height: "100%" }}>
-          <div className="row align-items-center">
-            <div className="col-lg-6 mt-5 mt-lg-0">
+        <Container className="my-lg-auto " style={{ height: "100%" }}>
+          <Row className="align-items-center">
+            <Col lg="6" className="mt-5 mt-lg-0">
               <h1
                 className="pt-5 mt-3 text-white"
                 data-aos="fade-up"
@@ -61,9 +82,9 @@ class Auth extends React.Component {
                 iniciar sesion en tu cuenta; si no tienes una cuenta, puedes
                 crearla en menos de un minuto!
               </p>
-            </div>
+            </Col>
 
-            <div className="col-lg-5 ml-auto mt-5 mb-5 mb-lg-0">
+            <Col lg="5" className="ml-auto mt-5 mb-5 mb-lg-0">
               {/* inicio de sesion */}
               {document.location.pathname === myRoutes.login ? (
                 <form
@@ -205,12 +226,21 @@ class Auth extends React.Component {
                   </div>
                 </form>
               ) : null}
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
 }
 
-export default Auth;
+const mapStateToProps = (state) => ({
+  targetUrl: state.app.targetUrl,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  replace: (newUrl) => dispatch(replace(newUrl)),
+  setTargetUrl: (targetUrl) => dispatch(setTargetUrl(targetUrl)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

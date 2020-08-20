@@ -42,8 +42,8 @@ class AvatarNavBar extends React.Component {
     }
 
     return (
-      <UncontrolledDropdown nav className="pr-3">
-        <DropdownToggle className="pr-0" nav>
+      <UncontrolledDropdown nav className="p-0">
+        <DropdownToggle className="p-0" nav>
           <Media className="align-items-center">
             <img
               className="ml-2 avatar rounded-circle"
@@ -52,15 +52,17 @@ class AvatarNavBar extends React.Component {
               src={pic_url}
             />
             <Media>
-              <span className="mb-0 ml-1 text-white">
+              <span className="mb-0 ml-1 text-white d-md-none d-lg-block">
                 @{this.props.userData.user_name}
+              </span>
+              <span className="mb-0 ml-1 text-white">
                 <i className="ml-1 fa fa-sort-down"></i>
               </span>
             </Media>
           </Media>
         </DropdownToggle>
 
-        <DropdownMenu className="dropdown-menu-arrow" right>
+        <DropdownMenu className="dropdown-menu-arrow bg-white mt-3" right>
           <DropdownItem
             tag={Link}
             replace

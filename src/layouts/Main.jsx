@@ -31,7 +31,6 @@ class Main extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log("update");
     this.loadUserData();
   }
 
