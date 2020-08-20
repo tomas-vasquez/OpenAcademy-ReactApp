@@ -48,23 +48,19 @@ class AuthorData extends React.Component {
   };
 
   render() {
-    let userData = this.props.userData;
+    let profile = this.props.profile;
 
     let pic_url;
 
-    if (userData.blob_pic_url !== undefined && userData.blob_pic_url !== null) {
-      pic_url = userData.blob_pic_url;
+    if (profile.pic_url !== null) {
+      pic_url = storageUrl + profile.pic_url;
     } else {
-      if (userData.pic_url !== null) {
-        pic_url = storageUrl + userData.pic_url;
-      } else {
-        pic_url = require("assets/img/noPic.jpg");
-      }
+      pic_url = require("assets/img/noPic.jpg");
     }
 
     return (
       <>
-        <Card>
+        <Card className="shadow mb-4">
           <CardBody>
             <Container>
               <Row>
@@ -79,7 +75,7 @@ class AuthorData extends React.Component {
                     }}
                     className="m-auto"
                     onClick={this.profile.handleClickPic}
-                    alt={userData.name}
+                    alt={profile.name}
                   />
                 </Col>
                 <Col xs="12" lg="8" className="order-lg-1">
@@ -87,10 +83,10 @@ class AuthorData extends React.Component {
                     Hola !!!
                   </h1>
                   <p className="mb-4" data-aos="fade-up" data-aos-delay="200">
-                    {userData.description}
+                    {profile.description}
                   </p>
                   <p data-aos="fade-up" data-aos-delay="300">
-                    <SocialButtons data={userData} />
+                    <SocialButtons data={profile} />
                   </p>
                 </Col>
               </Row>
@@ -105,16 +101,20 @@ class AuthorData extends React.Component {
           />
         </Card>
 
-        <Card className="mt-3 mb-5">
+        <Card className="shadow mb-4">
           <CardHeader>
-            <CardTitle tag="h5" className="d-flex m-0">
-              <span className="mr-auto">
-                <i className="fa fa-user" /> Datos del perfíl
-              </span>
-              {this.props.userData2.user_name === userData.user_name ? (
-                <Button className="m-0  py-2 px-3" onClick={this.toggleEditing}>
-                  <i className="fa fa-pencil-alt" /> editar
-                </Button>
+            <CardTitle tag="h5" className="m-0">
+              <i className="fa fa-user mr-3" />
+              Datos del perfíl
+              {this.props.userData !== null ? (
+                this.props.userData.user_name === profile.user_name ? (
+                  <Button
+                    className="m-0  py-2 px-3"
+                    onClick={this.toggleEditing}
+                  >
+                    <i className="fa fa-pencil-alt" /> editar
+                  </Button>
+                ) : null
               ) : null}
             </CardTitle>
           </CardHeader>
@@ -134,12 +134,12 @@ class AuthorData extends React.Component {
                   {this.state.editing ? (
                     <Input
                       id="input10"
-                      value={"@" + userData.user_name}
+                      value={"@" + profile.user_name}
                       type="text"
                       disabled
                     />
                   ) : (
-                    <p>@{userData.user_name}</p>
+                    <p>@{profile.user_name}</p>
                   )}
                 </div>
               </div>
@@ -152,13 +152,9 @@ class AuthorData extends React.Component {
                 </div>
                 <div className="col-md-8 showcase_content_area">
                   {this.state.editing ? (
-                    <Input
-                      defaultValue={userData.email}
-                      type="email"
-                      disabled
-                    />
+                    <Input defaultValue={profile.email} type="email" disabled />
                   ) : (
-                    <p>{userData.email}</p>
+                    <p>{profile.email}</p>
                   )}
                 </div>
               </div>
@@ -173,7 +169,7 @@ class AuthorData extends React.Component {
                   {this.state.editing ? (
                     <Input
                       name="name"
-                      defaultValue={userData.name}
+                      defaultValue={profile.name}
                       placeholder="Mi nombre completo"
                       type="text"
                       onChange={nameChangedHandler}
@@ -182,7 +178,7 @@ class AuthorData extends React.Component {
                       required
                     />
                   ) : (
-                    <p>{userData.name}</p>
+                    <p>{profile.name}</p>
                   )}
                 </div>
               </div>
@@ -193,6 +189,8 @@ class AuthorData extends React.Component {
               <OptionCountries
                 editing={this.state.editing}
                 parent_reference={this}
+                whatsapp_number={profile.whatsapp_number}
+                area_code={profile.area_code}
               />
 
               <div className="form-group row showcase_row_area">
@@ -212,7 +210,7 @@ class AuthorData extends React.Component {
                       <Input
                         id="input40"
                         name="link_facebook"
-                        defaultValue={userData.link_facebook}
+                        defaultValue={profile.link_facebook}
                         placeholder="Enlace de su perfil de facebook"
                         type="text"
                       />
@@ -235,11 +233,9 @@ class AuthorData extends React.Component {
                         Provar enlace
                       </UncontrolledTooltip>
                     </InputGroup>
-                  ) : userData.link_facebook !== null &&
-                    userData.link_facebook !== "" ? (
-                    <a href={userData.link_facebook}>
-                      {userData.link_facebook}
-                    </a>
+                  ) : profile.link_facebook !== null &&
+                    profile.link_facebook !== "" ? (
+                    <a href={profile.link_facebook}>{profile.link_facebook}</a>
                   ) : (
                     <p>no definido</p>
                   )}
@@ -263,7 +259,7 @@ class AuthorData extends React.Component {
                       <Input
                         id="input50"
                         name="link_twitter"
-                        defaultValue={userData.link_twitter}
+                        defaultValue={profile.link_twitter}
                         placeholder="Enlace de su perfil de twitter"
                         type="text"
                       />
@@ -286,9 +282,9 @@ class AuthorData extends React.Component {
                         Provar enlace
                       </UncontrolledTooltip>
                     </InputGroup>
-                  ) : userData.link_twitter !== null &&
-                    userData.link_twitter !== "" ? (
-                    <a href={userData.link_twitter}>{userData.link_twitter}</a>
+                  ) : profile.link_twitter !== null &&
+                    profile.link_twitter !== "" ? (
+                    <a href={profile.link_twitter}>{profile.link_twitter}</a>
                   ) : (
                     <p>no definido</p>
                   )}
@@ -312,7 +308,7 @@ class AuthorData extends React.Component {
                       <Input
                         id="input60"
                         name="link_instagram"
-                        defaultValue={userData.link_instagram}
+                        defaultValue={profile.link_instagram}
                         placeholder="Enlace de su perfil de instagram"
                         type="text"
                       />
@@ -335,10 +331,10 @@ class AuthorData extends React.Component {
                         Provar enlace
                       </UncontrolledTooltip>
                     </InputGroup>
-                  ) : userData.link_instagram !== null &&
-                    userData.link_instagram !== "" ? (
-                    <a href={userData.link_instagram}>
-                      {userData.link_instagram}
+                  ) : profile.link_instagram !== null &&
+                    profile.link_instagram !== "" ? (
+                    <a href={profile.link_instagram}>
+                      {profile.link_instagram}
                     </a>
                   ) : (
                     <p>no definido</p>
@@ -364,12 +360,12 @@ class AuthorData extends React.Component {
                         name="description"
                         placeholder="Escribe algo acerca de tí..."
                         rows="3"
-                        defaultValue={userData.description}
+                        defaultValue={profile.description}
                         type="textarea"
                         maxLength="160"
                       />
                     ) : (
-                      <p>{userData.description}</p>
+                      <p>{profile.description}</p>
                     )}
                   </div>
                 </div>
@@ -389,7 +385,7 @@ class AuthorData extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  userData2: state.userData,
+  userData: state.userData,
 });
 
 export default connect(mapStateToProps)(AuthorData);

@@ -29,7 +29,7 @@ class Controller_admin {
   */
 
   initApp() {
-    if (!store.getState().app.isBeenLoadedMainData) {
+    if (!store.getState().app.isBeenLoadedUserData) {
       this.modeladmin.loadMainData(
         (data) => {
           //store.dispatch(setNotifications(data.notifications));

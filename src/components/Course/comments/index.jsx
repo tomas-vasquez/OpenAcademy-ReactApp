@@ -74,6 +74,10 @@ class Comments extends React.Component {
   render() {
     return (
       <>
+        <h4 className="mt-4 border-top py-3 text-dark">
+          <i className="fa fa-comments mr-2" />
+          Preguntas y respuestas
+        </h4>
         <BoxComments
           replyComment={this.state.replyComment}
           handlerUnsetReplyComment={this.handlerUnsetReplyComment}

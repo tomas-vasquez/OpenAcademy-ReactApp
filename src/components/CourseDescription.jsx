@@ -9,6 +9,8 @@ import "moment/min/locales";
 import Controller_Academy from "_controllers/Academy";
 import PHCourseDescription from "./Loaders/PHCourseDescription";
 
+const _ = require("lodash");
+
 class CourseDescription extends React.Component {
   constructor(props) {
     super(props);
@@ -70,22 +72,16 @@ class CourseDescription extends React.Component {
   render() {
     return (
       <>
-        <h3 className="text-black">
-          {this.state.itemIndex +
-            ".- " +
-            (
-              this.state.currentItem.item_title.charAt(0).toUpperCase() +
-              this.state.currentItem.item_title.slice(
-                1,
-                this.state.currentItem.item_title.length
-              )
-            ).replace(/_/g, " ")}
-        </h3>
-        <p className="mb-4">
-          <strong className="text-black mr-3">Actualizado: </strong>
-          {moment(this.state.currentItem.created_at, "ISO").fromNow()}
-        </p>
-
+        <div className="border-bottom ">
+          <h4 className="pb-3 text-dark m-0">
+            <i className="fa fa-arrow-right mr-2" />
+            {_.upperFirst(this.state.currentItem.item_title).replace(/_/g, " ")}
+          </h4>
+          <p className="mb-3">
+            <span className="text-black mr-2">Actualizado: </span>
+            {moment(this.state.currentItem.created_at, "ISO").fromNow()}
+          </p>
+        </div>
         <div className="p-2 py-3">
           {this.state.description !== undefined ? (
             parser(this.state.description)

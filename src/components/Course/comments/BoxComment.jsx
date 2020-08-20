@@ -48,15 +48,11 @@ class BoxComments extends React.Component {
 
   render() {
     return (
-      <div className="comment-form-wrap pt-2">
-        <h3 className="mb-4">Preguntas y respuestas</h3>
-
+      <div className="comment-form-wrap">
         <Collapse isOpen={this.props.replyComment !== null}>
-          {/* {this.props.replyComment !== null ? ( */}
           <>
             <small className="h6 font-weight-400 text-muted mb-0">
               <i className="fa fa-reply ml-2 mr-1"></i> respondiendo a{" "}
-              {/* {this.props.replyComment.name.split(" ")[0]}: */}
             </small>
             <div className="comments-container mt-1">
               <ul id="comments-list" className="comments-list mt-0">
@@ -72,9 +68,11 @@ class BoxComments extends React.Component {
               </ul>
             </div>
           </>
-          {/* ) : null} */}
 
-          <Button onClick={this.props.handlerUnsetReplyComment}>
+          <Button
+            onClick={this.props.handlerUnsetReplyComment}
+            className="fixed"
+          >
             <i className="fa fa-times" />
           </Button>
         </Collapse>

@@ -1,9 +1,10 @@
 import React from "react";
+import _ from "lodash";
 
 import { connect } from "react-redux";
 // core components
-import DemoNavbar from "components/Navbars/DemoNavbar.js";
-import CardsFooter from "components/Footers/CardsFooter.js";
+import Navbar from "components/Navbars/Navbar";
+import CardsFooter from "components/Footers/CardsFooter";
 
 import CardAuthor from "components/CardAuthor";
 import Controller_Academy from "_controllers/Academy";
@@ -34,10 +35,6 @@ class Landing extends React.Component {
       items: props.academy.items[courseInUrl],
       error: null,
     };
-  }
-
-  componentDidMount() {
-    this.loadData();
   }
 
   loadData = () => {
@@ -84,6 +81,23 @@ class Landing extends React.Component {
     this.loadData();
   };
 
+  loadUserData() {
+    if (this.props.userData === null) {
+      if (this.db.get("api-token")) {
+        this.controlleradmin.initApp(this, () => this.forceUpdate());
+      }
+    }
+  }
+
+  componentDidMount() {
+    this.loadData();
+    this.loadUserData();
+  }
+
+  componentDidUpdate() {
+    this.loadUserData();
+  }
+
   getCurrentTitle = () => {
     let courseInUrl = document.baseURI.split("/")[3];
     let item_title = document.baseURI.split("/")[4];
@@ -122,7 +136,7 @@ class Landing extends React.Component {
     let author = null;
 
     if (this.state.items !== undefined && this.state.courses !== null) {
-      //calculamos el currentItem
+      //calculamos el currentItem y demás
       this.state.items.forEach((item, key) => {
         if (item.item_title === this.getCurrentTitle()) {
           proviusItem = this.state.items[key - 1];
@@ -139,16 +153,25 @@ class Landing extends React.Component {
     return (
       <>
         <div className="site-wrap">
-          <DemoNavbar />
+          <Navbar />
           {this.state.error === null ? (
             this.state.items !== undefined && currentItem !== null ? (
               <>
-                {}
-                <Header title={currentItem.item_title} />
+                <Header
+                  title={course.course_title}
+                  subTitle={
+                    _.upperFirst(currentItem.item_title) +
+                    " (" +
+                    itemIndex +
+                    "/" +
+                    this.state.items.length +
+                    ")"
+                  }
+                />
 
                 <Container style={{ marginTop: -100 }}>
                   <Row>
-                    <Col lg="9" className="mb-5 pl-lg-4">
+                    <Col lg="8" className="mb-5 pl-lg-4">
                       <CourseVideo
                         currentItem={currentItem}
                         itemIndex={itemIndex}
@@ -162,13 +185,13 @@ class Landing extends React.Component {
                         target_id={"item-" + course.id + "-" + currentItem.id}
                       />
                     </Col>
-                    <Col lg="3" className="p-0">
-                      <CardAuthor author={author} />
+                    <Col lg="4" className="">
                       <CourseMap
                         items={this.state.items}
                         course_title={course ? course.course_short_link : ""}
                         currentItem={currentItem}
                       />
+                      <CardAuthor author={author} />
                     </Col>
                   </Row>
                 </Container>

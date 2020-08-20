@@ -2,5 +2,10 @@
 /node_modules
 package-lock.json
 
-
 .vscode
+
+*.test.js
+*.test.jsx
+jest.config.js
+/coverage
+*__snapshots__

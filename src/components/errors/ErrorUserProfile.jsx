@@ -8,15 +8,6 @@ import ErrorConection from "./ErrorConection";
 import Header from "components/Headers/Header";
 
 class ErrorUserProfile extends React.Component {
-  componentDidMount = () => {
-    console.error(
-      "%c Error > %c",
-      "background:red; color:white",
-      "",
-      this.props.error
-    );
-  };
-
   render() {
     let error = this.props.error;
 

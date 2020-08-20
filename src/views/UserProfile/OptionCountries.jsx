@@ -1,8 +1,6 @@
 import classnames from "classnames";
 import React from "react";
 
-import { connect } from "react-redux";
-
 // reactstrap components
 import {
   Input,
@@ -13,7 +11,6 @@ import {
 } from "reactstrap";
 
 import { onChangeNumber } from "helpers/input";
-
 import { serverUrl } from "config";
 import { countrys as telephones } from "helpers/countrys";
 
@@ -181,31 +178,9 @@ class OptionCountries extends React.Component {
             )}
           </div>
         </div>
-
-        {/* 
-
-        <Row>
-          <Col md="6">
-            <FormGroup>
-              <label className="h6" className="form-control-label">País:</label>
-            </FormGroup>
-          </Col>
-
-          <Col md="6">
-            <FormGroup>
-              <label className="h6" className="form-control-label">Número de WathsApp:</label>
-              
-            </FormGroup>
-          </Col>
-        </Row> */}
       </>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  whatsapp_number: state.userData.whatsapp_number,
-  area_code: state.userData.area_code,
-});
-
-export default connect(mapStateToProps)(OptionCountries);
+export default OptionCountries;

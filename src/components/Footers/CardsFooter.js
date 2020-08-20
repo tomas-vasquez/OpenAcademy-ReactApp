@@ -5,7 +5,8 @@ import { myRoutes } from "config";
 
 class CardsFooter extends React.Component {
   render() {
-    return (
+    return document.location.pathname !== myRoutes.login &&
+      document.location.pathname !== myRoutes.register ? (
       <footer className="footer-section bg-muted shadow pb-0 pt-5 mt-5 ">
         <div className="container">
           <div className="row">
@@ -26,12 +27,12 @@ class CardsFooter extends React.Component {
                 <li>
                   <Link to={myRoutes.courses}>Cursos</Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to={myRoutes.conf}>Conferencias</Link>
                 </li>
                 <li>
-                  <Link to={myRoutes.dict}>Dicta un curso</Link>
-                </li>
+                  <Link to={myRoutes.dict}>Dicta un curso</Link> */}
+                {/* </li> */}
               </ul>
             </div>
 
@@ -73,7 +74,7 @@ class CardsFooter extends React.Component {
           </div>
         </div>
       </footer>
-    );
+    ) : null;
   }
 }
 

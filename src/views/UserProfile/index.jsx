@@ -15,7 +15,7 @@ class UserProfile extends React.Component {
   constructor() {
     super();
     this.state = {
-      userData: null,
+      profile: null,
       error: null,
     };
     this.profile = new Controller_Profile();
@@ -26,27 +26,33 @@ class UserProfile extends React.Component {
   }
 
   loadData = () => {
-    let userName = this.props.match.params.user_name;
+    if (this.props.match !== undefined) {
+      let userName = this.props.match.params.user_name;
 
-    this.profile.getProfile(userName, (response, error) => {
-      this.setState({
-        userData: response ? response.user_data : null,
-        error: error,
+      this.profile.getProfile(userName, (response, error) => {
+        this.setState({
+          profile: response ? response.user_data : null,
+          error: error,
+        });
       });
-    });
+    } else {
+      this.setState({
+        error: {},
+      });
+    }
   };
 
   reloadData = () => {
-    this.setState({ userData: null, error: null });
+    this.setState({ profile: null, error: null });
     this.loadData();
   };
 
   render() {
-    let userData = this.state.userData;
+    let profile = this.state.profile;
 
-    return this.state.userData !== null ? (
+    return this.state.profile !== null ? (
       <>
-        <Header title={userData.name} subTitle={"@" + userData.user_name} />
+        <Header title={profile.name} subTitle={"@" + profile.user_name} />
         <Container className="mt-5">
           <Row
             style={{
@@ -54,7 +60,7 @@ class UserProfile extends React.Component {
             }}
           >
             <Col xs="12" lg="8" className="order-lg-2">
-              <AuthorData userData={userData} />
+              <AuthorData profile={profile} />
             </Col>
             <Col xs="12" lg="4" className="order-lg-1">
               <Certificates />

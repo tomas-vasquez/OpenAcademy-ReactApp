@@ -22,7 +22,6 @@ import { ConnectedRouter } from "connected-react-router";
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      {/* <Suspense fallback={<SSuspense />}> */}
       <Switch>
         <Route
           exact

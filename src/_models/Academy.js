@@ -17,7 +17,7 @@ class Model_Academy {
     //hacemos la consulta al servidor
     axios({
       method: "get",
-      url: apiUrl + "/academy/getall",
+      url: apiUrl + "/academy/courses",
     })
       .then((response) => {
         _success(response);
@@ -65,7 +65,7 @@ class Model_Academy {
         _error(error);
       });
   }
-  
+
   /*
    *---------------------------------------------------------------
    *
@@ -79,9 +79,9 @@ class Model_Academy {
       url: apiUrl + "/academy",
       headers: {
         "Content-Type": "aplication/json",
-        "api-token": this.db.get("api-token")
+        "api-token": this.db.get("api-token"),
       },
-      data: data
+      data: data,
     })
       .then((response) => {
         _success(response);

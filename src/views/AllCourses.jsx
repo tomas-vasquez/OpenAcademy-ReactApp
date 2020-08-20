@@ -67,7 +67,7 @@ class AllCourse extends React.Component {
         <Container className="mt-0">
           <Card className="py-1px-0 mx-0 pb-3" style={{ marginTop: -100 }}>
             <CardHeader>
-              <CardTitle tag="h2">
+              <CardTitle tag="h5" className="m-0">
                 Cursos más vistos...
                 <i className="fa fa-fire text-danger mr-1" />
                 <i className="fa fa-fire text-danger mr-1" />
@@ -82,6 +82,7 @@ class AllCourse extends React.Component {
                 { breakPoint: 760, cardsToShow: 3 },
                 { breakPoint: 0, cardsToShow: 1 },
               ]}
+              showArrows={false}
               DotsWrapper={styled.div`
                 text-align: center;
               `}
@@ -107,12 +108,12 @@ class AllCourse extends React.Component {
         </Container>
 
         <Container className="mt-5">
-          <h2 className="mb-5">
+          <h5 className="mb-4">
             Todos los cursos...
             <i className="fa fa-book text-primary mr-1" />
             <i className="fa fa-book text-primary mr-1" />
             <i className="fa fa-book text-primary mr-1" />
-          </h2>
+          </h5>
           <Row>
             {courses !== null
               ? courses.map((_course, key) => (

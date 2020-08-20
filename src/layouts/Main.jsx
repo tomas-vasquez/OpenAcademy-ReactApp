@@ -18,42 +18,44 @@ class Main extends React.Component {
     this.db = new DB();
   }
 
+  loadUserData() {
+    if (this.props.userData === null) {
+      if (this.db.get("api-token")) {
+        this.controlleradmin.initApp(this, () => this.forceUpdate());
+      }
+    }
+  }
+
   componentDidMount() {
-    // if (!this.props.isBeenLoadedMainData) {
-    //   if(this.db.get("api-token"))
-    //   this.controlleradmin.initApp(this);
-    // }
+    this.loadUserData();
+  }
+
+  componentDidUpdate() {
+    console.log("update");
+    this.loadUserData();
   }
 
   getRoutes = (routes) => {
-    return routes.map((prop, key) => {
-      if (prop.layout === "admin") {
-        return (
-          <Route exact path={prop.path} component={prop.component} key={key} />
-        );
-      } else {
-        return null;
-      }
-    });
+    return routes.map((prop, key) => (
+      <Route exact path={prop.path} component={prop.component} key={key} />
+    ));
   };
 
   render() {
     return (
-      <>
-        <div className="site-wrap">
-          <Navbar />
+      <div className="site-wrap">
+        <Navbar />
 
-          <Switch>{this.getRoutes(routes)}</Switch>
+        <Switch>{this.getRoutes(routes)}</Switch>
 
-          <CardsFooter />
-        </div>
-      </>
+        <CardsFooter />
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  isBeenLoadedMainData: state.app.isBeenLoadedMainData,
+  userData: state.app.userData,
 });
 
 export default connect(mapStateToProps)(Main);

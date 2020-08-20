@@ -98,24 +98,13 @@ class Controller_Users extends Controller_admin {
     */
 
   logout = () => {
-    this.log.msg("Cerrando sessión... ");
-
-    this.alerts.showConfirm(
-      "esta seguro?",
-      "Cerrando sesión",
-      true,
-      () => {
-        this.unsafeLogout();
-      },
-      () => {
-        this.log.msg("Cerrando sessión... cancelado! :D\n");
-      }
-    );
+    this.alerts.showConfirm("esta seguro?", "Cerrando sesión", true, () => {
+      this.unsafeLogout();
+    });
   };
 
   unsafeLogout = () => {
     this.alerts.showLoading();
-    this.log.msg("logeando...");
 
     this.users.logout(
       () => {
@@ -133,9 +122,6 @@ class Controller_Users extends Controller_admin {
     */
 
   get_user_data = (id, _callback) => {
-    // this.alerts.showLoading();
-    this.log.msg("Cargando datos de usuario");
-
     this.users.get_user_data(
       id,
       (response) => {
@@ -147,9 +133,7 @@ class Controller_Users extends Controller_admin {
         });
 
         store.dispatch(replaceUsers(userData));
-        this.log.msg("logeando... Perfecto !!! \n");
 
-        //ejecutamos el callback
         if (_callback !== undefined) _callback();
       },
       (error) =>
