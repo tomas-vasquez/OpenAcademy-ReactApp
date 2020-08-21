@@ -34,7 +34,7 @@ class SocialButtons extends React.Component {
             }
             target="_blank"
           >
-            <i className="fab fa-whatsapp" />
+            <i className="fa fa-whatsapp" />
           </Button>
         ) : null}
         {this.props.data.link_facebook ? (
@@ -43,7 +43,7 @@ class SocialButtons extends React.Component {
             color="primary"
             href={this.props.data.link_facebook}
           >
-            <i className="fab fa-facebook" />
+            <i className="fa fa-facebook" />
           </Button>
         ) : null}
         {this.props.data.link_twitter ? (
@@ -53,7 +53,7 @@ class SocialButtons extends React.Component {
             href={this.props.data.link_twitter}
             target="_blank"
           >
-            <i className="fab fa-twitter" />
+            <i className="fa fa-twitter" />
           </Button>
         ) : null}
         {this.props.data.link_instagram ? (
@@ -63,7 +63,7 @@ class SocialButtons extends React.Component {
             href={this.props.data.link_instagram}
             target="_blank"
           >
-            <i className="fab fa-instagram" />
+            <i className="fa fa-instagram" />
           </Button>
         ) : null}
       </>

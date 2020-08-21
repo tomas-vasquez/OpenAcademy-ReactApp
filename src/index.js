@@ -1,4 +1,3 @@
-import "assets/css/bootstrap.min.css";
 import "assets/css/style.css";
 
 import React from "react";
@@ -54,7 +53,6 @@ ReactDOM.render(
 
           <Route render={(props) => <CourseLayouth {...props} />} />
         </Switch>
-        {/* </Suspense> */}
       </ConnectedRouter>
     </Provider>
   </PerfectScrollWraper>,

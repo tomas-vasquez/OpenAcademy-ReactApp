@@ -1,3 +1,4 @@
+@import "bootstrap/bootstrap";
 @import "bootstrap/functions";
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
@@ -12,8 +13,9 @@
 @import "placeholder-loading";
 @import "plugin-perfect-scrollbar";
 
-////////
+@import "../vendor/font-awesome/css/font-awesome.css";
 
+////////
 .lds-dual-ring-sm,
 .lds-dual-ring-sm-w {
   display: inline-block;
