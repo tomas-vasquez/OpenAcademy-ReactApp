@@ -2,7 +2,7 @@ import React from "react";
 
 import { connect } from "react-redux";
 
-import CourseDescription from "components/CourseDescription";
+import CourseDescription from "components/Course/CourseDescription";
 
 import { Card, CardBody } from "reactstrap";
 

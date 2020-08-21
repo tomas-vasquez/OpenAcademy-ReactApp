@@ -24,7 +24,6 @@ class Model_Academy {
     formData.append("item_id", item_id);
     formData.append("last_update", lastUpdate);
 
-    //hacemos la consulta al servidor
     this.axios
       .get(
         apiUrl + "/comments?item_id=" + item_id + "&last_update=" + lastUpdate,

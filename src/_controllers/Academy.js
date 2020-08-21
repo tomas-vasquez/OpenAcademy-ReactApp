@@ -10,6 +10,7 @@ import {
   setDescription,
 } from "store/academy_store/actions";
 import { setItems } from "store/academy_store/actions";
+import { setTest } from "store/academy_store/actions";
 
 class Controller_Academy extends Controller_admin {
   constructor() {
@@ -38,6 +39,7 @@ class Controller_Academy extends Controller_admin {
       }
     );
   }
+
   /*!
 =========================================================
 * 
@@ -69,6 +71,25 @@ class Controller_Academy extends Controller_admin {
       (response) => {
         store.dispatch(setDescription(currentDescription, response.data));
 
+        _callback(response.data, null);
+      },
+      (error) => {
+        _callback(null, error);
+      }
+    );
+  }
+
+  /*!
+=========================================================
+* 
+=========================================================
+*/
+
+  loadTest(currentTest, _callback) {
+    this.modelAcademy.loadTest(
+      currentTest,
+      (response) => {
+        store.dispatch(setTest(currentTest, response.data));
         _callback(response.data, null);
       },
       (error) => {
