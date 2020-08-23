@@ -19,6 +19,7 @@ import { Container, Col, Row } from "reactstrap";
 import PHCourse from "components/Loaders/PHCourse";
 import CourseVideo from "views/CourseVideo";
 import ItemsJumperButtons from "components/Course/ItemsJumperButtons";
+import CourseTest from "views/CouseTest";
 
 class Landing extends React.Component {
   ////
@@ -43,7 +44,12 @@ class Landing extends React.Component {
     let loadItems = () => {
       if (this.props.academy.items[courseInUrl] === undefined) {
         this.academy.loadItems(courseInUrl, (response, error) => {
-          this.setState({ items: response.items, error: error });
+          // console.log(response);
+          if (response.items !== null) {
+            this.setState({ items: response.items, error: error });
+          } else {
+            this.setState({ error: error });
+          }
         });
       } else {
         this.setState({ items: this.props.academy.items[courseInUrl] });
@@ -127,6 +133,21 @@ class Landing extends React.Component {
     }
   };
 
+  sortItems(array) {
+    var aux = array;
+
+    for (let y = 0; y <= array.length - 2; y++) {
+      for (let i = 0; i <= array.length - 2; i++) {
+        if (array[i].item_sort > array[i + 1].item_sort) {
+          aux = array[i];
+          array[i] = array[i + 1];
+          array[i + 1] = aux;
+        }
+      }
+    }
+    return array;
+  }
+
   render() {
     let courseInUrl = document.baseURI.split("/")[3];
 
@@ -137,6 +158,8 @@ class Landing extends React.Component {
       });
     }
 
+    let classes = null;
+
     let nextItem = null;
     let currentItem = null;
     let proviusItem = null;
@@ -144,12 +167,16 @@ class Landing extends React.Component {
     let author = null;
 
     if (this.state.items !== undefined && this.state.courses !== null) {
+      classes = this.sortItems(this.state.items).filter(
+        (item) => item.item_type !== "separator"
+      );
+
       //calculamos el currentItem y demás
-      this.state.items.forEach((item, key) => {
+      classes.forEach((item, key) => {
         if (item.item_title === this.getCurrentTitle()) {
-          proviusItem = this.state.items[key - 1];
+          proviusItem = classes[key - 1];
           currentItem = item;
-          nextItem = this.state.items[key + 1];
+          nextItem = classes[key + 1];
           itemIndex = key + 1;
         }
         author = this.state.authors.find((author) => {
@@ -172,7 +199,9 @@ class Landing extends React.Component {
                     " (" +
                     itemIndex +
                     "/" +
-                    this.state.items.length +
+                    this.state.items.filter(
+                      (item) => item.item_type !== "separator"
+                    ).length +
                     ")"
                   }
                 />
@@ -180,26 +209,36 @@ class Landing extends React.Component {
                 <Container style={{ marginTop: -100 }}>
                   <Row>
                     <Col lg="8" className="mb-5 pl-lg-4">
-                      <CourseVideo
-                        currentItem={currentItem}
-                        itemIndex={itemIndex}
-                      />
+                      {currentItem.item_type === "video" ? (
+                        <CourseVideo
+                          currentItem={currentItem}
+                          itemIndex={itemIndex}
+                        />
+                      ) : null}
+                      {currentItem.item_type === "test" ? (
+                        <CourseTest
+                          currentItem={currentItem}
+                          itemIndex={itemIndex}
+                        />
+                      ) : null}
                       <ItemsJumperButtons
                         course={course}
                         proviusItem={proviusItem}
                         nextItem={nextItem}
                       />
-                      <Comments
-                        target_id={"item-" + course.id + "-" + currentItem.id}
-                      />
+                      {currentItem.item_type === "video" ? (
+                        <Comments
+                          target_id={"item-" + course.id + "-" + currentItem.id}
+                        />
+                      ) : null}
                     </Col>
                     <Col lg="4" className="">
+                      <CardAuthor author={author} />
                       <CourseMap
                         items={this.state.items}
                         course_title={course ? course.course_short_link : ""}
                         currentItem={currentItem}
                       />
-                      <CardAuthor author={author} />
                     </Col>
                   </Row>
                 </Container>

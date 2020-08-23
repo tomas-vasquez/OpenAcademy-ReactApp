@@ -16,7 +16,6 @@ class Model_Profile {
   */
 
   getProfile = (user_name, _success, _error) => {
-    //hacemos la consulta al servidor
     this.axios({
       method: "get",
       url: apiUrl + "/profile?user_name=" + user_name,
@@ -43,7 +42,6 @@ class Model_Profile {
     var formData = new FormData();
     formData.append("blob", blob);
 
-    //hacemos la consulta al servidor
     this.axios({
       method: "post",
       url: apiUrl + "/user_pic",
@@ -70,7 +68,6 @@ class Model_Profile {
 */
 
   deletePic = (_success, _error) => {
-    //hacemos la consulta al servidor
     this.axios({
       method: "delete",
       url: apiUrl + "/user_pic",
@@ -96,7 +93,6 @@ class Model_Profile {
   */
 
   updateUserData = (data, _success, _error) => {
-    //hacemos la consulta al servidor
     this.axios({
       method: "post",
       url: apiUrl + "/user_data",

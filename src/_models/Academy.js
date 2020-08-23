@@ -7,6 +7,7 @@ class Model_Academy {
   constructor() {
     this.db = new DB();
   }
+
   /*
    *---------------------------------------------------------------
    *
@@ -14,7 +15,6 @@ class Model_Academy {
    */
 
   loadCourses(_success, _error) {
-    //hacemos la consulta al servidor
     axios({
       method: "get",
       url: apiUrl + "/academy/courses",
@@ -33,7 +33,6 @@ class Model_Academy {
    */
 
   loadItems(currentCourse, _success, _error) {
-    //hacemos la consulta al servidor
     axios({
       method: "get",
       url: apiUrl + "/academy/get_items/" + currentCourse,
@@ -53,7 +52,6 @@ class Model_Academy {
    */
 
   loadDescription(currentCourse, _success, _error) {
-    //hacemos la consulta al servidor
     axios({
       method: "get",
       url: serverUrl + "/storage/academy/descriptions/" + currentCourse,
@@ -72,16 +70,10 @@ class Model_Academy {
    *---------------------------------------------------------------
    */
 
-  editCourse(data, _success, _error) {
-    //hacemos la consulta al servidor
+  loadTest(currentTest, _success, _error) {
     axios({
-      method: "post",
-      url: apiUrl + "/academy",
-      headers: {
-        "Content-Type": "aplication/json",
-        "api-token": this.db.get("api-token"),
-      },
-      data: data,
+      method: "get",
+      url: serverUrl + "/storage/academy/tests/" + currentTest,
     })
       .then((response) => {
         _success(response);

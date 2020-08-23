@@ -7,7 +7,7 @@ import moment from "moment";
 import "moment/min/locales";
 
 import Controller_Academy from "_controllers/Academy";
-import PHCourseDescription from "./Loaders/PHCourseDescription";
+import PHCourseDescription from "../Loaders/PHCourseDescription";
 
 const _ = require("lodash");
 

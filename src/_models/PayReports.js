@@ -1,4 +1,3 @@
-
 import Logger from "helpers/Logger";
 
 import { apiUrl } from "config";
@@ -7,7 +6,6 @@ import axios from "axios";
 import DB from "helpers/db";
 
 class Model_PayReports {
-
   constructor() {
     this.db = new DB();
     this.axios = axios;
@@ -23,24 +21,24 @@ class Model_PayReports {
     let log = new Logger("Model_PayReports uploadReport", "background:cyan", 2);
     log.msg("subiendo reporte... ");
 
-    //hacemos la consulta al servidor
     this.axios({
       method: "post",
-      url: (apiUrl + "/pay_report"),
+      url: apiUrl + "/pay_report",
       headers: {
-        "api-token": this.db.get("api-token")
+        "api-token": this.db.get("api-token"),
       },
       onUploadProgress,
-      data: formData
+      data: formData,
     })
-      .then(response => {
+      .then((response) => {
         setTimeout(() => {
-          _success(response)
+          _success(response);
         }, 500);
       })
-      .catch(error => { _error(error) });
-
-  }
+      .catch((error) => {
+        _error(error);
+      });
+  };
 
   /*!
   =========================================================
@@ -49,20 +47,27 @@ class Model_PayReports {
   */
 
   deletePayReport = (report_id, _success, _error) => {
-    let log = new Logger("Model_PayReports deletePayReport", "background:cyan", 2);
+    let log = new Logger(
+      "Model_PayReports deletePayReport",
+      "background:cyan",
+      2
+    );
     log.msg("borrando reporte...  ");
 
-    //hacemos la consulta al servidor
     this.axios({
       method: "delete",
-      url: (apiUrl + "/pay_report/" + report_id),
+      url: apiUrl + "/pay_report/" + report_id,
       headers: {
-        "api-token": this.db.get("api-token")
-      }
+        "api-token": this.db.get("api-token"),
+      },
     })
-      .then(response => { _success(response) })
-      .catch(error => { _error(error) });
-  }
+      .then((response) => {
+        _success(response);
+      })
+      .catch((error) => {
+        _error(error);
+      });
+  };
 
   /*!
   =========================================================
@@ -71,29 +76,31 @@ class Model_PayReports {
   */
 
   aprovePayReport = (report_id, _success, _error) => {
-    let log = new Logger("Model_PayReports aprovePayReport", "background:cyan", 2);
+    let log = new Logger(
+      "Model_PayReports aprovePayReport",
+      "background:cyan",
+      2
+    );
     log.msg("aprovando reporte...  ");
 
-    //hacemos la consulta al servidor
     this.axios({
       method: "post",
-      url: (apiUrl + "/pay_report/aprove/" + report_id),
+      url: apiUrl + "/pay_report/aprove/" + report_id,
       headers: {
-        "api-token": this.db.get("api-token")
-      }
+        "api-token": this.db.get("api-token"),
+      },
     })
-      .then(response => { _success(response) })
-      .catch(error => { _error(error) });
-
-
-
+      .then((response) => {
+        _success(response);
+      })
+      .catch((error) => {
+        _error(error);
+      });
 
     // var formData = new FormData();
     // let api_token = this.db.get("api-token");
     // formData.append("api-token", api_token);
     // formData.append("report_id", payReport.report_id);
-
-
 
     // //hacemos la consulta al servidor
     // this.axios.post(apiUrl + "/admin/payreports/aprove", formData)
@@ -113,7 +120,7 @@ class Model_PayReports {
     //     }
 
     //   });
-  }
+  };
 }
 
 export default Model_PayReports;

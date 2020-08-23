@@ -18,7 +18,6 @@ class AutoRefresh {
   */
 
   loadPack = (pack, _success, _error) => {
-    //hacemos la consulta al servidor
     this.axios({
       method: "get",
       url: apiUrl + "/auto_refresher?pack=" + JSON.stringify(pack),

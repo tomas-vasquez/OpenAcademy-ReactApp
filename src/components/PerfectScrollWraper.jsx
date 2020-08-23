@@ -2,6 +2,7 @@ import React from "react";
 
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
+import { history } from "store";
 
 var ps;
 
@@ -19,6 +20,12 @@ class PerfectScrollWraper extends React.Component {
       });
     }
     window.addEventListener("resize", () => {
+      ps.update();
+    });
+    history.listen(() => {
+      document.documentElement.scrollTop = 0;
+      document.scrollingElement.scrollTop = 0;
+      this.myRef.current.scrollTop = 0;
       ps.update();
     });
   }
