@@ -21,7 +21,9 @@ class Main extends React.Component {
   loadUserData() {
     if (this.props.userData === null) {
       if (this.db.get("api-token")) {
-        this.controlleradmin.initApp(this, () => this.forceUpdate());
+        this.profile.getUserData(() => {
+          this.forceUpdate();
+        });
       }
     }
   }

@@ -91,7 +91,9 @@ class Landing extends React.Component {
   loadUserData() {
     if (this.props.userData === null) {
       if (this.db.get("api-token")) {
-        this.profile.getUserData(() => {});
+        this.profile.getUserData(() => {
+          this.forceUpdate();
+        });
       }
     }
   }
@@ -191,7 +193,7 @@ class Landing extends React.Component {
 
     return (
       <>
-        <div className='site-wrap'>
+        <div className="site-wrap">
           <Navbar />
           {this.state.error === null ? (
             this.state.items && currentItem ? (
@@ -212,7 +214,7 @@ class Landing extends React.Component {
 
                 <Container style={{ marginTop: -100 }}>
                   <Row>
-                    <Col lg='8' className='mb-5 pl-lg-4'>
+                    <Col lg="8" className="mb-5 pl-lg-4">
                       {currentItem.item_type === "video" ? (
                         <CourseVideo
                           currentItem={currentItem}
@@ -238,7 +240,7 @@ class Landing extends React.Component {
                         // />
                       ) : null} */}
                     </Col>
-                    <Col lg='4' className=''>
+                    <Col lg="4" className="">
                       <CardAuthor author={author} />
                       <CourseMap
                         items={this.state.items}
@@ -253,7 +255,7 @@ class Landing extends React.Component {
               <>
                 <Header
                   title={"Cargando curso..."}
-                  subTitle='espere por favor...'
+                  subTitle="espere por favor..."
                 />
                 <PHCourse />
               </>
