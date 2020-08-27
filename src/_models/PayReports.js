@@ -25,7 +25,7 @@ class Model_PayReports {
       method: "post",
       url: apiUrl + "/pay_report",
       headers: {
-        "api-token": this.db.get("api-token"),
+        api-token: this.db.get("api-token"),
       },
       onUploadProgress,
       data: formData,
@@ -58,7 +58,7 @@ class Model_PayReports {
       method: "delete",
       url: apiUrl + "/pay_report/" + report_id,
       headers: {
-        "api-token": this.db.get("api-token"),
+        api-token: this.db.get("api-token"),
       },
     })
       .then((response) => {
@@ -87,7 +87,7 @@ class Model_PayReports {
       method: "post",
       url: apiUrl + "/pay_report/aprove/" + report_id,
       headers: {
-        "api-token": this.db.get("api-token"),
+        api-token: this.db.get("api-token"),
       },
     })
       .then((response) => {
@@ -98,8 +98,8 @@ class Model_PayReports {
       });
 
     // var formData = new FormData();
-    // let api_token = this.db.get("api-token");
-    // formData.append("api-token", api_token);
+    // let api-token = this.db.get("api-token");
+    // formData.append("api-token", api-token);
     // formData.append("report_id", payReport.report_id);
 
     // //hacemos la consulta al servidor

@@ -96,6 +96,7 @@ class Auth extends React.Component {
                   <h3 className="h4 text-black mb-4">Iniciar sesión:</h3>
                   <div className="form-group">
                     <input
+                      id="input-email"
                       type="text"
                       name="email"
                       className="form-control"
@@ -105,6 +106,7 @@ class Auth extends React.Component {
                   </div>
                   <div className="form-group">
                     <input
+                      id="input-password"
                       name="password"
                       type="password"
                       className="form-control"

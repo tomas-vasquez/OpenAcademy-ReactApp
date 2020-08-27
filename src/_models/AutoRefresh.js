@@ -22,8 +22,8 @@ class AutoRefresh {
       method: "get",
       url: apiUrl + "/auto_refresher?pack=" + JSON.stringify(pack),
       headers: {
-        "Content-Type": "aplication/json",
-        "api-token": this.db.get("api-token"),
+        "Content-Type": "application/json",
+        api-token: this.db.get("api-token"),
       },
     })
       .then((response) => {

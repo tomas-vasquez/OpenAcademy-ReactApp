@@ -1,10 +1,7 @@
 import Controller_admin from ".././_controllers";
 import Model_Users from "_models/Users";
 
-import store from "store";
 import Alerts from "helpers/Alerts";
-
-import { replaceUsers } from "store/users_store/actions";
 
 class Controller_Users extends Controller_admin {
   constructor() {
@@ -42,7 +39,7 @@ class Controller_Users extends Controller_admin {
           this.alerts.showSuccess("Espere...", "Perfecto!!!");
           this.db.set("api-token", response.data.api_token);
 
-          if (_callback !== undefined) _callback();
+          _callback();
         },
         (error) =>
           this.errorsHandler(error, () => this.register(form, _callback))
@@ -85,7 +82,7 @@ class Controller_Users extends Controller_admin {
 
         this.db.set("api-token", response.data.api_token);
 
-        if (_callback !== undefined) _callback();
+        _callback();
       },
       (error) => this.errorsHandler(error, () => this.login(form, _callback))
     );
@@ -112,32 +109,6 @@ class Controller_Users extends Controller_admin {
         this.clearData();
       },
       (error) => this.errorsHandler(error, () => this.unsafeLogout())
-    );
-  };
-
-  /*!
-    =========================================================
-    * 
-    =========================================================
-    */
-
-  get_user_data = (id, _callback) => {
-    this.users.get_user_data(
-      id,
-      (response) => {
-        let userData = store.getState().users.map((user) => {
-          if (user.id === id) {
-            return (user.profile = response.data.data);
-          }
-          return user;
-        });
-
-        store.dispatch(replaceUsers(userData));
-
-        if (_callback !== undefined) _callback();
-      },
-      (error) =>
-        this.errorsHandler(error, () => this.get_user_data(id, _callback))
     );
   };
 }

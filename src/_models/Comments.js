@@ -49,7 +49,7 @@ class Model_Academy {
       method: "post",
       url: apiUrl + "/comments",
       headers: {
-        "Content-Type": "aplication/json",
+        "Content-Type": "application/json",
         "api-token": this.db.get("api-token"),
       },
       data: {

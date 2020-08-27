@@ -2,6 +2,7 @@ import axios from "axios";
 import { serverUrl } from "config";
 import { apiUrl } from "config";
 import DB from "helpers/db";
+import { courseItemsDescriptionsUrl } from "config";
 
 class Model_Academy {
   constructor() {
@@ -35,7 +36,7 @@ class Model_Academy {
   loadItems(currentCourse, _success, _error) {
     axios({
       method: "get",
-      url: apiUrl + "/academy/get_items/" + currentCourse,
+      url: apiUrl + "/academy/items/" + currentCourse,
     })
       .then((response) => {
         _success(response);
@@ -54,7 +55,7 @@ class Model_Academy {
   loadDescription(currentCourse, _success, _error) {
     axios({
       method: "get",
-      url: serverUrl + "/storage/academy/descriptions/" + currentCourse,
+      url: courseItemsDescriptionsUrl + currentCourse,
     })
       .then((response) => {
         _success(response);

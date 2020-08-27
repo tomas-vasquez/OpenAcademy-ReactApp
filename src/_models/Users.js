@@ -2,6 +2,7 @@ import { apiUrl } from "config";
 
 import axios from "axios";
 import DB from "helpers/db";
+import { apiLoginUrl, apiSignupUrl } from "config";
 
 class Model_User {
   constructor() {
@@ -30,9 +31,9 @@ class Model_User {
 
     this.axios({
       method: "post",
-      url: apiUrl + "/user/register",
+      url: apiSignupUrl,
       headers: {
-        "Content-Type": "aplication/json",
+        "Content-Type": "application/json",
       },
       data: data,
     })
@@ -53,10 +54,11 @@ class Model_User {
   login = (data, _success, _error) => {
     this.axios({
       method: "post",
-      url: apiUrl + "/user/login",
+      url: apiLoginUrl,
       headers: {
-        "Content-Type": "aplication/json",
+        "Content-Type": "application/json",
       },
+
       data: data,
     })
       .then((response) => {
@@ -77,28 +79,6 @@ class Model_User {
     this.axios({
       method: "get",
       url: apiUrl + "/user/logout",
-      headers: {
-        "api-token": this.db.get("api-token"),
-      },
-    })
-      .then((response) => {
-        _success(response);
-      })
-      .catch((error) => {
-        _error(error);
-      });
-  };
-
-  /*
-   *---------------------------------------------------------------
-   *
-   *---------------------------------------------------------------
-   */
-
-  get_user_data = ($id, _success, _error) => {
-    this.axios({
-      method: "get",
-      url: apiUrl + "/user_data/" + $id,
       headers: {
         "api-token": this.db.get("api-token"),
       },

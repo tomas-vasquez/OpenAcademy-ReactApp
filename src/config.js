@@ -1,54 +1,20 @@
 // export const serverUrl = "http://192.168.43.85";
-export const serverUrl = "http://localhost";
+export const serverUrl = "http://localhost:4000";
 
-export const apiUrl = serverUrl + "/api/v1";
-export const appUrl = serverUrl + "/app";
-export const storageUrl = serverUrl + "/storage/";
-export const reportsUrl = serverUrl + "/storage/pay_reports";
-export const academyMediaUrl = serverUrl + "/storage/academy";
-export const blogUrl = serverUrl + "/storage/blog/";
-export const flagsUrl = serverUrl + "/storage/flags/";
-export const mediaUrl = serverUrl + "/storage/media";
-export const pay_methodsUrl = serverUrl + "/storage/pay_methods";
+export const apiUrl = serverUrl + "";
+export const apiLoginUrl = serverUrl + "/login";
+export const apiSignupUrl = serverUrl + "/signup";
 
-export const basenameOffice = "/academia";
-export const basenameAuth = "/auth";
+export const userPicUrl = serverUrl + "/storage/user_pics";
+export const coursePicUrl = serverUrl + "/storage/course_pics";
+export const courseItemsDescriptionsUrl = serverUrl + "/storage/descriptions/";
+export const flagsUrl = serverUrl + "/storage/flags";
 
 export const myRoutes = {
   home: "/",
   profile: "/miperfil",
-  yourcourses:"/tus-cursos",
   courses: "/cursos",
-  course: "/curso",
-
-  //appp
-
-  landing1: "/inicio",
-
-  movie1: "/video",
-  landing2: "/inicio2",
-  doc1: "/terminos_y_condiciones",
-  blog: "/blog",
-
-  addContent:"/añadir-contenido",
-  editCourse:"/editar-curso",
-  //academia
-
-  admin: "/academia",
-  auth: "/ingresar",
 
   login: "/acceso",
-  register: "/registro",
-
-  activation: basenameOffice + "/activation",
-
-  usersLevel1: basenameOffice + "/usuarios",
-  platformettings: basenameOffice + "/configuraciones",
-  usersLevel3: basenameOffice + "/ventas",
-
-  academyLevel1: basenameOffice + "/academia",
-  academyLevel2: basenameOffice + "/academia-master",
-  academyLevel3: basenameOffice + "/academia-profesional",
-
-  editorBlog: basenameOffice + "/crear-blog",
+  register: "/singup",
 };

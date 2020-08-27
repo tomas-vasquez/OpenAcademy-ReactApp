@@ -9,7 +9,7 @@ import CardsFooter from "components/Footers/CardsFooter";
 import CardAuthor from "components/CardAuthor";
 import Controller_Academy from "_controllers/Academy";
 import DB from "helpers/db";
-import Controller_Admin from "_controllers";
+import Controller_Profile from "_controllers/Profile";
 import CourseMap from "components/Course/CourseMap";
 import Header from "components/Headers/Header";
 import Comments from "components/Course/comments";
@@ -29,7 +29,8 @@ class Landing extends React.Component {
 
     this.academy = new Controller_Academy();
     this.db = new DB();
-    this.controlleradmin = new Controller_Admin();
+    this.profile = new Controller_Profile();
+
     this.state = {
       courses: props.academy.courses,
       authors: props.academy.authors,
@@ -42,10 +43,10 @@ class Landing extends React.Component {
     let courseInUrl = document.baseURI.split("/")[3];
 
     let loadItems = () => {
-      if (this.props.academy.items[courseInUrl] === undefined) {
+      if (!this.props.academy.items[courseInUrl]) {
         this.academy.loadItems(courseInUrl, (response, error) => {
           // console.log(response);
-          if (response.items !== null) {
+          if (response.items) {
             this.setState({ items: response.items, error: error });
           } else {
             this.setState({ error: error });
@@ -56,7 +57,7 @@ class Landing extends React.Component {
       }
     };
 
-    if (this.state.courses === null) {
+    if (!this.state.courses) {
       this.academy.loadCourses((response, error) => {
         if (error === null) {
           this.setState({
@@ -90,7 +91,7 @@ class Landing extends React.Component {
   loadUserData() {
     if (this.props.userData === null) {
       if (this.db.get("api-token")) {
-        this.controlleradmin.initApp(this, () => this.forceUpdate());
+        this.profile.getUserData(() => {});
       }
     }
   }
@@ -107,6 +108,9 @@ class Landing extends React.Component {
   getCurrentTitle = () => {
     let courseInUrl = document.baseURI.split("/")[3];
     let item_title = document.baseURI.split("/")[4];
+    let classes = this.sortItems(this.state.items).filter(
+      (item) => item.item_type !== "separator"
+    );
 
     let targetItem = null;
 
@@ -116,18 +120,18 @@ class Landing extends React.Component {
     } else {
       let indb = this.db.get("lastItem>" + courseInUrl);
       if (indb === undefined) {
-        targetItem = this.state.items[0].item_title;
+        targetItem = classes[0].item_title;
         this.db.set("lastItem>" + courseInUrl, targetItem);
       } else {
         targetItem = indb;
       }
     }
-    let aux = this.state.items.find((item) => {
+    let aux = classes.find((item) => {
       return item.item_title === targetItem.replace(/_/g, " ");
     });
     if (aux === undefined) {
-      this.db.set("lastItem>" + courseInUrl, this.state.items[0].item_title);
-      return this.state.items[0].item_title;
+      this.db.set("lastItem>" + courseInUrl, classes[0].item_title);
+      return classes[0].item_title;
     } else {
       return targetItem.replace(/_/g, " ");
     }
@@ -152,7 +156,7 @@ class Landing extends React.Component {
     let courseInUrl = document.baseURI.split("/")[3];
 
     let course = null;
-    if (this.state.courses !== null) {
+    if (this.state.courses) {
       course = this.state.courses.find((course) => {
         return course.course_short_link === courseInUrl;
       });
@@ -166,7 +170,7 @@ class Landing extends React.Component {
     let itemIndex = 0;
     let author = null;
 
-    if (this.state.items !== undefined && this.state.courses !== null) {
+    if (this.state.items && this.state.courses) {
       classes = this.sortItems(this.state.items).filter(
         (item) => item.item_type !== "separator"
       );
@@ -180,17 +184,17 @@ class Landing extends React.Component {
           itemIndex = key + 1;
         }
         author = this.state.authors.find((author) => {
-          return author.user_id === item.item_author_id;
+          return author._id === item.item_author_id;
         });
       });
     }
 
     return (
       <>
-        <div className="site-wrap">
+        <div className='site-wrap'>
           <Navbar />
           {this.state.error === null ? (
-            this.state.items !== undefined && currentItem !== null ? (
+            this.state.items && currentItem ? (
               <>
                 <Header
                   title={course.course_title}
@@ -208,7 +212,7 @@ class Landing extends React.Component {
 
                 <Container style={{ marginTop: -100 }}>
                   <Row>
-                    <Col lg="8" className="mb-5 pl-lg-4">
+                    <Col lg='8' className='mb-5 pl-lg-4'>
                       {currentItem.item_type === "video" ? (
                         <CourseVideo
                           currentItem={currentItem}
@@ -226,13 +230,15 @@ class Landing extends React.Component {
                         proviusItem={proviusItem}
                         nextItem={nextItem}
                       />
-                      {currentItem.item_type === "video" ? (
-                        <Comments
-                          target_id={"item-" + course.id + "-" + currentItem.id}
-                        />
-                      ) : null}
+                      {/* {currentItem.item_type === "video" ? (
+                        // <Comments
+                        //   target_id={
+                        //     "item-" + course._id + "-" + currentItem._id
+                        //   }
+                        // />
+                      ) : null} */}
                     </Col>
-                    <Col lg="4" className="">
+                    <Col lg='4' className=''>
                       <CardAuthor author={author} />
                       <CourseMap
                         items={this.state.items}
@@ -247,7 +253,7 @@ class Landing extends React.Component {
               <>
                 <Header
                   title={"Cargando curso..."}
-                  subTitle="espere por favor..."
+                  subTitle='espere por favor...'
                 />
                 <PHCourse />
               </>

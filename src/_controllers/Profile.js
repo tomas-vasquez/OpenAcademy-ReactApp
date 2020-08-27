@@ -8,10 +8,11 @@ import Db from "helpers/db";
 import store from "store";
 import { setUserData } from "store/userData_store/actions";
 
-import { storageUrl } from "config";
+import { userPicUrl } from "config";
 import Controller_admin from ".";
 
 import { cropToProfilePic } from "helpers/image";
+import { replaceUsers } from "store/users_store/actions";
 
 class Controller_Profile extends Controller_admin {
   constructor() {
@@ -34,22 +35,20 @@ class Controller_Profile extends Controller_admin {
     );
   };
 
-  /*!
-  =========================================================
-  * 
-  =========================================================
-  */
+  /* =========================================================
+   *
+   * ========================================================= */
 
   handleClickPic = (e) => {
     let picUrl = "";
     let pic_url = store.getState().userData.pic_url;
     let blob_pic_url = store.getState().userData.blob_pic_url;
 
-    if (blob_pic_url !== undefined && blob_pic_url !== null) {
+    if (blob_pic_url !== undefined && blob_pic_url) {
       picUrl = blob_pic_url;
     } else {
-      if (pic_url !== null) {
-        picUrl = storageUrl + pic_url;
+      if (pic_url) {
+        picUrl = userPicUrl + pic_url;
       } else {
         picUrl = require("assets/img/noPic.jpg");
       }
@@ -80,11 +79,9 @@ class Controller_Profile extends Controller_admin {
       });
   };
 
-  /*
-   *---------------------------------------------------------------
+  /* =========================================================
    *
-   *---------------------------------------------------------------
-   */
+   * ========================================================= */
 
   handle_pic_selected(file) {
     //vemos si la imagen seleccionada es v{alida}
@@ -117,12 +114,6 @@ class Controller_Profile extends Controller_admin {
       (error) => this.errorsHandler(error, () => this.unsafeUploadPic(blob))
     );
   };
-
-  /*!
-  =========================================================
-  * 
-  =========================================================
-  */
 
   deletePic = () => {
     swal
@@ -163,11 +154,19 @@ class Controller_Profile extends Controller_admin {
     );
   };
 
-  /*!
-  =========================================================
-  * 
-  =========================================================
-  */
+  /* =========================================================
+   *
+   * ========================================================= */
+
+  getUserData = (_callback) => {
+    this.profile.getUserData(
+      (response) => {
+        store.dispatch(setUserData(response.user_data));
+        _callback();
+      },
+      (error) => this.errorsHandler(error, () => this.getUserData(_callback))
+    );
+  };
 
   updateUserData = (form) => {
     this.alerts.showConfirm(
