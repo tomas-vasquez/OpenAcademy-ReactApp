@@ -25,7 +25,7 @@ class Model_PayReports {
       method: "post",
       url: apiUrl + "/pay_report",
       headers: {
-        api-token: this.db.get("api-token"),
+        "api-token": this.db.get("api-token"),
       },
       onUploadProgress,
       data: formData,
@@ -58,7 +58,7 @@ class Model_PayReports {
       method: "delete",
       url: apiUrl + "/pay_report/" + report_id,
       headers: {
-        api-token: this.db.get("api-token"),
+        "api-token": this.db.get("api-token"),
       },
     })
       .then((response) => {
@@ -87,7 +87,7 @@ class Model_PayReports {
       method: "post",
       url: apiUrl + "/pay_report/aprove/" + report_id,
       headers: {
-        api-token: this.db.get("api-token"),
+        "api-token": this.db.get("api-token"),
       },
     })
       .then((response) => {

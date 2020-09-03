@@ -12,7 +12,7 @@ import DB from "helpers/db";
 import Controller_Profile from "_controllers/Profile";
 import CourseMap from "components/Course/CourseMap";
 import Header from "components/Headers/Header";
-import Comments from "components/Course/comments";
+// import Comments from "components/Course/comments";
 import ErrorAllCourses from "components/errors/ErrorAllCourse";
 import { Container, Col, Row } from "reactstrap";
 
@@ -185,6 +185,7 @@ class Landing extends React.Component {
           nextItem = classes[key + 1];
           itemIndex = key + 1;
         }
+
         author = this.state.authors.find((author) => {
           return author._id === item.item_author_id;
         });
@@ -241,7 +242,7 @@ class Landing extends React.Component {
                       ) : null} */}
                     </Col>
                     <Col lg="4" className="">
-                      <CardAuthor author={author} />
+                      {author ? <CardAuthor author={author} /> : null}
                       <CourseMap
                         items={this.state.items}
                         course_title={course ? course.course_short_link : ""}

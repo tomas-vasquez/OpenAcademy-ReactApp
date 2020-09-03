@@ -15,10 +15,7 @@ class CourseTest extends React.Component {
   }
 
   loadData = () => {
-    if (
-      this.props.academy.tests[this.props.currentItem.item_content_url] ===
-      undefined
-    ) {
+    if (!this.props.academy.tests[this.props.currentItem.item_content_url]) {
       this.academy.loadTest(
         this.props.currentItem.item_content_url,
         (response, error) => {
@@ -45,7 +42,7 @@ class CourseTest extends React.Component {
     return (
       <>
         <Card className="mb-4 shadow">
-          {this.state.treeTest !== null ? (
+          {this.state.treeTest ? (
             <>
               <Test
                 tree={{

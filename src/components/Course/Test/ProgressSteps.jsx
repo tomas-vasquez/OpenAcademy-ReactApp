@@ -16,7 +16,6 @@ const ProgressSteps = ({ questions, currentQuestion }) => {
             <li className="swal2-progress-step-line"></li>
           </Fragment>
         ))}
-        
         <li className="swal2-progress-step">
           <i className="fa fa-check"></i>
         </li>

@@ -9,6 +9,7 @@ import {
   setAuthors,
   setDescription,
 } from "store/academy_store/actions";
+
 import { setItems } from "store/academy_store/actions";
 import { setTest } from "store/academy_store/actions";
 
@@ -20,17 +21,16 @@ class Controller_Academy extends Controller_admin {
     this.modelAcademy = new Model_Academy();
   }
 
-  /*!
-=========================================================
-* 
-=========================================================
-*/
+  /* =========================================================
+   *
+   * ========================================================= */
 
   loadCourses(_callback) {
     this.modelAcademy.loadCourses(
       (response) => {
         store.dispatch(setCourses(response.data.courses));
         store.dispatch(setAuthors(response.data.authors));
+        store.log();
 
         _callback(response.data, null);
       },
@@ -40,18 +40,16 @@ class Controller_Academy extends Controller_admin {
     );
   }
 
-  /*!
-=========================================================
-* 
-=========================================================
-*/
+  /* =========================================================
+   *
+   * ========================================================= */
 
   loadItems(currentCourse, _callback) {
     this.modelAcademy.loadItems(
       currentCourse,
       (response) => {
         store.dispatch(setItems(currentCourse, response.data.items));
-
+        store.log();
         _callback(response.data, null);
       },
       (error) => {
@@ -59,11 +57,10 @@ class Controller_Academy extends Controller_admin {
       }
     );
   }
-  /*!
-=========================================================
-* 
-=========================================================
-*/
+
+  /* =========================================================
+   *
+   * ========================================================= */
 
   loadDescription(currentDescription, _callback) {
     this.modelAcademy.loadDescription(
@@ -79,17 +76,33 @@ class Controller_Academy extends Controller_admin {
     );
   }
 
-  /*!
-=========================================================
-* 
-=========================================================
-*/
+  /* =========================================================
+   *
+   * ========================================================= */
 
-  loadTest(currentTest, _callback) {
+  loadTest(testId, _callback) {
     this.modelAcademy.loadTest(
-      currentTest,
+      testId,
       (response) => {
-        store.dispatch(setTest(currentTest, response.data));
+        store.dispatch(setTest(testId, response.data));
+        _callback(response.data, null);
+      },
+      (error) => {
+        console.log(error);
+        _callback(null, error);
+      }
+    );
+  }
+
+  /* =========================================================
+   *
+   * ========================================================= */
+
+  qualify(test, answers, _callback) {
+    this.modelAcademy.qualify(
+      test,
+      answers,
+      (response) => {
         _callback(response.data, null);
       },
       (error) => {

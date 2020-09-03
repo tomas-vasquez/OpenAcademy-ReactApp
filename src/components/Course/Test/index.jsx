@@ -14,7 +14,7 @@ class Test extends React.Component {
       startTest: false,
       currentQuestion: 0,
       time: null,
-      answers: [],
+      answers: {},
       finallyseTest: false,
     };
   }
@@ -30,8 +30,9 @@ class Test extends React.Component {
   };
 
   handlerAnswerQuestion = (a) => {
+    let questions = this.props.tree.questions;
     let aux = this.state.answers;
-    aux[this.state.currentQuestion] = a;
+    aux[questions[this.state.currentQuestion].key] = a;
     this.setState({
       answers: aux,
     });
@@ -40,7 +41,7 @@ class Test extends React.Component {
 
   render() {
     return this.state.startTest ? (
-      !this.state.finallyseTest ? (
+      this.state.finallyseTest ? (
         <Check
           test={this.props.tree}
           answers={this.state.answers}
@@ -58,7 +59,9 @@ class Test extends React.Component {
             <Button
               color="primary"
               disabled={
-                this.state.answers[this.state.currentQuestion] === undefined
+                this.state.answers[
+                  this.props.tree.questions[this.state.currentQuestion].key
+                ] === undefined
               }
               onClick={() => {
                 if (

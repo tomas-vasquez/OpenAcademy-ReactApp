@@ -93,7 +93,7 @@ class AllCourse extends React.Component {
                       <CardCourse
                         course={_course}
                         author={authors.find((author) => {
-                          return author.user_id === _course.course_author_id;
+                          return author._id === _course.course_author_id;
                         })}
                       />
                     </div>
@@ -121,7 +121,7 @@ class AllCourse extends React.Component {
                     <CardCourse
                       course={_course}
                       author={this.state.authors.find((author) => {
-                        return author.user_id === _course.course_author_id;
+                        return author._id === _course.course_author_id;
                       })}
                     />
                   </Col>

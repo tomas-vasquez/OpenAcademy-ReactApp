@@ -2,13 +2,7 @@ import React from "react";
 
 import parser from "html-react-parser";
 import ProgressSteps from "./ProgressSteps";
-import {
-  CardHeader,
-  CardTitle,
-  CardBody,
-  Button,
-  CardFooter,
-} from "reactstrap";
+import { CardHeader, CardTitle, CardBody } from "reactstrap";
 
 const SingleQuestion = ({
   test,

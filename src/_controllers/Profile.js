@@ -12,7 +12,6 @@ import { userPicUrl } from "config";
 import Controller_admin from ".";
 
 import { cropToProfilePic } from "helpers/image";
-import { replaceUsers } from "store/users_store/actions";
 
 class Controller_Profile extends Controller_admin {
   constructor() {
@@ -161,7 +160,7 @@ class Controller_Profile extends Controller_admin {
   getUserData = (_callback) => {
     this.profile.getUserData(
       (response) => {
-        store.dispatch(setUserData(response.user_data));
+        store.dispatch(setUserData(response.data.user_data));
         _callback();
       },
       (error) => this.errorsHandler(error, () => this.getUserData(_callback))
