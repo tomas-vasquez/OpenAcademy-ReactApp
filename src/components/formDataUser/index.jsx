@@ -21,7 +21,7 @@ import {
 } from "reactstrap";
 
 // core components
-import OptionCountries from "../../views/UserProfile/OptionCountries";
+import OptionCountries from "../../views/UserProfile/AuthorData/OptionCountries";
 import {
   focusHandler,
   blurHandler,

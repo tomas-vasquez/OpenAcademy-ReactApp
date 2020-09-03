@@ -167,18 +167,18 @@ class Controller_Profile extends Controller_admin {
     );
   };
 
-  updateUserData = (form) => {
+  updateUserData = (form, _callback) => {
     this.alerts.showConfirm(
       "está seguro de continuar?",
       "Actualizando datos de su perfíl",
       true,
       () => {
-        this.unsafeUpdateUserData(form);
+        this.unsafeUpdateUserData(form, _callback);
       }
     );
   };
 
-  unsafeUpdateUserData = (form) => {
+  unsafeUpdateUserData = (form, _callback) => {
     this.alerts.showLoading(true);
 
     let data = {};
@@ -193,8 +193,8 @@ class Controller_Profile extends Controller_admin {
       data,
       (response) => {
         this.alerts.showSuccess("Perfil actualizado");
-
         store.dispatch(setUserData(response.data));
+        _callback(response.data);
       },
       (error) =>
         this.errorsHandler(error, () => this.unsafeUpdateUserData(form))

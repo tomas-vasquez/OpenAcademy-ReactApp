@@ -89,7 +89,7 @@ class Landing extends React.Component {
   };
 
   loadUserData() {
-    if (this.props.userData === null) {
+    if (!this.props.userData) {
       if (this.db.get("api-token")) {
         this.profile.getUserData(() => {
           this.forceUpdate();

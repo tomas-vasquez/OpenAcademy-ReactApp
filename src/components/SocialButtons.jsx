@@ -29,7 +29,7 @@ class SocialButtons extends React.Component {
             color="primary"
             href={
               "https://api.whatsapp.com/send?phone=" +
-              this.props.data.area_code +
+              this.props.data.whatsapp_code_area +
               this.props.data.whatsapp_number
             }
             target="_blank"

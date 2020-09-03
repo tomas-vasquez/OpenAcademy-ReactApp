@@ -50,9 +50,12 @@ class UserProfile extends React.Component {
   render() {
     let profile = this.state.profile;
 
-    return this.state.profile !== null ? (
+    return profile ? (
       <>
-        <Header title={profile.name} subTitle={"@" + profile.user_name} />
+        <Header
+          title={profile.name ? profile.name : `@${profile.user_name}`}
+          subTitle={profile.name ? `@${profile.user_name}` : profile.email}
+        />
         <Container className="mt-5">
           <Row
             style={{
@@ -63,7 +66,7 @@ class UserProfile extends React.Component {
               <AuthorData profile={profile} />
             </Col>
             <Col xs="12" lg="4" className="order-lg-1">
-              <Certificates />
+              {/* <Certificates /> */}
             </Col>
           </Row>
         </Container>

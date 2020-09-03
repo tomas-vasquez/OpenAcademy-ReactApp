@@ -18,7 +18,7 @@ class Model_Profile {
       method: "get",
       url: apiUrl + "/profile?user_name=" + user_name,
       headers: {
-        "Content-Type": "aplication/json",
+        "Content-Type": "application/json",
         "api-token": this.db.get("api-token"),
       },
     })
@@ -66,7 +66,7 @@ class Model_Profile {
       method: "delete",
       url: apiUrl + "/user_pic",
       headers: {
-        "Content-Type": "aplication/json",
+        "Content-Type": "application/json",
         "api-token": this.db.get("api-token"),
       },
     })
@@ -109,7 +109,7 @@ class Model_Profile {
       method: "post",
       url: apiUrl + "/user_data",
       headers: {
-        "Content-Type": "aplication/json",
+        "Content-Type": "application/json",
         "api-token": this.db.get("api-token"),
       },
       data: data,

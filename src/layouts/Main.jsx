@@ -6,20 +6,20 @@ import { connect } from "react-redux";
 import Navbar from "components/Navbars/Navbar";
 import CardsFooter from "components/Footers/CardsFooter";
 
-import Controller_admin from "_controllers";
 import { Switch, Route } from "react-router";
 import routes from "routes";
 import DB from "helpers/db";
+import Controller_Profile from "_controllers/Profile";
 
 class Main extends React.Component {
   constructor() {
     super();
-    this.controlleradmin = new Controller_admin();
     this.db = new DB();
+    this.profile = new Controller_Profile();
   }
 
   loadUserData() {
-    if (this.props.userData === null) {
+    if (!this.props.userData) {
       if (this.db.get("api-token")) {
         this.profile.getUserData(() => {
           this.forceUpdate();
@@ -56,7 +56,7 @@ class Main extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.app.userData,
+  userData: state.userData,
 });
 
 export default connect(mapStateToProps)(Main);
