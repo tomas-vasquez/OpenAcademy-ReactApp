@@ -40,7 +40,6 @@ class CourseMap extends React.Component {
             key={"item-" + index}
             index={index}
             item={items[index]}
-            course_title={this.props.course_title}
             currentItem={this.props.currentItem}
           />
         );

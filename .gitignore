@@ -9,3 +9,7 @@ package-lock.json
 jest.config.js
 /coverage
 *__snapshots__
+*.swp
+*.swo
+*.gz
+*.log

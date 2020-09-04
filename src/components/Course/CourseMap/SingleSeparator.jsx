@@ -10,15 +10,11 @@ const SingleSeparator = ({ title, active, onClick }) => (
     }}
     onClick={onClick}
   >
-    <CardTitle tag="h5" className="my-2 mx-3 d-flex">
-      <span>{_.upperFirst(title)}</span>
-      <span className="ml-auto">
-        {active ? (
-          <i className="fa fa-minus text-align-right" />
-        ) : (
-          <i className="fa fa-plus" />
-        )}
-      </span>
+    <CardTitle tag="h5" className="my-2 mx-2" style={{ transition: 1000 }}>
+      <span className="mx-1">
+        {active ? <i className="fa fa-minus" /> : <i className="fa fa-plus" />}
+      </span>{" "}
+      <span className="ml-2">{_.upperFirst(title)}</span>
     </CardTitle>
   </CardHeader>
 );

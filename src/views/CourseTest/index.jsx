@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Card, CardBody } from "reactstrap";
 import PHCourseDescription from "components/Loaders/PHCourseDescription";
 import Controller_Academy from "_controllers/Academy";
-import Test from "components/Course/Test";
+import Test from "./Test";
 
 class CourseTest extends React.Component {
   constructor() {

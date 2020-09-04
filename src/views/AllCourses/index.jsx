@@ -118,12 +118,12 @@ class AllCourse extends React.Component {
             {courses !== null
               ? courses.map((_course, key) => (
                   <Col key={key} xs="12" sm="6" md="6" lg="3">
-                    <CardCourse
+                    {/* <CardCourse
                       course={_course}
                       author={this.state.authors.find((author) => {
                         return author._id === _course.course_author_id;
                       })}
-                    />
+                    /> */}
                   </Col>
                 ))
               : ["", "", "", ""].map((value, key) => (
