@@ -4,8 +4,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Route, Switch } from "react-router-dom";
 
-import MainLayouth from "layouts/Main";
-import CourseLayouth from "layouts/Course";
+import MainLayouth from "views/layouts/Main";
+import CourseLayouth from "views/layouts/Course";
 
 import { myRoutes } from "config";
 
@@ -13,7 +13,7 @@ import { Provider } from "react-redux";
 import store, { history } from "store";
 import { ConnectedRouter } from "connected-react-router";
 
-// import PerfectScrollWraper from "components/PerfectScrollWraper";
+// import PerfectScrollWraper from "views/components/PerfectScrollWraper";
 
 ReactDOM.render(
   // <PerfectScrollWraper>

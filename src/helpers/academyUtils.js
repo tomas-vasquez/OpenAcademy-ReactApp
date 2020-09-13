@@ -1,7 +1,7 @@
 import DB from "helpers/db";
 import store from "store";
-import Controller_Profile from "_controllers/Profile";
-import Controller_Academy from "_controllers/Academy";
+import Controller_Profile from "fetchers/Profile";
+import Controller_Academy from "fetchers/Academy";
 
 const db = new DB();
 
@@ -30,7 +30,7 @@ export const loadItems = (_callback) => {
     const academy = new Controller_Academy();
     academy.loadItems(courseInUrl, (response, error) => {
       if (response.items) {
-        _callback(null, response.items);
+        if (response.items.length !== 0) _callback(null, response.items);
       } else {
         _callback(error, null);
       }
@@ -83,8 +83,6 @@ const getCurrentTitle = (items) => {
   let courseInUrl = document.baseURI.split("/")[3];
   let item_title = document.baseURI.split("/")[4];
 
-  console.log("--->", items);
-
   let classes = sortItems(items).filter(
     (item) => item.item_type !== "separator"
   );
@@ -119,7 +117,7 @@ const getCurrentTitle = (items) => {
  * ========================================================= */
 
 export const getCurrentItem = (items) => {
-  if (items) {
+  if (items && items.length !== 0) {
     let nextItem = null;
     let currentItem = null;
     let proviusItem = null;

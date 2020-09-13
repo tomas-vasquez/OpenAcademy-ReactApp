@@ -1,4 +1,3 @@
-// export const serverUrl = "http://192.168.43.85";
 export const serverUrl = "http://localhost:3001";
 
 export const apiUrl = serverUrl + "";
@@ -15,7 +14,6 @@ export const myRoutes = {
   home: "/",
   profile: "/miperfil",
   courses: "/cursos",
-
   login: "/acceso",
   register: "/singup",
 };
