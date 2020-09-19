@@ -48,7 +48,8 @@ class Main extends React.Component {
         <Switch>
           <Route exact path={myRoutes.login} component={Auth} />
           <Route exact path={myRoutes.register} component={Auth} />
-          <Route exact path={myRoutes.home} component={Home} />
+          {/* <Route exact path={myRoutes.home} component={Home} /> */}
+          <Route exact path={myRoutes.home} component={Courses} />
           <Route exact path={"/@:user_name"} component={UserProfile} />
           <Route exact path={myRoutes.courses} component={Courses} />
         </Switch>

@@ -52,10 +52,10 @@ class AvatarNavBar extends React.Component {
               src={pic_url}
             />
             <Media>
-              <span className="mb-0 ml-1 text-white d-md-none d-lg-block">
+              <span className="mb-0 ml-1 text-muted d-md-none d-lg-block">
                 @{this.props.userData.user_name}
               </span>
-              <span className="mb-0 ml-1 text-white">
+              <span className="mb-0 ml-1 text-muted">
                 <i className="ml-1 fa fa-sort-down"></i>
               </span>
             </Media>

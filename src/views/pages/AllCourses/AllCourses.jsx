@@ -5,13 +5,13 @@ import PHCardCourse from "views/components/Loaders/PHCardCourse";
 
 export default function AllCourses({ courses, authors }) {
   return (
-    <Container className="mt-5">
-      <h5 className="mb-4">
+    <Container className="my-4">
+      <h4 className="mb-4">
         Todos los cursos...
         <i className="fa fa-book text-primary mr-1" />
         <i className="fa fa-book text-primary mr-1" />
         <i className="fa fa-book text-primary mr-1" />
-      </h5>
+      </h4>
       <Row>
         {courses !== null
           ? courses.map((_course, key) => (

@@ -1,6 +1,6 @@
 import React from "react";
 
-class PHCourseDescription extends React.Component {
+class PHItemDescription extends React.Component {
   render() {
     return (
       <div
@@ -56,4 +56,4 @@ class PHCourseDescription extends React.Component {
   }
 }
 
-export default PHCourseDescription;
+export default PHItemDescription;

@@ -2,6 +2,7 @@ import Controller_admin from ".././fetchers";
 
 import Alerts from "helpers/Alerts";
 import { apiLoginUrl, apiSignupUrl, apiUrl } from "config";
+import axios from "axios"
 
 class Controller_Users extends Controller_admin {
   constructor() {
@@ -32,7 +33,7 @@ class Controller_Users extends Controller_admin {
     if (data.accept_the_terms) {
       data.accept_the_terms = undefined;
 
-      this.axios({
+      axios({
         method: "post",
         url: apiSignupUrl,
         headers: {
@@ -79,7 +80,7 @@ class Controller_Users extends Controller_admin {
       }
     }
 
-    this.axios({
+    axios({
       method: "post",
       url: apiLoginUrl,
       headers: {
@@ -112,7 +113,7 @@ class Controller_Users extends Controller_admin {
   unsafeLogout = () => {
     this.alerts.showLoading();
 
-    this.axios({
+    axios({
       method: "get",
       url: apiUrl + "/user/logout",
       headers: {

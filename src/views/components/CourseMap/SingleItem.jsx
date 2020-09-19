@@ -4,19 +4,19 @@ import _ from "lodash";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
-const isLock = (userData, item) => {
-  if (!item.item_need_keys) return false;
-  if (!userData.keys) return true;
+// const isLock = (userData, item) => {
+//   if (!item.item_need_keys) return false;
+//   if (!userData.keys) return true;
 
-  let keys = 0;
-  item.item_need_keys.forEach((user_key) => {
-    item.item_need_keys.forEach((item_key) => {
-      if (user_key === item_key) keys = keys + 1;
-    });
-  });
+//   let keys = 0;
+//   item.item_need_keys.forEach((user_key) => {
+//     item.item_need_keys.forEach((item_key) => {
+//       if (user_key === item_key) keys = keys + 1;
+//     });
+//   });
 
-  return item.item_need_keys.length === keys;
-};
+//   return item.item_need_keys.length === keys;
+// };
 
 const SingleItem = ({ index, item, currentItem, ...props }) => {
   let courseInUrl = document.baseURI.split("/")[3];
@@ -25,23 +25,30 @@ const SingleItem = ({ index, item, currentItem, ...props }) => {
     <li className="w-100">
       <NavLink
         to={"/" + courseInUrl + "/" + item.item_title.replace(/ /g, "_")}
-        className="nav-link text-muted"
+        className="nav-link text-muted border-bottom"
+        style={{
+          backgroundColor:
+            currentItem.item_title === item.item_title ? "#e6f2f5" : "white",
+        }}
       >
-        <i
-          className={classnames("fa fa-arrow-right", {
-            "d-none": currentItem.item_title !== item.item_title,
-          })}
-          style={{ position: "absolute", margin: " 8px -10px" }}
-        />
-        {isLock(props.userData, item) ? (
-          <i className="fa fa-lock mr-2 ml-4" />
-        ) : item.item_type === "video" ? (
-          <i className="fa fa-film mr-2 ml-4" />
-        ) : item.item_type === "test" ? (
-          <i className="fa fa-key mr-2 ml-4" />
-        ) : null}
-
-        <span>{_.upperFirst(item.item_title)}</span>
+        <p className="m-0">
+          <i
+            className={classnames("fa fa-play mr-2", {
+              "d-none": currentItem.item_title !== item.item_title,
+            })}
+          />
+          {`${index + 1}. ${_.upperFirst(item.item_title)}`}
+        </p>
+        <small>
+          {item.item_type === "video" ? (
+            <>video</>
+          ) : item.item_type === "test" ? (
+            <>
+              <i className="fa fa-pencil mr-2" />
+              examen
+            </>
+          ) : null}
+        </small>
       </NavLink>
     </li>
   );

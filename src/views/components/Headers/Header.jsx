@@ -11,7 +11,7 @@ class Header extends React.Component {
         style={{
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundImage: "url(" + require("assets/images/banner.jpg") + ")",
+          backgroundImage: "url(" + require("assets/img/banner.jpg") + ")",
         }}
       >
         <div className="container">

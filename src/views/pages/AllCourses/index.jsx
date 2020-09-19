@@ -2,10 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import Controller_Academy from "fetchers/Academy";
 
-import Header from "views/components/Headers/Header";
+import Header from "views/components/Headers/HeaderHero";
 import ErrorAllCourses from "views/components/errors/ErrorAllCourse";
-import MySlider from "./Slider";
+// import MySlider from "./Slider";
 import AllCourses from "./AllCourses";
+import Invitation from "views/components/Invitation";
 
 class AllCourse extends React.Component {
   constructor(props) {
@@ -58,8 +59,9 @@ class AllCourse extends React.Component {
             subTitle={"Son " + courses.length + " cursos en total"}
           />
         )}
-        <MySlider courses={courses} authors={authors} />
+        {/* <MySlider courses={courses} authors={authors} /> */}
         <AllCourses courses={courses} authors={authors} />
+        <Invitation />
       </>
     ) : (
       <ErrorAllCourses error={this.state.error} reload={this.reload} />

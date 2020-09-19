@@ -1,11 +1,9 @@
 import React from "react";
-import { Collapse, CardBody, Nav } from "reactstrap";
+import { Collapse, Nav } from "reactstrap";
 
-const FrameCollapsable = ({ currentSection, elems, isOpen }) => (
+const FrameCollapsable = ({ elems, isOpen }) => (
   <Collapse isOpen={isOpen}>
-    <CardBody className="py-1">
-      <Nav type="vertical">{elems}</Nav>
-    </CardBody>
+    <Nav type="vertical">{elems}</Nav>
   </Collapse>
 );
 

@@ -8,6 +8,7 @@ import { Card, CardBody, CardImg, Media } from "reactstrap";
 
 import { coursePicUrl, userPicUrl } from "config";
 import { Link } from "react-router-dom";
+import _ from "lodash";
 
 class CardCourse extends React.Component {
   constructor() {
@@ -16,8 +17,7 @@ class CardCourse extends React.Component {
   }
 
   formatDate(date) {
-    let unix = new Date(date).getTime() / 1000;
-    return moment(unix, "UNIX").fromNow();
+    return moment(date, "ISO").fromNow();
   }
 
   render() {
@@ -43,14 +43,17 @@ class CardCourse extends React.Component {
               <figure className=" m-0">
                 <CardImg src={coursePicUrl + course.course_pic_url}></CardImg>
               </figure>
-              <div className="course-inner-text py-4 px-4">
-                <span className="course-price">$99</span>
-                <div className="meta text-muted mr-2">
-                  <i className="fa fa-clock mr-2" />
+              <div className="course-inner-text p-3">
+                <span className="course-price">gratis!</span>
+                <small className="meta text-muted">
                   {this.formatDate(course.created_at)}
-                </div>
-                <h3 className="text-primary">{course.course_title}</h3>
-                <p className="text-muted">{course.course_description}</p>
+                </small>
+                <h3 className="text-primary">
+                  {_.upperFirst(course.course_title)}
+                </h3>
+                <p className="text-muted mb-0">
+                  {_.upperFirst(course.course_description)}
+                </p>
               </div>
               <div className="d-flex border-top stats">
                 <div className="py-3 px-4">
@@ -65,13 +68,10 @@ class CardCourse extends React.Component {
                     </Media>
                     <Media body className="pl-2 my-auto">
                       <Media className="mb-0 text-muted">
-                        {author ? author.name : null}
+                        {author.name ? author.name : `@${author.user_name}`}
                       </Media>
                     </Media>
                   </Media>
-                </div>
-                <div className="py-3 px-4 w-25 ml-auto border-left">
-                  <span className="icon-chat"></span> 2
                 </div>
               </div>
             </div>

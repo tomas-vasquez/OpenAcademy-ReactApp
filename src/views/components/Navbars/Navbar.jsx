@@ -1,5 +1,4 @@
 import React from "react";
-// nodejs library that concatenates classes
 import classnames from "classnames";
 
 import { Link, NavLink } from "react-router-dom";
@@ -19,10 +18,11 @@ class AdminNavbar extends React.Component {
     super(props);
     this.state = {
       collapseOpen: false,
-      modalSearch: false,
-      color: "navbar-transparent",
     };
     this.db = new DB();
+    window.addEventListener("resize", () => {
+      this.forceUpdate();
+    });
   }
 
   handleCloseSessionButtom = (e) => {
@@ -30,45 +30,10 @@ class AdminNavbar extends React.Component {
     this.user.logout();
   };
 
-  componentDidMount() {
-    window.addEventListener("resize", this.updateColor);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateColor);
-  }
-
-  // function that adds color white/transparent to the navbar on resize (this is for the collapse)
-  updateColor = () => {
-    if (window.innerWidth < 764 && this.state.collapseOpen) {
-      this.setState({
-        color: "",
-      });
-    } else {
-      this.setState({
-        color: "navbar-transparent",
-      });
-    }
-  };
-
   // this function opens and closes the collapse on small devices
   toggleCollapse = () => {
-    if (this.state.collapseOpen) {
-      this.setState({
-        color: "navbar-transparent",
-      });
-    } else {
-      this.setState({
-        color: "",
-      });
-    }
     this.setState({
       collapseOpen: !this.state.collapseOpen,
-    });
-  };
-  // this function is to open the Search modal
-  toggleModalSearch = () => {
-    this.setState({
-      modalSearch: !this.state.modalSearch,
     });
   };
 
@@ -88,12 +53,17 @@ class AdminNavbar extends React.Component {
     return (
       <>
         <Navbar
-          className={classnames("navbar-absolute py-3", this.state.color)}
+          className={classnames("py-3 navbar-relative", {
+            "navbar-absolute navbar-transparent":
+              (document.location.pathname === myRoutes.login ||
+                document.location.pathname === myRoutes.register) &&
+              window.innerWidth > 768,
+          })}
           expand="md"
         >
           <div className="navbar-wrapper">
             <Link to="/">
-              <h1 className="h3 text-white">MyAcademy</h1>
+              <h1 className="h3 ">MyAcademy</h1>
             </Link>
           </div>
           <button
@@ -141,42 +111,46 @@ class AdminNavbar extends React.Component {
               >
                 Dicta un curso
               </NavLink>
-              {this.props.userData !== null ? (
-                <>
-                  <NavLink
-                    tag="li"
-                    to={"/@" + this.props.userData.user_name}
-                    className="nav-link text-white border-top mt-2 pt-3 d-md-none"
-                  >
-                    <span>Mi perfil</span>
-                  </NavLink>
-                  <NavLink
-                    tag="li"
-                    onClick={this.handleCloseSessionButtom}
-                    to={"/"}
-                    className="nav-link text-white d-md-none"
-                  >
-                    <span>Cerrar sesión</span>
-                  </NavLink>
-                </>
-              ) : (
-                <>
-                  <NavLink
-                    tag="li"
-                    to={myRoutes.login}
-                    className="nav-link text-white border-top mt-2 pt-3 d-md-none"
-                  >
-                    <span>Iniciar sesion</span>
-                  </NavLink>
-                  <NavLink
-                    tag="li"
-                    to={myRoutes.register}
-                    className="nav-link text-white d-md-none"
-                  >
-                    <span>Registrame</span>
-                  </NavLink>
-                </>
-              )}
+
+              {document.location.pathname !== myRoutes.login &&
+              document.location.pathname !== myRoutes.register ? (
+                this.props.userData !== null ? (
+                  <>
+                    <NavLink
+                      tag="li"
+                      to={"/@" + this.props.userData.user_name}
+                      className="nav-link text-white border-top mt-2 pt-3 d-md-none"
+                    >
+                      <span>Mi perfil</span>
+                    </NavLink>
+                    <NavLink
+                      tag="li"
+                      onClick={this.handleCloseSessionButtom}
+                      to={"/"}
+                      className="nav-link text-white d-md-none"
+                    >
+                      <span>Cerrar sesión</span>
+                    </NavLink>
+                  </>
+                ) : (
+                  <>
+                    <NavLink
+                      tag="li"
+                      to={myRoutes.login}
+                      className="nav-link text-white border-top mt-2 pt-3 d-md-none"
+                    >
+                      <span>Iniciar sesion</span>
+                    </NavLink>
+                    <NavLink
+                      tag="li"
+                      to={myRoutes.register}
+                      className="nav-link text-white d-md-none"
+                    >
+                      <span>Registrame</span>
+                    </NavLink>
+                  </>
+                )
+              ) : null}
             </Nav>
 
             <Nav

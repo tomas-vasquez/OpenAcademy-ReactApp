@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Card, CardBody, Container } from "reactstrap";
+import Invitation from "views/components/Invitation";
+import ItemDescription from "../AllCourses/ItemDescription";
 
 class CourseVideo extends React.Component {
   constructor(props) {
@@ -10,21 +11,24 @@ class CourseVideo extends React.Component {
 
   render() {
     return this.props.video !== null ? (
-      <Container style={{ marginTop: -100 }}>
-        <Card className="mb-4 border-0 bg-black">
-          <CardBody className="p-0 p-md-2">
-            <div className="video-container shadow">
-              <video
-                controls={true}
-                src={this.props.currentItem.item_video_url}
-                width="720"
-                height="420"
-                autoPlay
-              />
-            </div>
-          </CardBody>
-        </Card>
-      </Container>
+      <>
+        <div className="video-container shadow d-flex">
+          <video
+            className="m-auto"
+            controls
+            src={this.props.currentItem.item_video_url}
+            width="720"
+            height="420"
+            autoPlay
+          />
+        </div>
+        <ItemDescription
+          items={this.props.items}
+          itemIndex={this.props.itemIndex}
+          currentItem={this.props.currentItem}
+        />
+        <Invitation />
+      </>
     ) : null;
   }
 }

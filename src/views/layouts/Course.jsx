@@ -1,18 +1,14 @@
 import React from "react";
-import _ from "lodash";
+// import _ from "lodash";
 import { connect } from "react-redux";
 
 // core components
 import Header from "views/components/Headers/Header";
-import Navbar from "views/components/Navbars/Navbar";
 import CardsFooter from "views/components/Footers/CardsFooter";
 import { Container, Col, Row } from "reactstrap";
 
-import CardAuthor from "views/components/CardAuthor";
 import CourseMap from "views/components/CourseMap";
-// import Comments from "views/components/comments";
 import ErrorAllCourses from "views/components/errors/ErrorAllCourse";
-import ItemsJumperButtons from "views/components/ItemsJumperButtons";
 import PHCourse from "views/components/Loaders/PHCourse";
 
 import CourseVideo from "views/pages/CourseVideo";
@@ -20,7 +16,8 @@ import CourseTest from "views/pages/CourseTest";
 
 import Controller_Academy from "fetchers/Academy";
 import { getCurrentItem, loadUserData, loadItems } from "helpers/academyUtils";
-import CourseDescription from "views/pages/AllCourses/CourseDescription";
+import ItemDescription from "views/pages/AllCourses/ItemDescription";
+import NavbarCourse from "views/components/Navbars/NavbarCourse";
 
 class Landing extends React.Component {
   ////
@@ -87,51 +84,37 @@ class Landing extends React.Component {
   }
 
   render() {
-    let courseInUrl = document.baseURI.split("/")[3];
+    // let courseInUrl = document.baseURI.split("/")[3];
 
-    let course = null;
+    // let course = null;
 
-    if (this.state.courses) {
-      course = this.state.courses.find((course) => {
-        return course.course_short_link === courseInUrl;
-      });
-    }
+    // if (this.state.courses) {
+    //   course = this.state.courses.find((course) => {
+    //     return course.course_short_link === courseInUrl;
+    //   });
+    // }
 
-    let { proviusItem, currentItem, nextItem, itemIndex } = getCurrentItem(
-      this.state.items
-    );
+    // let { proviusItem, currentItem, nextItem, itemIndex } = getCurrentItem(
+    let { currentItem, itemIndex } = getCurrentItem(this.state.items);
 
     return (
       <>
         <div className="site-wrap">
-          <Navbar />
           {this.state.error === null ? (
             currentItem ? (
               <>
-                <Header
-                  title={course.course_title}
-                  subTitle={
-                    _.upperFirst(currentItem.item_title) +
-                    " (" +
-                    itemIndex +
-                    "/" +
-                    this.state.items.filter(
-                      (item) => item.item_type !== "separator"
-                    ).length +
-                    ")"
-                  }
-                />
-
-                {currentItem.item_type === "video" ? (
-                  <CourseVideo
-                    currentItem={currentItem}
-                    itemIndex={itemIndex}
-                  />
-                ) : null}
-
-                <Container>
+                <Container fluid>
                   <Row>
-                    <Col lg="8" className="mb-5 pl-lg-4">
+                    <Col lg="9" className="p-0 border-right">
+                      <NavbarCourse />
+
+                      {currentItem.item_type === "video" ? (
+                        <CourseVideo
+                          items={this.state.items}
+                          currentItem={currentItem}
+                          itemIndex={itemIndex}
+                        />
+                      ) : null}
                       {currentItem.item_type === "test" ? (
                         <CourseTest
                           currentItem={currentItem}
@@ -139,17 +122,20 @@ class Landing extends React.Component {
                         />
                       ) : null}
 
-                      <CourseDescription
-                        itemIndex={itemIndex}
-                        currentItem={currentItem}
-                      />
-                      <ItemsJumperButtons
-                        proviusItem={proviusItem}
-                        nextItem={nextItem}
-                      />
+                      <CardsFooter />
                     </Col>
-                    <Col lg="4" className="">
-                      <CardAuthor currentItem={currentItem} />
+
+                    <Col
+                      lg="3"
+                      className="p-0 d-none d-lg-block h-100"
+                      style={{
+                        overflowY: "scroll",
+                        top: 0,
+                        right: 0,
+                        position: "fixed",
+                        marginLeft: "auto",
+                      }}
+                    >
                       <CourseMap
                         items={this.state.items}
                         currentItem={currentItem}
@@ -170,8 +156,6 @@ class Landing extends React.Component {
           ) : (
             <ErrorAllCourses error={this.state.error} reload={this.reload} />
           )}
-
-          <CardsFooter />
         </div>
       </>
     );

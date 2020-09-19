@@ -5,11 +5,13 @@ import Db from "helpers/db";
 import store from "store";
 import { setUserData } from "store/userData_store/actions";
 
+import axios from "axios"
 import { userPicUrl } from "config";
 import Controller_admin from ".";
 
 import { cropToProfilePic } from "helpers/image";
 import { apiUrl } from "config";
+
 
 class Controller_Profile extends Controller_admin {
   constructor() {
@@ -19,7 +21,7 @@ class Controller_Profile extends Controller_admin {
   }
 
   getProfile = (user_name, _callback) => {
-    this.axios({
+    axios({
       method: "get",
       url: apiUrl + "/profile?user_name=" + user_name,
       headers: {
@@ -95,7 +97,7 @@ class Controller_Profile extends Controller_admin {
     var formData = new FormData();
     formData.append("blob", blob);
 
-    this.axios({
+    axios({
       method: "post",
       url: apiUrl + "/user_pic",
       headers: {
@@ -149,7 +151,7 @@ class Controller_Profile extends Controller_admin {
   };
 
   unsafeDeletePic = () => {
-    this.axios({
+    axios({
       method: "delete",
       url: apiUrl + "/user_pic",
       headers: {
@@ -177,7 +179,7 @@ class Controller_Profile extends Controller_admin {
    * ========================================================= */
 
   getUserData = (_callback) => {
-    this.axios({
+    axios({
       method: "get",
       url: apiUrl + "/user_data",
       headers: {
@@ -215,7 +217,7 @@ class Controller_Profile extends Controller_admin {
       }
     }
 
-    this.axios({
+    axios({
       method: "post",
       url: apiUrl + "/user_data",
       headers: {

@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { Card, CardBody } from "reactstrap";
-import PHCourseDescription from "views/components/Loaders/PHCourseDescription";
+import PHItemDescription from "views/components/Loaders/PHItemDescription";
 import Controller_Academy from "fetchers/Academy";
 import Test from "./Test";
 
@@ -53,7 +53,7 @@ class CourseTest extends React.Component {
             </>
           ) : (
             <CardBody>
-              <PHCourseDescription />
+              <PHItemDescription />
             </CardBody>
           )}
         </Card>

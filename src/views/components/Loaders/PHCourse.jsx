@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
-import PHCourseDescription from "./PHCourseDescription";
+import PHItemDescription from "./PHItemDescription";
 
 class PHCourse extends React.Component {
   render() {
@@ -18,7 +18,7 @@ class PHCourse extends React.Component {
                 </div>
               </div>
             </div>
-            <PHCourseDescription />
+            <PHItemDescription />
           </Col>
           <Col lg="3" className="p-0">
             <div className="ph-item p-0 mb-3">

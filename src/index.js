@@ -30,7 +30,7 @@ ReactDOM.render(
           path={myRoutes.register}
           render={(props) => <MainLayouth {...props} />}
         />
-        <Route exact path="/" render={(props) => <MainLayouth {...props} />} />
+        {/* <Route exact path="/" render={(props) => <MainLayouth {...props} />} /> */}
         <Route
           exact
           path={myRoutes.profile}

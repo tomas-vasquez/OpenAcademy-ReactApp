@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { userPicUrl } from "config";
 import SocialButtons from "views/components/SocialButtons";
 import { Link } from "react-router-dom";
-import { Card, CardHeader, CardTitle, CardBody } from "reactstrap";
+import { Col, Row } from "reactstrap";
 
 const CardAuthor = ({ currentItem, ...props }) => {
   let author = props.academy.authors.find((author) => {
@@ -21,30 +21,32 @@ const CardAuthor = ({ currentItem, ...props }) => {
     }
 
     return (
-      <Card className="mb-4 text-muted shadow">
-        <CardHeader>
-          <CardTitle tag="h5" className="m-0">
-            <i className="fa fa-user mr-3" />
-            Docente:
-          </CardTitle>
-        </CardHeader>{" "}
-        <CardBody className="text-center">
-          <Link to={"/@" + author.user_name}>
-            <img
-              src={pic_url}
-              alt={author.name}
-              className="w-25 rounded-circle mb-4"
-            />
+      <Row>
+        <Col xs="12" md="auto" className="d-flex">
+          <div className="mx-auto mt-2">
+            <Link to={"/@" + author.user_name}>
+              <img
+                src={pic_url}
+                alt={author.name}
+                className="rounded-circle mb-4"
+              />
+            </Link>
+          </div>
+        </Col>
+        <Col xs="12" md="">
+          <div className="">
             <h3 className="h5 text-muted mb-4">
               {author.name ? author.name : author.user_name}
             </h3>
             <p className="text-muted">{author.description}</p>
-          </Link>
-          <div className="text-center">
-            <SocialButtons data={author} />
+            <div className="d-flex d-md-block">
+              <div className="mx-auto">
+                <SocialButtons data={author} />
+              </div>
+            </div>
           </div>
-        </CardBody>
-      </Card>
+        </Col>
+      </Row>
     );
   } else {
     return null;

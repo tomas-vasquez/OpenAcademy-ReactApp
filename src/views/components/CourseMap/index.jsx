@@ -1,7 +1,5 @@
 import React from "react";
 
-import { Card } from "reactstrap";
-
 import SingleSeparator from "./SingleSeparator";
 import SingleItem from "./SingleItem";
 import FrameCollapsable from "./FrameCollapsable";
@@ -73,24 +71,21 @@ class CourseMap extends React.Component {
   };
 
   render() {
-    return (
-      <Card className="mb-4 shadow">
-        {this.props.items !== undefined && this.props.currentItem !== null ? (
-          <>
-            <SingleSeparator
-              title={"Contenido"}
-              currentSection={0}
-              active={this.state.col_0}
-              onClick={() => {
-                this.setState({ col_0: !this.state.col_0 });
-              }}
-            />
+    return this.props.items !== undefined && this.props.currentItem !== null ? (
+      <>
+        <SingleSeparator
+          title={"Contenido del curso"}
+          currentSection={0}
+          active={this.state.col_0}
+          onClick={() => {
+            this.setState({ col_0: !this.state.col_0 });
+          }}
+        />
 
-            {this.recursiveRender(0, this.props.items)}
-          </>
-        ) : null}
-      </Card>
-    );
+        {this.recursiveRender(0, this.props.items)}
+      </>
+    ) : null;
+    // </Card>
   }
 }
 

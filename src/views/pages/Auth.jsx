@@ -60,7 +60,7 @@ class Auth extends React.Component {
           minHeight: this.state.height,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundImage: "url(" + require("assets/images/banner.jpg") + ")",
+          backgroundImage: "url(" + require("assets/img/banner.jpg") + ")",
         }}
       >
         <Container className="my-lg-auto " style={{ height: "100%" }}>
