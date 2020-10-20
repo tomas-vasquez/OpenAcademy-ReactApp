@@ -5,13 +5,11 @@ import Db from "helpers/db";
 import store from "store";
 import { setUserData } from "store/userData_store/actions";
 
-import axios from "axios"
-import { userPicUrl } from "config";
+import axios from "axios";
 import Controller_admin from ".";
 
 import { cropToProfilePic } from "helpers/image";
 import { apiUrl } from "config";
-
 
 class Controller_Profile extends Controller_admin {
   constructor() {
@@ -50,7 +48,7 @@ class Controller_Profile extends Controller_admin {
       picUrl = blob_pic_url;
     } else {
       if (pic_url) {
-        picUrl = userPicUrl + pic_url;
+        picUrl = pic_url;
       } else {
         picUrl = require("assets/img/noPic.jpg");
       }

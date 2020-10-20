@@ -2,7 +2,6 @@ import React from "react";
 
 import { connect } from "react-redux";
 
-import { userPicUrl } from "config";
 import SocialButtons from "views/components/SocialButtons";
 import { Link } from "react-router-dom";
 import { Col, Row } from "reactstrap";
@@ -15,7 +14,7 @@ const CardAuthor = ({ currentItem, ...props }) => {
   if (author) {
     let pic_url;
     if (author.pic_url) {
-      pic_url = userPicUrl + author.pic_url;
+      pic_url = author.pic_url;
     } else {
       pic_url = require("assets/img/noPic.jpg");
     }

@@ -6,7 +6,6 @@ import "moment/min/locales";
 // reactstrap components
 import { Card, CardBody, CardImg, Media } from "reactstrap";
 
-import { coursePicUrl, userPicUrl } from "config";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 
@@ -26,7 +25,7 @@ class CardCourse extends React.Component {
     let pic_url;
 
     if (author.pic_url) {
-      pic_url = userPicUrl + author.pic_url;
+      pic_url = author.pic_url;
     } else {
       pic_url = require("assets/img/noPic.jpg");
     }
@@ -41,13 +40,14 @@ class CardCourse extends React.Component {
           <CardBody className="p-0">
             <div className="h-50 align-self-stretch">
               <figure className=" m-0">
-                <CardImg src={coursePicUrl + course.course_pic_url}></CardImg>
+                <CardImg src={course.course_pic_url}></CardImg>
               </figure>
               <div className="course-inner-text p-3">
                 <span className="course-price">gratis!</span>
                 <small className="meta text-muted">
                   {this.formatDate(course.created_at)}
                 </small>
+
                 <h3 className="text-primary">
                   {_.upperFirst(course.course_title)}
                 </h3>

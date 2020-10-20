@@ -30,7 +30,9 @@ export default function Invitation() {
                 </p>
               </Col>
               <Col xs="12" lg="auto" className="ml-auto my-auto">
-                <Button className="mt-3 my-lg-auto">Ensena en Vikings</Button>
+                <Button className="mt-3 my-lg-auto">
+                  Ensena en Open Academy
+                </Button>
               </Col>
             </Row>
           </Col>

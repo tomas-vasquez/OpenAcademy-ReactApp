@@ -55,7 +55,7 @@ class AdminNavbar extends React.Component {
           <div className="navbar-wrapper">
             <Link to="/">
               {/* <img src="" alt="" /> */}
-              <h1 className="h3 text-white">Vikings</h1>
+              <h1 className="h3 text-white">Open Academy</h1>
             </Link>
           </div>
         </Navbar>

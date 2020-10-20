@@ -1,11 +1,10 @@
 import React from "react";
 import { Col, CardBody, Container, Row, Card } from "reactstrap";
 import SocialButtons from "views/components/SocialButtons";
-import { userPicUrl } from "config";
 
 const getPicUrl = (profile) => {
   if (profile.pic_url) {
-    return userPicUrl + profile.pic_url;
+    return profile.pic_url;
   } else {
     return require("assets/img/noPic.jpg");
   }

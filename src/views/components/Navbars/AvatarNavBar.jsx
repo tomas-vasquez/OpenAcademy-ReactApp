@@ -12,7 +12,6 @@ import {
 } from "reactstrap";
 
 import Controller_Users from "fetchers/Users";
-import { userPicUrl } from "config";
 
 class AvatarNavBar extends React.Component {
   constructor(props) {
@@ -35,7 +34,7 @@ class AvatarNavBar extends React.Component {
       pic_url = this.props.userData.blob_pic_url;
     } else {
       if (this.props.userData.pic_url) {
-        pic_url = userPicUrl + this.props.userData.pic_url;
+        pic_url = this.props.userData.pic_url;
       } else {
         pic_url = require("assets/img/noPic.jpg");
       }
