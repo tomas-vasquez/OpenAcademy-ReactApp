@@ -4,7 +4,6 @@ import Controller_Academy from "fetchers/Academy";
 
 import Header from "views/components/Headers/HeaderHero";
 import ErrorAllCourses from "views/components/errors/ErrorAllCourse";
-// import MySlider from "./Slider";
 import AllCourses from "./AllCourses";
 import Invitation from "views/components/Invitation";
 

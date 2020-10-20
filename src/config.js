@@ -6,7 +6,7 @@ export const apiSignupUrl = serverUrl + "/signup";
 
 export const userPicUrl = serverUrl + "/storage/user_pics";
 export const coursePicUrl = serverUrl + "/storage/course_pics";
-export const courseItemsDescriptionsUrl = serverUrl + "/storage/descriptions/";
+export const courseItemsDescriptionsUrl = serverUrl + "/academy/descriptions/";
 export const flagsUrl = serverUrl + "/storage/flags";
 export const testsUrl = serverUrl + "/academy/tests";
 

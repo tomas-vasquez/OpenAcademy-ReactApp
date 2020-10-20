@@ -43,7 +43,7 @@ class ItemDescription extends React.Component {
       ] === undefined
     ) {
       this.academy.loadDescription(
-        this.props.currentItem.item_content_url,
+        this.props.currentItem._id,
         (response, error) => {
           if (error) {
             this.setState({

@@ -36,7 +36,7 @@ class Controller_Academy extends Controller_admin {
       .then((response) => {
         store.dispatch(setCourses(response.data.courses));
         store.dispatch(setAuthors(response.data.authors));
-        // store.log();
+        console.log(response.data);
         _callback(response.data, null);
       })
       .catch((error) => {
@@ -55,7 +55,7 @@ class Controller_Academy extends Controller_admin {
     })
       .then((response) => {
         store.dispatch(setItems(currentCourse, response.data.items));
-        store.log();
+        store.log(response.data);
         _callback(response.data, null);
       })
       .catch((error) => {
@@ -67,13 +67,13 @@ class Controller_Academy extends Controller_admin {
    *
    * ========================================================= */
 
-  loadDescription(currentDescription, _callback) {
+  loadDescription(itemId, _callback) {
     axios({
       method: "get",
-      url: courseItemsDescriptionsUrl + currentDescription,
+      url: courseItemsDescriptionsUrl + itemId,
     })
       .then((response) => {
-        store.dispatch(setDescription(currentDescription, response.data));
+        store.dispatch(setDescription(itemId, response.data));
         _callback(response.data, null);
       })
       .catch((error) => {

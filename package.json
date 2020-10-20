@@ -13,10 +13,8 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
-    "bootstrap": "4.3.1",
     "classnames": "2.2.6",
     "connected-react-router": "^6.8.0",
-    "headroom.js": "0.11.0",
     "html-react-parser": "^0.13.0",
     "moment": "2.24.0",
     "node-sass": "4.13.1",
@@ -31,12 +29,12 @@
     "react-scripts": "^3.4.1",
     "react-styled-carousel": "^0.5.1",
     "reactstrap": "8.4.1",
-    "reapop": "^2.1.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "sweetalert2": "^10.0.1"
   },
   "devDependencies": {
+    "bootstrap": "4.3.1",
     "@types/googlemaps": "3.39.2",
     "@types/markerclustererplus": "2.1.33",
     "@types/react": "16.9.19",
@@ -47,9 +45,6 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.0.8",
-    "gulp": "4.0.2",
-    "gulp-append-prepend": "1.0.8",
-    "jquery": "3.4.1",
     "typescript": "3.7.5"
   },
   "browserslist": {
