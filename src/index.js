@@ -41,13 +41,14 @@ ReactDOM.render(
           path={myRoutes.courses}
           render={(props) => <MainLayouth {...props} />}
         />
+        <Route exact path="/" render={(props) => <MainLayouth {...props} />} />
         <Route
           exact
           path="/@:user_name"
           render={(props) => <MainLayouth {...props} />}
         />
 
-        <Route render={(props) => <MainLayouth {...props} />} />
+        <Route render={(props) => <CourseLayouth {...props} />} />
       </Switch>
     </ConnectedRouter>
   </Provider>,
