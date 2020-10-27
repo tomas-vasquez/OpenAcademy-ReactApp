@@ -13,7 +13,7 @@
 @import "placeholder-loading";
 @import "plugin-perfect-scrollbar";
 
-@import "vendor/font-awesome/css/font-awesome.css";
+// @import "vendor/font-awesome/css/font-awesome.css";
 
 ////////
 .lds-dual-ring-sm,
@@ -392,7 +392,7 @@ img {
 }
 
 .hero {
-  background-image: url(img/hero.jpg);
+  // background-image: url(img/hero.jpg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -422,7 +422,7 @@ img {
         border: none;
         text-indent: -9999px;
         display: block;
-        background-image: url(img/lupa.png);
+        background-image: url();
         background-repeat: no-repeat;
         background-position: center center;
         width: calc(3rem - 10px);
@@ -456,13 +456,13 @@ img {
       text-align: center;
       background-size: 2.4rem;
       &.icono1 {
-        background-image: url(img/icono1.png);
+        // background-image: url(img/icono1.png);
       }
       &.icono2 {
-        background-image: url(img/icono2.png);
+        // background-image: url(img/icono2.png);
       }
       &.icono3 {
-        background-image: url(img/icono3.png);
+        // background-image: url(img/icono3.png);
       }
     }
   }
