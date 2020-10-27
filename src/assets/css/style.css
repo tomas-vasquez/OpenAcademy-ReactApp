@@ -4,7 +4,7 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-@import url(../vendor/font-awesome/css/font-awesome.css);
+@import url(vendor/font-awesome/css/font-awesome.css);
 :root {
   --blue: #1c4b82;
   --indigo: #0d0cb5;
@@ -7599,7 +7599,7 @@ h5,
 
 .video-container {
   display: flex;
-  max-height: 400px;
+  max-height: 420px;
   overflow: hidden;
   background-color: #14171c; }
 
@@ -7608,7 +7608,7 @@ h5,
 .video-container object,
 .video-container embed,
 .video-container div {
-  max-height: 400px;
+  max-height: 420px;
   height: 100%; }
 
 .comments-container {
@@ -7872,7 +7872,7 @@ img {
       text-decoration: none; }
 
 .hero {
-  background-image: url(../img/hero.jpg);
+  background-image: url(img/hero.jpg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -7899,7 +7899,7 @@ img {
       border: none;
       text-indent: -9999px;
       display: block;
-      background-image: url(../img/lupa.png);
+      background-image: url(img/lupa.png);
       background-repeat: no-repeat;
       background-position: center center;
       width: calc(3rem - 10px);
@@ -7927,11 +7927,11 @@ img {
       text-align: center;
       background-size: 2.4rem; }
       .barra .iconos .icono.icono1 {
-        background-image: url(../img/icono1.png); }
+        background-image: url(img/icono1.png); }
       .barra .iconos .icono.icono2 {
-        background-image: url(../img/icono2.png); }
+        background-image: url(img/icono2.png); }
       .barra .iconos .icono.icono3 {
-        background-image: url(../img/icono3.png); }
+        background-image: url(img/icono3.png); }
 
 /** Cursos **/
 .cursos {
