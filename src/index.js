@@ -47,7 +47,7 @@ ReactDOM.render(
           render={(props) => <MainLayouth {...props} />}
         />
 
-        <Route render={(props) => <CourseLayouth {...props} />} />
+        <Route render={(props) => <MainLayouth {...props} />} />
       </Switch>
     </ConnectedRouter>
   </Provider>,

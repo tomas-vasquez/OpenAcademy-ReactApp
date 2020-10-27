@@ -137,7 +137,9 @@ class Landing extends React.Component {
                       }}
                     >
                       <CourseMap
-                        items={this.state.items}
+                        items={this.state.items.sort(
+                          (a, b) => a.item_sort - b.item_sort
+                        )}
                         currentItem={currentItem}
                       />
                     </Col>

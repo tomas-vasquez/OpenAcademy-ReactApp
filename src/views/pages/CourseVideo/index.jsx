@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Invitation from "views/components/Invitation";
 import ItemDescription from "../AllCourses/ItemDescription";
+import Video from "./Video";
 
 class CourseVideo extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class CourseVideo extends React.Component {
     return this.props.video !== null ? (
       <>
         <div className="video-container shadow d-flex">
-          <video
+          <Video
             className="m-auto"
             controls
             src={this.props.currentItem.item_video_url}
@@ -23,7 +24,7 @@ class CourseVideo extends React.Component {
           />
         </div>
         <ItemDescription
-          items={this.props.items}
+          items={this.props.items.sort((a, b) => a.item_sort - b.item_sort)}
           itemIndex={this.props.itemIndex}
           currentItem={this.props.currentItem}
         />
