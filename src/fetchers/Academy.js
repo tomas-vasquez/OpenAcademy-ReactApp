@@ -36,7 +36,6 @@ class Controller_Academy extends Controller_admin {
       .then((response) => {
         store.dispatch(setCourses(response.data.courses));
         store.dispatch(setAuthors(response.data.authors));
-        console.log(response.data);
         _callback(response.data, null);
       })
       .catch((error) => {

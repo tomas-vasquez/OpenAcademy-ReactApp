@@ -3,6 +3,7 @@ import React from "react";
 import _ from "lodash";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import { getShortLink } from "helpers/academyUtils";
 
 // const isLock = (userData, item) => {
 //   if (!item.item_need_keys) return false;
@@ -24,7 +25,7 @@ const SingleItem = ({ index, item, currentItem, ...props }) => {
   return (
     <li className="w-100">
       <NavLink
-        to={"/" + courseInUrl + "/" + item.item_title.replace(/ /g, "_")}
+        to={"/" + courseInUrl + "/" + getShortLink(item.item_title)}
         className="nav-link text-muted border-bottom"
         style={{
           backgroundColor:

@@ -84,19 +84,7 @@ class Landing extends React.Component {
   }
 
   render() {
-    // let courseInUrl = document.baseURI.split("/")[3];
-
-    // let course = null;
-
-    // if (this.state.courses) {
-    //   course = this.state.courses.find((course) => {
-    //     return course.course_short_link === courseInUrl;
-    //   });
-    // }
-
-    // let { proviusItem, currentItem, nextItem, itemIndex } = getCurrentItem(
     let { currentItem, itemIndex } = getCurrentItem(this.state.items);
-
     return (
       <>
         <div className="site-wrap">

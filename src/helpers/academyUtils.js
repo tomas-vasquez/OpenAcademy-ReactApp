@@ -83,32 +83,34 @@ const getCurrentTitle = (items) => {
   let courseInUrl = document.baseURI.split("/")[3];
   let item_title = document.baseURI.split("/")[4];
 
-  let classes = sortItems(items).filter(
+  let _items = sortItems(items).filter(
     (item) => item.item_type !== "separator"
   );
 
   let targetItem = null;
 
-  if (item_title !== undefined) {
-    targetItem = item_title;
-    db.set("lastItem>" + courseInUrl, item_title);
+  if (item_title) {
+    targetItem = getShortLink(item_title);
+    db.set("lastItem>" + courseInUrl, targetItem);
   } else {
     let indb = db.get("lastItem>" + courseInUrl);
     if (indb === undefined) {
-      targetItem = classes[0].item_title;
+      targetItem = getShortLink(_items[0].item_title);
       db.set("lastItem>" + courseInUrl, targetItem);
     } else {
       targetItem = indb;
     }
   }
-  let aux = classes.find((item) => {
-    return item.item_title === targetItem.replace(/_/g, " ");
+
+  let aux = _items.find((item) => {
+    return getShortLink(item.item_title) === targetItem;
   });
-  if (aux === undefined) {
-    db.set("lastItem>" + courseInUrl, classes[0].item_title);
-    return classes[0].item_title;
+
+  if (!aux) {
+    db.set("lastItem>" + courseInUrl, getShortLink(_items[0].item_title));
+    return getShortLink(_items[0].item_title);
   } else {
-    return targetItem.replace(/_/g, " ");
+    return targetItem;
   }
 };
 
@@ -125,15 +127,16 @@ export const getCurrentItem = (items) => {
 
     let currentTitle = getCurrentTitle(items);
 
-    const classes = sortItems(items).filter(
+    const _items = sortItems(items).filter(
       (item) => item.item_type !== "separator"
     );
 
-    classes.forEach((item, key) => {
-      if (item.item_title === currentTitle) {
-        proviusItem = classes[key - 1];
+    const title = getShortLink(currentTitle);
+    _items.forEach((item, key) => {
+      if (getShortLink(item.item_title) === title) {
+        proviusItem = _items[key - 1];
         currentItem = item;
-        nextItem = classes[key + 1];
+        nextItem = _items[key + 1];
         itemIndex = key + 1;
       }
     });
@@ -142,4 +145,18 @@ export const getCurrentItem = (items) => {
   } else {
     return {};
   }
+};
+
+/* =========================================================
+ *
+ * ========================================================= */
+
+export const getShortLink = (link) => {
+  let newString = link;
+  newString = newString.toLowerCase();
+  newString = newString.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  newString = newString.replace(/ /g, "_");
+  newString = newString.replace(/\?/g, "");
+  newString = newString.replace(/¿/g, "");
+  return newString;
 };

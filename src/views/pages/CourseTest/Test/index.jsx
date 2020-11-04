@@ -36,7 +36,6 @@ class Test extends React.Component {
     this.setState({
       answers: aux,
     });
-    console.log(this.state.answers);
   };
 
   render() {
