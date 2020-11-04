@@ -1,4 +1,5 @@
 import "assets/css/style.css";
+import "assets/vendor/font-awesome/css/font-awesome.min.css";
 
 import React from "react";
 import ReactDOM from "react-dom";
